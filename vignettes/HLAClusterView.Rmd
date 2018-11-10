@@ -46,9 +46,14 @@ TODO
 
 TODO
 
-Since 1998, the IMGT/HLA Database [@Abraham2018] has provided curated information regarding polymorphism in the genes of the immune system related to HLA class I and II.
+Since 1998, the IMGT/HLA Database [@Abraham2018] has provided curated information about polymorphism in the genes of the immune system.
 
 TODO
+
+# Metrics which estimate similarity between two HLA typing #
+
+## Hamming distance based on first typing field ##
+
 
 # An analysis step by step #
 
