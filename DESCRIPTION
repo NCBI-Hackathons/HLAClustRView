@@ -1,0 +1,15 @@
+Package: HLAClusterView
+Type: Package
+Title: TODO
+Version: 0.99.0
+Date: 2018-11-09
+Author: TODO
+Maintainer: TODO
+Description: TODO
+License: MIT | file LICENSE
+Encoding: UTF-8
+Depends: R
+Suggests: testthat, knitr, rmarkdown
+NeedsCompilation: no
+VignetteBuilder: knitr
+RoxygenNote: 6.1.0
