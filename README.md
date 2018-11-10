@@ -1,8 +1,4 @@
-# Integrating-HLA-typing-methods-and-RNA-seq
-
-TODO
-
-## HLAClustRView Package ##
+# HLAClustRView Package #
 
 TODO
 
