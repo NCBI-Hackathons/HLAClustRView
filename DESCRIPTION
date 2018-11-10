@@ -4,11 +4,12 @@ Title: TODO
 Description: TODO
 Version: 0.99.0
 Date: 2018-11-09
-Author: TODO
+Author: Nissim Ranade, Santiago Medina, Adewunmi Adelaja, 
+    Astrid Deschênes and Pascal Belleau
 Maintainer: Pascal Belleau <belleau@cshl.edu>
-License: MIT | file LICENSE
+License: MIT + file LICENSE
 Encoding: UTF-8
-Depends: R
+Depends: R (>= 3.3)
 Suggests: testthat, knitr, rmarkdown
 NeedsCompilation: no
 VignetteBuilder: knitr
