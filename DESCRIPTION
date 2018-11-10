@@ -1,10 +1,10 @@
-Package: HLAClusterView
+Package: HLAClustRView
 Type: Package
 Title: TODO
 Version: 0.99.0
 Date: 2018-11-09
 Author: TODO
-Maintainer: TODO
+Maintainer: Pascal Belleau <belleau@cshl.edu>
 Description: TODO
 License: MIT | file LICENSE
 Encoding: UTF-8
