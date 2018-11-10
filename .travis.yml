@@ -1,0 +1,18 @@
+language: r
+sudo: required
+
+# Packages from Bioconductor needed
+bioc_required: false
+
+# Be strict when checking package
+warnings_are_errors: true
+
+r_build_args: "--no-manual --no-resave-data"
+r_check_args: "--no-build-vignettes --no-manual --timings"
+
+# Package dependencies from CRAN
+r_binary_packages:
+  - covr
+
+after_success:
+  - Rscript -e 'library(covr);codecov()'
