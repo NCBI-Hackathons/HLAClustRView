@@ -24,7 +24,7 @@ most up-to-date information.
 ## Package Workflow ##
 
 <center>
-![Figure 1. HLAClustRView workflow](./vignettes/HLAdesign.jpg "HLAClustRView design")
+<img src="/vignettes/HLAdesign.jpg" alt=""/>
 </center>
 
 ## Citing ##
