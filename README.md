@@ -10,6 +10,11 @@ quantify the similarity between HLA typing from multiple samples. Using
 these metrics, the package enables hierarchical cluster analysis and can 
 bind RNA-seq expression (when available) to the clusters.
 
+## Description of Package Functionality ##
+
+The vignette of the **HLAClustRView** package, which is a document that 
+provides a task-oriented description of the package functionality,
+
 ## Citing ##
 
 If you use the *HLAClustRView* package 
