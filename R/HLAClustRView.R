@@ -1,8 +1,9 @@
-#' HLAClustRView: TODO
+#' HLAClustRView: HLA typing clustering and visualization based on specific similarity metrics
 #'
-#' This package is TODO
-#'
-#'
+#' This package implements specialized similarity metrics that quantify the
+#' similarity between HLA typing from multiple samples. Using these metrics,
+#' the package enables hierarchical cluster analysis and can bind RNA-seq
+#' expression (when available) to the clusters.
 #'
 #' @docType package
 #'
