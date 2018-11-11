@@ -31,3 +31,6 @@ tibble::tribble(
 )
 hamming_distance_digit1(d)
 }
+\author{
+Santiago Medina, Nissim Ranade
+}
