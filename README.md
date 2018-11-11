@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/NCBI-Hackathons/HLAClustRView.svg?branch=master)](https://travis-ci.org/NCBI-Hackathons/HLAClustRView)
 
 <center>
-![](../master/vignettes/HLAClustRViewLogo.png)
+<img src="/vignettes/HLAClustRViewLogo.png" alt=""/>
 </center>
 
 <center>
