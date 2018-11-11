@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/NCBI-Hackathons/Integrating-HLA-typing-methods-and-RNA-seq.svg?branch=master)](https://travis-ci.org/NCBI-Hackathons/Integrating-HLA-typing-methods-and-RNA-seq)
+[![Build Status](https://travis-ci.org/NCBI-Hackathons/HLAClustRView.svg?branch=master)](https://travis-ci.org/NCBI-Hackathons/HLAClustRView)
 
 # HLA typing clustering and visualization based on specific similarity metrics #
 
