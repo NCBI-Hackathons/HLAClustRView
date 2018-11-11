@@ -5,9 +5,8 @@
 <img src="/vignettes/HLAClustRViewLogo.png" alt=""/>
 </center>
 
-<center>
 # HLA typing clustering and visualization based on specific similarity metrics #
-</center>
+
 
 <br>
 
