@@ -1,0 +1,84 @@
+---
+title: HLAClustRView
+author: Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschenes and Pascal Belleau
+output:
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+bibliography: biblio.bibtex
+vignette: |
+  %\VignetteIndexEntry{TODO}     
+  %\VignettePackage{HLAClustRView}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown} 
+---
+
+```{r style, echo = FALSE, results = 'asis', warning=FALSE, message=FALSE}
+library(knitr)
+library(HLAClustRView)
+```
+
+<br />
+
+**Package**: `r packageDescription("HLAClustRView")[["Package"]]` <br />
+**Authors**: `r packageDescription("HLAClustRView")[["Author"]]` <br />
+**Version**: `r packageDescription("HLAClustRView")$Version` <br />
+**Compiled date**: `r Sys.Date()` <br />
+**License**: `r packageDescription("HLAClustRView")[["License"]]` <br />
+
+
+# Licensing  #
+
+The *`r packageDescription("HLAClustRView")[["Package"]]`* package and the 
+underlying *`r packageDescription("HLAClustRView")[["Package"]]`* code 
+are distributed under the MIT license. You are free to use and 
+redistribute this software.
+
+# Citing #
+
+If you use the *`r packageDescription("HLAClustRView")[["Package"]]`* package 
+for a publication, we would ask you to cite the following:
+
+TODO
+
+# Introduction #
+
+TODO
+
+Since 1998, the IMGT/HLA Database [@Abraham2018] has provided curated 
+information about polymorphism in the genes of the immune system.
+
+TODO
+
+# Metrics which estimate similarity between two HLA typing #
+
+To enable quantification of the similarity between two HLA typing, similarity
+metric must be used.
+
+## Hamming distance based on first typing field ##
+
+TODO
+
+# An analysis step by step #
+
+## 1. Loading the HLAClustRView package
+
+```{r loadingPackage, warning=FALSE, message=FALSE} 
+library(HLAClustRView)
+```
+
+TODO
+
+# Session info
+
+Here is the output of sessionInfo() on the system on which this document 
+was compiled:
+
+```{r sessionInfo, echo=FALSE}
+sessionInfo()
+```
+
+
+# References
+
