@@ -13,4 +13,7 @@ Depends: R (>= 3.3)
 Suggests: testthat, knitr, rmarkdown
 NeedsCompilation: no
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
+Imports: purrr,
+    dplyr,
+    tidyr
