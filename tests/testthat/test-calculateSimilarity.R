@@ -18,6 +18,8 @@ d2 <- tibble::tribble(
 test_that("correct Hamming Value", {
     expect_equal(hamming_distance_digit1(d1)$distance, 1)
     expect_equal(hamming_distance_digit1(d2)$distance, 0)
+    ## returns NA when distance is the same for both allels
+    expect_true(is.na(hamming_distance_digit1(d2)$same_allele))
 })
 
 test_that("correct output format", {

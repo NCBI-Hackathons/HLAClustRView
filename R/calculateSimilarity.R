@@ -6,8 +6,8 @@
 #' @param allele tibble with 3 columns: *sample*, *Allele*, *Digit1*
 #' (see example)
 #' @return One row tibble with minimum hamming distance &
-#' logical value column indicating whether same allele was used
-#' @export
+#' logical value column indicating whether same allele was used If the distance is the
+#' same for both then NA is returned
 #'
 #' @examples
 #' d <-
@@ -19,17 +19,26 @@
 #'    "s2", 2, 5,
 #')
 #' hamming_distance_digit1(d)
+#' @importFrom dplyr %>% mutate group_by summarise filter
+#' @export
 hamming_distance_digit1 <- function(allele) {
     stopifnot(nrow(allele) == 4)
-    allele %>%
+    hdist <-
+        allele %>%
         split(.$sample) %>%
         purrr::reduce(.f = tidyr::crossing) %>% # biparty graph to compute simularities
-        dplyr::mutate(
+        mutate(
             is_similar = Digit1 != Digit11,
             same_allele = Allele == Allele1
             ) %>%
-        dplyr::group_by(same_allele) %>%
-        dplyr::summarise(distance = sum(is_similar)) %>%
-        dplyr::filter(distance == min(distance)) %>%
-        dplyr::slice(1:1) # make sure you return one row in case of repeats
+        group_by(same_allele) %>%
+        summarise(distance = sum(is_similar)) %>%
+        dplyr::filter(distance == min(distance))
+
+    ## check if the minimum distance is the same
+    if (nrow(hdist) == 2) {
+        mutate(hdist, same_allele = NA) %>%
+            dplyr::slice(1:1)
+    }
+    else hdist
 }
