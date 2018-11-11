@@ -12,10 +12,12 @@ hamming_distance_digit1(allele)
 }
 \value{
 One row tibble with minimum hamming distance &
-logical value column indicating whether same allele was used
+logical value column indicating whether same allele was used If the distance is the
+same for both then NA is returned
 }
 \description{
-The distance is given by
+This function computes the hamming distance for two samples and two alleles,
+ the hamming distance is given by
 \eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)}
 }
 \examples{
@@ -28,4 +30,7 @@ tibble::tribble(
    "s2", 2, 5,
 )
 hamming_distance_digit1(d)
+}
+\author{
+Santiago Medina, Nissim Ranade
 }
