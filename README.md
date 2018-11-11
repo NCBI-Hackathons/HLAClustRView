@@ -26,7 +26,7 @@ for a publication, we would ask you to cite the following:
 
 ## Authors ##
 
-Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschenes and 
+[Nissim Ranade](https://www.linkedin.com/in/nissim-ranade-4029b3b5 "Nissim Ranade"), Santiago Medina, Adewunmi Adelaja, Astrid Deschênes and 
 [Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau "Pascal Belleau")
 
 ## License ##
