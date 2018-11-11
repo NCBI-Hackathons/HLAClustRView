@@ -40,7 +40,8 @@ redistribute this software.
 If you use the *`r packageDescription("HLAClustRView")[["Package"]]`* package 
 for a publication, we would ask you to cite the following:
 
-TODO
+> Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschênes and Pascal Belleau (2018). HLAClustRView: HLA typing clustering and
+  visualization based on adapted similarity metrics. R package version 0.99.0.
 
 # Introduction #
 

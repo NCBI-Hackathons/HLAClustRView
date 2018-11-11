@@ -1,7 +1,11 @@
 Package: HLAClustRView
 Type: Package
-Title: TODO
-Description: TODO
+Title: HLA typing clustering and visualization based on adapted similarity 
+    metrics 
+Description: This package implements specialized similarity metrics that
+    quantify the similarity between HLA typing from multiple samples. Using 
+    those metrics, the package enables hierarchical cluster analysis and can 
+    bind RNA-seq expression (when available) to the clusters.
 Version: 0.99.0
 Date: 2018-11-09
 Author: Nissim Ranade, Santiago Medina, Adewunmi Adelaja, 
@@ -13,4 +17,7 @@ Depends: R (>= 3.3)
 Suggests: testthat, knitr, rmarkdown
 NeedsCompilation: no
 VignetteBuilder: knitr
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
+Imports: purrr,
+    dplyr,
+    tidyr
