@@ -45,31 +45,50 @@ for a publication, we would ask you to cite the following:
 
 # Introduction #
 
+The human leukocyte antigen (HLA) complex plays a primary biological role in 
+the regulation of the immune system. It also plays a critical role in the
+outcomes of human organ transplantation [@Choo2007]. 
+
+The set of genes that form the HLA complex are highly polymorphic and the 
+novel alleles are still discovered [@Abraham2018]. Because of their high 
+polymorphic status, accurate typing of HLA genes with short-read sequencing 
+data is a challenging task. Software specialized in HLA typing such
+as xHLA [@Xie2017] and HLAProfiler [@Buchkovich2017], had to be developped. 
+
+Since 1998, the IMGT/HLA Database [@Robinson2015] has provided curated 
+information about polymorphism in the human genes of the immune system.
+The naming of HLA genes, allele sequences, and their quality control under the 
+responsibility of the [WHO Nomenclature Committee for Factors of the HLA System](http://hla.alleles.org/nomenclature/committee.html).
+
 TODO
 
-Since 1998, the IMGT/HLA Database [@Abraham2018] has provided curated 
-information about polymorphism in the genes of the immune system.
-
-TODO
-
-# Metrics which estimate similarity between two HLA typing #
+# Metrics which estimate similarity between two HLA typing 
 
 To enable quantification of the similarity between two HLA typing, similarity
 metric must be used.
 
-## Hamming distance based on first typing field ##
+## Hamming distance based on first HLA typing field 
 
 TODO
 
 # An analysis step by step #
 
-## 1. Loading the HLAClustRView package
+### 1. Loading the HLAClustRView package
 
 ```{r loadingPackage, warning=FALSE, message=FALSE} 
 library(HLAClustRView)
 ```
 
-TODO
+### 2. Parsing HLA typing samples file
+
+The file containing the HLA typing for all analysed samples needs to be loaded.
+This task is done by the *prepareHLADataset()* function.
+
+### 3. Calculating similarity metric
+
+The Hamming distance based on first HLA typing field can be calculated through
+the *hamming_distance_digit1()* function.
+
 
 # Session info
 
