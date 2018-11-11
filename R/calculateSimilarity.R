@@ -45,24 +45,29 @@ hamming_distance_digit1 <- function(allele) {
     else hdist
 }
 
-#' Sample Pair Distance
+#' @title Sample Pair Distance
 #'
-#' Computes the Hamming Distance for a pair of samples and then aggregates the
-#' sum over the genes keeping information of which allele was used for the distance
-#' @param sample_pair_data a tible with columns HLAgene (genes), Allele (alleles),
+#' @decription Computes the Hamming Distance for a pair of samples and then
+#' aggregates the sum over the genes keeping information of which allele was
+#' used for the distance.
+#'
+#' @param sample_pair_data a \code{tible} with columns HLAgene (genes), Allele (alleles),
 #' Digit1 (digit 1) and sample (see example data)
 #'
-#' @author Santiago Medina, Nissim Ranade
 #' @return  a tibble with one row and a column for the total hamming distance
 #' and n columns more where n is the number of genes
-#' @export
+#'
+#' @examples
+#' data("example_sample_pair_data") # example data
+#' sample_pair_distance(example_sample_pair_data)
+#'
+#' @author Santiago Medina, Nissim Ranade
+#'
 #' @importFrom tidyr nest unnest spread
 #' @importFrom dplyr group_by %>% summarise filter pull select mutate
 #' @importFrom utils data
 #' @importFrom purrr map
-#' @examples
-#' data("example_sample_pair_data") # example data
-#' sample_pair_distance(example_sample_pair_data)
+#' @export
 sample_pair_distance <- function(sample_pair_data) {
     # make sure only two samples are given
     stopifnot(length(unique(sample_pair_data$sample)) == 2)
@@ -92,18 +97,23 @@ sample_pair_distance <- function(sample_pair_data) {
 }
 
 
-#' calculate hamming distance between samples
+#' @title Calculate hamming distance between samples
 #'
 #' @param hla_data data frame with allele data
+#'
+#'
+#' @return TODO
+#'
+#' @examples
+#' ## TODO
+#'
+#' @author Santiago Medina, Nissim Ranade
 #'
 #' @importFrom dplyr filter mutate select group_by inner_join as_tibble rename
 #' @importFrom tidyr unnest nest
 #' @importFrom utils combn
 #' @importFrom purrr map_lgl
-#' @return
 #' @export
-#'
-#' @examples
 calculateSimilarity <- function(hla_data) {
     ssample_pair_distance <- possibly(sample_pair_distance, otherwise = FALSE)
 
