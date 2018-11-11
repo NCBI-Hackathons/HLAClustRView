@@ -13,7 +13,8 @@ bind RNA-seq expression (when available) to the clusters.
 ## Description of Package Functionality ##
 
 The vignette of the **HLAClustRView** package, which is a document that 
-provides a task-oriented description of the package functionality,
+provides a task-oriented description of the package functionality, contains the 
+most up-to-date information.
 
 ## Citing ##
 
