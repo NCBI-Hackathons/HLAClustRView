@@ -1,11 +1,13 @@
 
 [![Build Status](https://travis-ci.org/NCBI-Hackathons/Integrating-HLA-typing-methods-and-RNA-seq.svg?branch=master)](https://travis-ci.org/NCBI-Hackathons/Integrating-HLA-typing-methods-and-RNA-seq)
 
-# HLAClustRView Package #
+# HLA typing clustering and visualization based on specific similarity metrics #
+
+## HLAClustRView Package ##
 
 The **HLAClustRView** package implements specialized similarity metrics that
 quantify the similarity between HLA typing from multiple samples. Using 
-those metrics, the package enables hierarchical cluster analysis and can 
+these metrics, the package enables hierarchical cluster analysis and can 
 bind RNA-seq expression (when available) to the clusters.
 
 ## Citing ##
@@ -14,7 +16,7 @@ If you use the *HLAClustRView* package
 for a publication, we would ask you to cite the following:
 
 > Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschênes and Pascal Belleau (2018). HLAClustRView: HLA typing clustering and
-  visualization based on adapted similarity metrics. R package version 0.99.0.
+  visualization based on specific similarity metrics. R package version 0.99.0.
 
 ## Authors ##
 
