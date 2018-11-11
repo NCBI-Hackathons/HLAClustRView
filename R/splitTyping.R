@@ -4,11 +4,11 @@ splitTyping <- function (aChar)
     options('stringAsFactor'=FALSE)
     prefix <-str_extract(aChar, "(^.*[:digit:])|(^[:alpha:]+$)")
     splitted <- strsplit(prefix,"[.*:_]")
-    pad <-5-lengths(splitted)
-    splitted <- append(splitted,rep(NA, pad) )
-    suffix <-str_extract(aChar, "(?<=([:digit:]|[.*:_]))[:alpha:]+$")
-    output <- c(unlist(splitted), suffix)
 
+    splitted<-t(sapply(splitted, function(x) c(x,rep(NA, 5-length(x)))))
+
+    suffix <-str_extract(aChar, "(?<=([:digit:]|[.*:_]))[:alpha:]+$")
+    output <-cbind(splitted, as.array(suffix))
     return(output)
 
 }
