@@ -32,6 +32,6 @@ res <- sample_pair_distance(example_sample_pair_data)
 test_that("correct distance (agregated sum)", {
     expect_equal(res$HammingDistance, 3)
     # keep only genes that are in both samples
-    expect_true(all(c("A", "C") %in% colnames(res)))
+    expect_true(all(c("A", "C") %in% tidyr::unnest(res)$HLAgene))
 
 })

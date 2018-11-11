@@ -53,8 +53,8 @@ hamming_distance_digit1 <- function(allele) {
 #' Digit1 (digit 1) and sample (see example data)
 #'
 #' @author Santiago Medina, Nissim Ranade
-#' @return  a tibble with one row and a column for the total hamming distance
-#' and n columns more where n is the number of genes
+#' @return  a tibble with one row and column HammingDistance & column data
+#' corresponding to the same_allele information
 #' @export
 #' @importFrom tidyr nest unnest spread
 #' @importFrom dplyr group_by %>% summarise filter pull select mutate
@@ -86,9 +86,10 @@ sample_pair_distance <- function(sample_pair_data) {
         unnest(x)
 
     distances_per_gene %>%
+        mutate(HammingDistance = sum(distance)) %>%
         select(-distance) %>%
-        spread(key = HLAgene, value = same_allele) %>%
-        mutate(HammingDistance = sum(distances_per_gene$distance))
+        group_by(HammingDistance) %>%
+        nest()
 }
 
 
@@ -96,7 +97,7 @@ sample_pair_distance <- function(sample_pair_data) {
 #'
 #' @param hla_data data frame with allele data
 #'
-#' @importFrom dplyr filter mutate select group_by inner_join as_tibble rename
+#' @importFrom dplyr filter mutate select group_by inner_join as_tibble rename %>%
 #' @importFrom tidyr unnest nest
 #' @importFrom utils combn
 #' @importFrom purrr map_lgl
@@ -131,7 +132,7 @@ calculateSimilarity <- function(hla_data) {
 
     distances %>%
         select(-HammingDistance) %>%
-        gather(key = HLAgene, value = same_allele, -sample1, -sample2) %>%
+        unnest(data) %>%
         group_by(sample1, sample2) %>%
         nest() %>%
         inner_join(
