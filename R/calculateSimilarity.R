@@ -69,6 +69,7 @@ hamming_distance_digit1 <- function(allele) {
 #' @importFrom dplyr group_by %>% summarise filter pull select mutate
 #' @importFrom utils data
 #' @importFrom purrr map
+#' @export
 sample_pair_distance <- function(sample_pair_data) {
     # make sure only two samples are given
     stopifnot(length(unique(sample_pair_data$SampleName)) == 2)
