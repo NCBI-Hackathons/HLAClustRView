@@ -11,8 +11,8 @@ sample_pair_distance(sample_pair_data)
 Digit1 (digit 1) and sample (see example data)}
 }
 \value{
-a tibble with one row and a column for the total hamming distance
-and n columns more where n is the number of genes
+a tibble with one row and column HammingDistance & column data
+corresponding to the same_allele information
 }
 \description{
 Computes the Hamming Distance for a pair of samples and then
