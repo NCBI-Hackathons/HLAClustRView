@@ -161,16 +161,21 @@ calculateSimilarity <- function(hla_data) {
 
 }
 
-#' Parse hladb
+#' @title Parse hladb
 #'
-#' Converts object to tibble, removes samples with missing values
+#' @description Converts object to tibble, removes samples with missing values
+#'
 #' @param hladb hla database the output of function \code{parseHLADb}
 #'
-#' @return
-#' @export
+#' @return TODO
+#'
+#' @examples
+#'
+#' ## TODO
+#'
 #' @importFrom purrr map reduce set_names
 #' @importFrom dplyr mutate_all filter pull bind_cols as_tibble %>%
-#' @examples
+#' @export
 parse_hla_data <- function(hladb) {
 
     hla_data <-

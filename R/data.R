@@ -27,3 +27,4 @@
 #'   ...
 #' }
 "example_calculateSimilarity"
+

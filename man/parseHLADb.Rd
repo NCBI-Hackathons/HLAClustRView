@@ -18,8 +18,8 @@ HLADb object with the following column names:
 Parses a text file containing HLA allele names into an HLADb object
 }
 \examples{
-ex <- parseHLADb("pathToFile.txt")
-head(ex)
+#ex <- parseHLADb("pathToFile.txt")
+#head(ex)
 # SampleName AlleleName GeneName AlleleGroup Protein SynSubst NonCoding Suffix
 # 1  ERR188053          1        A          31      01       02        01   <NA>
 # 2  ERR188053          2        A          68      01       01        01   <NA>
