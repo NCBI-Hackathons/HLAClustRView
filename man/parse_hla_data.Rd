@@ -9,6 +9,14 @@ parse_hla_data(hladb)
 \arguments{
 \item{hladb}{hla database the output of function \code{parseHLADb}}
 }
+\value{
+TODO
+}
 \description{
 Converts object to tibble, removes samples with missing values
+}
+\examples{
+
+## TODO
+
 }

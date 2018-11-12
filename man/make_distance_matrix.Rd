@@ -7,9 +7,21 @@
 make_distance_matrix(outMet)
 }
 \arguments{
-\item{outMet}{tibble with hamming distance for sample pairs \code{calculateSimilarity}}
+\item{outMet}{tibble with hamming distance for sample
+pairs \code{calculateSimilarity}}
+}
+\value{
+TODO
 }
 \description{
-This function takes the output of \code{calculateSimilarity} function
-and returns a distance matrix to use for clustering
+This function takes the output of \code{calculateSimilarity}
+function and returns a distance matrix to use for clustering
+}
+\examples{
+
+##TODO
+
+}
+\author{
+Santiago Medina, Pascal Belleau
 }

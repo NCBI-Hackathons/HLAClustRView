@@ -9,6 +9,17 @@ draw_cluster(matrixDistance)
 \arguments{
 \item{matrixDistance}{distance matrix}
 }
+\value{
+TODO
+}
 \description{
-Draw cluster
+TODO
+}
+\examples{
+
+##TODO
+
+}
+\author{
+Santiago Medina, Pascal Belleau
 }
