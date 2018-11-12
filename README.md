@@ -24,10 +24,10 @@ most up-to-date information.
 
 ## Package Details ##
 
-* Version: 0.99.0
-* Depends: R (>= 3.3)
-* Imports: purrr, dplyr, tidyr, tibble, utils, methods, stringr
-* Suggests: testthat, knitr, rmarkdown
+* **Version:** 0.99.0
+* **Depends:** R (>= 3.3)
+* **Imports:** purrr, dplyr, tidyr, tibble, utils, methods, stringr
+* **Suggests:** testthat, knitr, rmarkdown
     
 ## Package Workflow ##
 
