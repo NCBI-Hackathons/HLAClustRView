@@ -9,6 +9,9 @@ calculateSimilarity(hla_data)
 \arguments{
 \item{hla_data}{data frame with allele data}
 }
+\value{
+TODO
+}
 \description{
 Takes the parsed hla database and computes the hamming distance
 for each pair of samples
@@ -21,7 +24,4 @@ data(example_calculateSimilarity)
 ## Calculate similarity metrics
 #calculateSimilarity(example_calculateSimilarity)
 
-}
-\author{
-Santiago Medina, Nissim Ranade
 }

@@ -33,4 +33,18 @@ make_distance_matrix <- function(outMet) {
 
 }
 
-
+#' Draw cluster
+#'
+#' @param matrixDistance distance matrix
+#' @importFrom dplyr %>%
+#' @importFrom graphics plot
+#' @importFrom stats as.dist
+#' @return
+#' @export
+#'
+#' @examples
+draw_cluster <- function(matrixDistance) {
+    hc <- as.dist(matrixDistance) %>%
+        hclust()
+    plot(hc)
+}
