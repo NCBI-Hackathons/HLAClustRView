@@ -12,8 +12,8 @@ parseHLADb <-function (hlaDbPath)
 
      #check if RData file is present
     folderName <- dirname(hlaDbPath);
-    rdaFileName <-paste(folderName,'hladb.Rdata', sep = '/')
-    if (!file.exists(rdaFileName))
+    rdsFileName <-paste(folderName,'hladb.rds', sep = '/')
+    if (!file.exists(rdsFileName))
     {
     fileName <- paste(folderName, 'E_GEUVexp.txt',sep = '/')
     file.exists(fileName)
@@ -38,11 +38,11 @@ parseHLADb <-function (hlaDbPath)
     hla <-setClass('HLADb',
                   contains = c("data.frame","list")                  )
     db<-hla(db)
-    save(db, file= rdaFileName)
+    saveRDS(db, file= rdsFileName)
 
     }else
     {
-        db <-load(rdaFileName)
+        db <-readRDS(rdsFileName)
     }
     return (db)
 #
