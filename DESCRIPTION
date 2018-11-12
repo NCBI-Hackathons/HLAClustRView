@@ -1,10 +1,10 @@
 Package: HLAClustRView
 Type: Package
-Title: HLA typing clustering and visualization based on adapted similarity 
+Title: HLA typing clustering and visualization based on specific similarity 
     metrics 
 Description: This package implements specialized similarity metrics that
     quantify the similarity between HLA typing from multiple samples. Using 
-    those metrics, the package enables hierarchical cluster analysis and can 
+    these metrics, the package enables hierarchical cluster analysis and can 
     bind RNA-seq expression (when available) to the clusters.
 Version: 0.99.0
 Date: 2018-11-09
@@ -21,4 +21,7 @@ RoxygenNote: 6.1.1
 Imports: purrr,
     dplyr,
     tidyr,
-    tibble
+    tibble,
+    utils,
+    methods,
+    stringr

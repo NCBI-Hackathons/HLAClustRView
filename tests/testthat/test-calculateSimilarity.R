@@ -1,3 +1,9 @@
+### Unit tests for functions in calculateSimilarity.R file
+
+library(HLAClustRView)
+
+data("example_sample_pair_data")
+
 d1 <- tibble::tribble(
         ~SampleName, ~AlleleName, ~AlleleGroup,
         "s1", 1, 1,
@@ -27,8 +33,10 @@ test_that("correct output format", {
 })
 
 # test function sample_pair_distance --------------------------------------
+
 data("example_sample_pair_data")
-res <- sample_pair_distance(example_sample_pair_data)
+res <- HLAClustRView::sample_pair_distance(example_sample_pair_data)
+
 test_that("correct distance (agregated sum)", {
     expect_equal(res$HammingDistance, 3)
     # keep only genes that are in both samples
