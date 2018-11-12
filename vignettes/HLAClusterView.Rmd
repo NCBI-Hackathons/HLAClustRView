@@ -1,6 +1,6 @@
 ---
 title: HLAClustRView
-author: Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschenes and Pascal Belleau
+author: Adewunmi Adelaja, Nissim Ranade, Santiago Medina, Astrid Deschenes and Pascal Belleau
 output:
   html_document:
     toc: yes
@@ -40,13 +40,16 @@ redistribute this software.
 If you use the *`r packageDescription("HLAClustRView")[["Package"]]`* package 
 for a publication, we would ask you to cite the following:
 
-> Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschênes and Pascal Belleau (2018). HLAClustRView: HLA typing clustering and
+> Adewunmi Adelaja, Nissim Ranade, Santiago Medina,  Astrid Deschênes and Pascal Belleau (2018). HLAClustRView: HLA typing clustering and
   visualization based on specific similarity metrics. R package version 0.99.0.
 
 # Introduction #
 
-The human leukocyte antigen (HLA) complex plays a primary biological role in 
-the regulation of the immune system. It also plays a critical role in the
+The human leukocyte antigen (HLA) complex plays an important biological role in 
+the regulation of the immune system. HLA  
+
+
+It also plays a critical role in the
 outcomes of human organ transplantation [@Choo2007]. 
 
 The set of genes that form the HLA complex are highly polymorphic and the 
