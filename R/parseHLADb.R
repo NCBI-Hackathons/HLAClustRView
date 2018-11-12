@@ -13,6 +13,8 @@
 #' @author Adewunmi Adelaja
 #'
 #' @importFrom stringr str_split
+#' @importFrom utils read.table
+#' @importFrom methods setClass
 #' @export
 parseHLADb <-function (hlaDbPath)
 {    # GOAL: load information from HLA database and create a usable R object that contains it
