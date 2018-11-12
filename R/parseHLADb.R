@@ -60,10 +60,15 @@ parseHLADb <-function (hlaDbPath)
     colnames(db)<-colName
 
     #create HlADb class
-    hla <-setClass('HLADb',
-                  contains = c("data.frame")                  )
-    db<-hla(db)
-    saveRDS(db, file= rdsFileName)
+    #hla <-setClass('HLADb',
+    #              contains = c("data.frame"))
+    #db<-hla(db)
+
+    res<-list()
+    res[[1]]<- db
+    class(res) <- "HLADb"
+
+    #saveRDS(db, file= rdsFileName)
     }
         else{
             print("Can't find hlaDbPath.")
