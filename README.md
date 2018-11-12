@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/NCBI-Hackathons/HLAClustRView.svg?branch=master)](https://travis-ci.org/NCBI-Hackathons/HLAClustRView)
+[![codecov](https://codecov.io/gh/NCBI-Hackathons/HLAClustRView/branch/master/graph/badge.svg)](https://codecov.io/gh/NCBI-Hackathons/HLAClustRView)
+
 
 <p align="center">
 <img src="/vignettes/HLAClustRViewLogo.png" alt=""/>
@@ -20,6 +22,13 @@ The vignette of the **HLAClustRView** package, which is a document that
 provides a task-oriented description of the package functionality, contains the 
 most up-to-date information.
 
+## Package Details ##
+
+* **Version:** 0.99.0
+* **Depends:** R (>= 3.3)
+* **Imports:** purrr, dplyr, tidyr, tibble, utils, methods, stringr
+* **Suggests:** testthat, knitr, rmarkdown
+    
 ## Package Workflow ##
 
 

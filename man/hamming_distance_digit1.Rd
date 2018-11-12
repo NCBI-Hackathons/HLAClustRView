@@ -7,7 +7,7 @@
 hamming_distance_digit1(allele)
 }
 \arguments{
-\item{allele}{tibble with 3 columns: *sample*, *Allele*, *Digit1*
+\item{allele}{tibble with 3 columns: SampleName, AlleleName, AlleleGroup,
 (see example)}
 }
 \value{
@@ -23,7 +23,7 @@ This function computes the hamming distance for two samples and two alleles,
 \examples{
 d <-
 tibble::tribble(
-   ~sample, ~Allele, ~Digit1,
+   ~SampleName, ~AlleleName, ~AlleleGroup,
    "s1", 1, 1,
    "s1", 2, 3,
    "s2", 1, 1,

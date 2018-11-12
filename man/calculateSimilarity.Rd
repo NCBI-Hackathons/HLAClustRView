@@ -16,7 +16,12 @@ TODO
 Calculate hamming distance between samples
 }
 \examples{
-## TODO
+
+## Load example dataset
+data(example_calculateSimilarity)
+
+## Calculate similarity metrics
+#calculateSimilarity(example_calculateSimilarity)
 
 }
 \author{

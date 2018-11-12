@@ -22,4 +22,6 @@ Imports: purrr,
     dplyr,
     tidyr,
     tibble,
+    utils,
+    methods,
     stringr
