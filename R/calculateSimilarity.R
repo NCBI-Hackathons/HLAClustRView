@@ -109,7 +109,7 @@ sample_pair_distance <- function(sample_pair_data) {
 #'
 #' @author Santiago Medina, Nissim Ranade
 #'
-#' @importFrom dplyr filter mutate select group_by inner_join as_tibble rename
+#' @importFrom dplyr filter mutate select group_by inner_join as_tibble rename %>%
 #' @importFrom tidyr unnest nest
 #' @importFrom utils combn
 #' @importFrom purrr map_lgl possibly
