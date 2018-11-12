@@ -78,6 +78,10 @@ parseHLADb <-function (hlaDbPath)
     {
         db <-readRDS(rdsFileName)
     }
+
+    #
+    #remove samples with NA allele groups
+    drop <- db[is.na(db$AlleleGroup), 'SampleName']
+    db <- db[db$SampleName != drop,]
     return (db)
-#
 }
