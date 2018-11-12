@@ -1,5 +1,6 @@
 ---
 title: HLAClustRView
+subtitle: HLA typing clustering and visualization based on specific similarity metrics 
 author: Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschenes and Pascal Belleau
 output:
   html_document:
@@ -8,7 +9,7 @@ output:
     toc: yes
 bibliography: biblio.bibtex
 vignette: |
-  %\VignetteIndexEntry{TODO}     
+  %\VignetteIndexEntry{HLA typing clustering and visualization based on specific similarity metrics}     
   %\VignettePackage{HLAClustRView}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown} 

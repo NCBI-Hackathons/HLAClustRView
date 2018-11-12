@@ -57,8 +57,12 @@ hamming_distance_digit1 <- function(allele) {
 #' corresponding to the same_allele information
 #'
 #' @examples
-#' data("example_sample_pair_data") # example data
-#' sample_pair_distance(example_sample_pair_data)
+#'
+#' ## Load example dataset
+#' data("example_sample_pair_data")
+#'
+#' ## Computes the Hamming distance
+#' #sample_pair_distance(example_sample_pair_data)
 #'
 #' @author Santiago Medina, Nissim Ranade
 #'
@@ -104,8 +108,12 @@ sample_pair_distance <- function(sample_pair_data) {
 #' @return TODO
 #'
 #' @examples
+#'
+#' ## Load example dataset
 #' data(example_calculateSimilarity)
-#' calculateSimilarity(example_calculateSimilarity)
+#'
+#' ## Calculate similarity metrics
+#' #calculateSimilarity(example_calculateSimilarity)
 #'
 #' @author Santiago Medina, Nissim Ranade
 #'
