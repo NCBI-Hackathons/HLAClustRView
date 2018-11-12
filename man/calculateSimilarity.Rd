@@ -2,25 +2,16 @@
 % Please edit documentation in R/calculateSimilarity.R
 \name{calculateSimilarity}
 \alias{calculateSimilarity}
-\title{Calculate hamming distance between samples}
+\title{calculate hamming distance between samples}
 \usage{
 calculateSimilarity(hla_data)
 }
 \arguments{
 \item{hla_data}{data frame with allele data}
 }
-\value{
-TODO
-}
 \description{
-Calculate hamming distance between samples
-}
-\examples{
-## TODO
-
-}
-\author{
-Santiago Medina, Nissim Ranade
+Takes the parsed hla database and computes the hamming distance
+for each pair of samples
 }
 \examples{
 data(example_calculateSimilarity)
