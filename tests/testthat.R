@@ -1,9 +1,8 @@
 library(testthat)
 
-library(HLAClusterView)
+library(HLAClustRView)
 
 
 
 ## Run all unit tests
-## TODO : remove comment
-#test_check("HLAClusterView")
+test_check("HLAClustRView")

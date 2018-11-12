@@ -1,6 +1,21 @@
+#' @title TODO
+#'
+#' @description TODO
+#'
+#' @param aChar TODO
+#'
+#' @return TODO
+#'
+#' @examples
+#'
+#' ## TODO
+#'
+#' @author Adewunmi Adelaja
+#'
+#' @importFrom stringr str_extract
+#' @export
 splitTyping <- function (aChar)
 {
-    library (stringr)
     options('stringAsFactor'=FALSE)
     prefix <-str_extract(aChar, "(^.*[:digit:])|(^[:alpha:]+$)")
     splitted <- strsplit(prefix,"[.*:_]")

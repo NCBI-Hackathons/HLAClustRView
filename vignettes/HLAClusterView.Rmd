@@ -1,0 +1,120 @@
+---
+title: HLAClustRView
+author: Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschenes and Pascal Belleau
+output:
+  html_document:
+    toc: yes
+  pdf_document:
+    toc: yes
+bibliography: biblio.bibtex
+vignette: |
+  %\VignetteIndexEntry{TODO}     
+  %\VignettePackage{HLAClustRView}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown} 
+---
+
+```{r style, echo = FALSE, results = 'asis', warning=FALSE, message=FALSE}
+library(knitr)
+library(HLAClustRView)
+```
+
+<br />
+
+**Package**: `r packageDescription("HLAClustRView")[["Package"]]` <br />
+**Authors**: `r packageDescription("HLAClustRView")[["Author"]]` <br />
+**Version**: `r packageDescription("HLAClustRView")$Version` <br />
+**Compiled date**: `r Sys.Date()` <br />
+**License**: `r packageDescription("HLAClustRView")[["License"]]` <br />
+
+
+# Licensing  #
+
+The *`r packageDescription("HLAClustRView")[["Package"]]`* package and the 
+underlying *`r packageDescription("HLAClustRView")[["Package"]]`* code 
+are distributed under the MIT license. You are free to use and 
+redistribute this software.
+
+# Citing #
+
+If you use the *`r packageDescription("HLAClustRView")[["Package"]]`* package 
+for a publication, we would ask you to cite the following:
+
+> Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschênes and Pascal Belleau (2018). HLAClustRView: HLA typing clustering and
+  visualization based on specific similarity metrics. R package version 0.99.0.
+
+# Introduction #
+
+The human leukocyte antigen (HLA) complex plays a primary biological role in 
+the regulation of the immune system. It also plays a critical role in the
+outcomes of human organ transplantation [@Choo2007]. 
+
+The set of genes that form the HLA complex are highly polymorphic and the 
+novel alleles are still discovered [@Abraham2018]. Because of their high 
+polymorphic status, accurate typing of HLA genes with short-read sequencing 
+data is a challenging task. Software specialized in HLA typing such
+as xHLA [@Xie2017] and HLAProfiler [@Buchkovich2017], had to be developped. 
+
+Since 1998, the IMGT/HLA Database [@Robinson2015] has provided curated 
+information about polymorphism in the human genes of the immune system.
+The naming of HLA genes, allele sequences, and their quality control under the 
+responsibility of the [WHO Nomenclature Committee for Factors of the HLA System](http://hla.alleles.org/nomenclature/committee.html).
+
+# Workflow #
+
+The *`r packageDescription("HLAClustRView")[["Package"]]`* package is splitted
+in 3 main sections: input, process and visualization. The Figure 1 shows the
+workflow within each section. 
+
+<center>
+
+![Figure 1. HLAClustRView workflow](HLAdesign.jpg "HLAClustRView design")
+
+</center>
+
+
+<br>
+<br>
+
+TODO
+
+# Metrics which estimate similarity between two HLA typing 
+
+To enable quantification of the similarity between two HLA typing, similarity
+metric must be used.
+
+## Hamming distance based on first HLA typing field 
+
+TODO
+
+# An analysis step by step #
+
+### 1. Loading the HLAClustRView package
+
+```{r loadingPackage, warning=FALSE, message=FALSE} 
+library(HLAClustRView)
+```
+
+### 2. Parsing HLA typing samples file
+
+The file containing the HLA typing for all analysed samples needs to be loaded.
+This task is done by the *prepareHLADataset()* function.
+
+### 3. Calculating similarity metric
+
+The Hamming distance based on first HLA typing field can be calculated through
+the *hamming_distance_digit1()* function.
+
+
+# Session info
+
+Here is the output of sessionInfo() on the system on which this document 
+was compiled:
+
+```{r sessionInfo, echo=FALSE}
+sessionInfo()
+```
+
+
+# References
+
