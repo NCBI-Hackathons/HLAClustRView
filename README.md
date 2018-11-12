@@ -22,6 +22,13 @@ The vignette of the **HLAClustRView** package, which is a document that
 provides a task-oriented description of the package functionality, contains the 
 most up-to-date information.
 
+## Package Details ##
+
+* Version: 0.99.0
+* Depends: R (>= 3.3)
+* Imports: purrr, dplyr, tidyr, tibble, utils, methods, stringr
+* Suggests: testthat, knitr, rmarkdown
+    
 ## Package Workflow ##
 
 
