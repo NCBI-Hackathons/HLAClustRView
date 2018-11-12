@@ -1,12 +1,30 @@
+#' @title TODO
+#'
+#' @description TODO
+#'
+#' @param aChar TODO
+#'
+#' @return TODO
+#'
+#' @examples
+#'
+#' ## TODO
+#'
+#' @author Adewunmi Adelaja
+#'
+#' @importFrom stringr str_extract
+#' @export
 splitTyping <- function (aChar)
 {
-    library (stringr)
     options('stringAsFactor'=FALSE)
-    aChar<-"A*31:01:02:01"
-    prefix <-str_extract(aChar, '(^.*[:digit:])|(^[:alpha:]+$)')
-    splitted <- strsplit(prefix,'[.*:_]')
-    suffix <-str_extract(aChar, '(?<=([:digit:]|[.*:_]))[:alpha:]+$')
-    output <- append(unlist(splitted), suffix)
+    prefix <-str_extract(aChar, "(^.*[:digit:])|(^[:alpha:]+$)")
+    splitted <- strsplit(prefix,"[.*:_]")
+
+    splitted<-t(sapply(splitted, function(x) c(x,rep(NA, 5-length(x)))))
+
+    suffix <-str_extract(aChar, "(?<=([:digit:]|[.*:_]))[:alpha:]+$")
+    output <-cbind(splitted, as.array(suffix));
+    # output <-matrix(unlist(cbind(splitted, as.array(suffix))), ncol = 6, byrow = TRUE);
     return(output)
 
 }

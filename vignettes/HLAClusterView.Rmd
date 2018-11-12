@@ -60,6 +60,22 @@ information about polymorphism in the human genes of the immune system.
 The naming of HLA genes, allele sequences, and their quality control under the 
 responsibility of the [WHO Nomenclature Committee for Factors of the HLA System](http://hla.alleles.org/nomenclature/committee.html).
 
+# Workflow #
+
+The *`r packageDescription("HLAClustRView")[["Package"]]`* package is splitted
+in 3 main sections: input, process and visualization. The Figure 1 shows the
+workflow within each section. 
+
+<center>
+
+![Figure 1. HLAClustRView workflow](HLAdesign.jpg "HLAClustRView design")
+
+</center>
+
+
+<br>
+<br>
+
 TODO
 
 # Metrics which estimate similarity between two HLA typing 

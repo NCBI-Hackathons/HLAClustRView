@@ -1,9 +1,15 @@
-
 [![Build Status](https://travis-ci.org/NCBI-Hackathons/HLAClustRView.svg?branch=master)](https://travis-ci.org/NCBI-Hackathons/HLAClustRView)
+[![codecov](https://codecov.io/gh/NCBI-Hackathons/HLAClustRView/branch/master/graph/badge.svg)](https://codecov.io/gh/NCBI-Hackathons/HLAClustRView)
+
+
+<p align="center">
+<img src="/vignettes/HLAClustRViewLogo.png" alt=""/>
+</p>
 
 # HLA typing clustering and visualization based on specific similarity metrics #
 
-## HLAClustRView Package ##
+
+<br>
 
 The **HLAClustRView** package implements specialized similarity metrics that
 quantify the similarity between HLA typing from multiple samples. Using 
@@ -15,6 +21,13 @@ bind RNA-seq expression (when available) to the clusters.
 The vignette of the **HLAClustRView** package, which is a document that 
 provides a task-oriented description of the package functionality, contains the 
 most up-to-date information.
+
+## Package Workflow ##
+
+
+<p align="center">
+<img src="/vignettes/HLAdesign.jpg" alt=""/>
+</>
 
 ## Citing ##
 

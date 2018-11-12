@@ -21,4 +21,7 @@ RoxygenNote: 6.1.1
 Imports: purrr,
     dplyr,
     tidyr,
-    tibble
+    tibble,
+    utils,
+    methods,
+    stringr
