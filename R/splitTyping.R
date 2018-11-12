@@ -8,7 +8,8 @@ splitTyping <- function (aChar)
     splitted<-t(sapply(splitted, function(x) c(x,rep(NA, 5-length(x)))))
 
     suffix <-str_extract(aChar, "(?<=([:digit:]|[.*:_]))[:alpha:]+$")
-    output <-cbind(splitted, as.array(suffix))
+    output <-cbind(splitted, as.array(suffix));
+    # output <-matrix(unlist(cbind(splitted, as.array(suffix))), ncol = 6, byrow = TRUE);
     return(output)
 
 }
