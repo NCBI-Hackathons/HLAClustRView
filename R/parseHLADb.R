@@ -1,3 +1,19 @@
+#' @title TODO
+#'
+#' @description TODO
+#'
+#' @param hlaDbPath TODO
+#'
+#' @return TODO
+#'
+#' @examples
+#'
+#' ## TODO
+#'
+#' @author Adewunmi Adelaja
+#'
+#' @importFrom stringr str_split
+#' @export
 parseHLADb <-function (hlaDbPath)
 {    # GOAL: load information from HLA database and create a usable R object that contains it
     # Input validation:
@@ -7,8 +23,6 @@ parseHLADb <-function (hlaDbPath)
     db <- data.frame
 
     options(stringsAsFactors = FALSE)
-    library (stringr)
-    library (dplyr)
 
      #check if RData file is present
     folderName <- dirname(hlaDbPath);
