@@ -56,7 +56,7 @@ for a publication, we would ask you to cite the following:
 
 ## Authors ##
 
-[Adewunmi Adelaja](https://www.linkedin.com/in/adewunmi-adelaja-2b3b1635/ "Adewunmi Adelaja"), [Nissim Ranade](https://www.linkedin.com/in/nissim-ranade-4029b3b5 "Nissim Ranade"), Santiago Medina,  Astrid Deschênes and 
+[Adewunmi Adelaja](https://www.linkedin.com/in/adewunmi-adelaja-2b3b1635/ "Adewunmi Adelaja"), [Nissim Ranade](https://www.linkedin.com/in/nissim-ranade-4029b3b5 "Nissim Ranade"), [Santiago Medina](https://github.com/santiago1234),  Astrid Deschênes and 
 [Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau "Pascal Belleau")
 
 ## License ##
