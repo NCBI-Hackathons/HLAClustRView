@@ -1,4 +1,6 @@
 [![Build Status](https://travis-ci.org/NCBI-Hackathons/HLAClustRView.svg?branch=master)](https://travis-ci.org/NCBI-Hackathons/HLAClustRView)
+[![codecov](https://codecov.io/gh/NCBI-Hackathons/HLAClustRView/branch/master/graph/badge.svg)](https://codecov.io/gh/NCBI-Hackathons/HLAClustRView)
+
 
 <p align="center">
 <img src="/vignettes/HLAClustRViewLogo.png" alt=""/>
@@ -20,6 +22,13 @@ The vignette of the **HLAClustRView** package, which is a document that
 provides a task-oriented description of the package functionality, contains the 
 most up-to-date information.
 
+## Package Details ##
+
+* **Version:** 0.99.0
+* **Depends:** R (>= 3.3)
+* **Imports:** purrr, dplyr, tidyr, tibble, utils, methods, stringr
+* **Suggests:** testthat, knitr, rmarkdown
+    
 ## Package Workflow ##
 
 
@@ -32,12 +41,12 @@ most up-to-date information.
 If you use the *HLAClustRView* package 
 for a publication, we would ask you to cite the following:
 
-> Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschênes and Pascal Belleau (2018). HLAClustRView: HLA typing clustering and
+> Adewunmi Adelaja, Nissim Ranade, Santiago Medina, Astrid Deschênes and Pascal Belleau (2018). HLAClustRView: HLA typing clustering and
   visualization based on specific similarity metrics. R package version 0.99.0.
 
 ## Authors ##
 
-[Nissim Ranade](https://www.linkedin.com/in/nissim-ranade-4029b3b5 "Nissim Ranade"), Santiago Medina, Adewunmi Adelaja, Astrid Deschênes and 
+[Adewunmi Adelaja](https://www.linkedin.com/in/adewunmi-adelaja-2b3b1635/ "Adewunmi Adelaja"),[Nissim Ranade](https://www.linkedin.com/in/nissim-ranade-4029b3b5 "Nissim Ranade"), Santiago Medina,  Astrid Deschênes and 
 [Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau "Pascal Belleau")
 
 ## License ##

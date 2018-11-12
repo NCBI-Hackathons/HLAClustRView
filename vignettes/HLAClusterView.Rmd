@@ -46,15 +46,11 @@ for a publication, we would ask you to cite the following:
 # Introduction #
 
 The human leukocyte antigen (HLA) complex plays an important biological role in 
-the regulation of the immune system. HLA  
-
-
-It also plays a critical role in the
-outcomes of human organ transplantation [@Choo2007]. 
+the regulation of the immune system. HLA alleles encode major histocompatibility complex (MHC) protein, which display peptide antigens for recognition by T cells. MHCs are essential for antiviral, antibacterial, and anti-tumor immunity[@Kumar2012].  
+Further, inheritance of specific HLA Alleles are implicated in autoimmune disorders, such as inflammatory bowel disease, type 1 diabetes, rheumatoid arthritis, and systemic lupus erythematosus [@Gutierrez-Arcelus2016]. Furthermore, HLA gene products play a critical role in the outcomes of human organ transplantation [@Choo2007]. 
 
 The set of genes that form the HLA complex are highly polymorphic and the 
-novel alleles are still discovered [@Abraham2018]. Because of their high 
-polymorphic status, accurate typing of HLA genes with short-read sequencing 
+novel alleles are still discovered [@Abraham2018].High polymorphism of HLA alleles provides some immunologic advantages against infectious disease, it also presents challenges for organ transplantation[@Kumar2012]. Successful tissue and organ transplantation requires that donors and recipients have compatible HLA alleles[@Kumar2012]. Because of their high polymorphic status, accurate typing of HLA genes with short-read sequencing 
 data is a challenging task. Software specialized in HLA typing such
 as xHLA [@Xie2017] and HLAProfiler [@Buchkovich2017], had to be developped. 
 
