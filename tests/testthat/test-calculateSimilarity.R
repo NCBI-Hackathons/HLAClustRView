@@ -27,7 +27,7 @@ test_that("correct output format", {
 })
 
 # test function sample_pair_distance --------------------------------------
-
+data("example_sample_pair_data")
 res <- sample_pair_distance(example_sample_pair_data)
 test_that("correct distance (agregated sum)", {
     expect_equal(res$HammingDistance, 3)
