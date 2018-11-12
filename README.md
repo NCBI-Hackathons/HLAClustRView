@@ -9,12 +9,20 @@
 # HLA typing clustering and visualization based on specific similarity metrics #
 
 
-<br>
-
 The **HLAClustRView** package implements specialized similarity metrics that
-quantify the similarity between HLA typing from multiple samples. Using 
-these metrics, the package enables hierarchical cluster analysis and can 
-bind RNA-seq expression (when available) to the clusters.
+quantify the similarity between human leukocyte antigen (HLA) typing from 
+multiple samples. Using these metrics, the package enables hierarchical 
+cluster analysis and can bind RNA-seq expression (when available) to the 
+clusters.
+
+## Goal ##
+
+The HLA genes plays a primary biological role in 
+the regulation of the immune system and in the outcomes of human organ 
+transplantation. However, the official HLA typing format is uneasy to process. 
+The goal of the **HLAClustRView** package is to implement appropriate 
+similarity metrics from HLA typing to unable sample clustering and more complex
+analysis.
 
 ## Description of Package Functionality ##
 
@@ -46,7 +54,7 @@ for a publication, we would ask you to cite the following:
 
 ## Authors ##
 
-[Adewunmi Adelaja](https://www.linkedin.com/in/adewunmi-adelaja-2b3b1635/ "Adewunmi Adelaja"),[Nissim Ranade](https://www.linkedin.com/in/nissim-ranade-4029b3b5 "Nissim Ranade"), Santiago Medina,  Astrid Deschênes and 
+[Adewunmi Adelaja](https://www.linkedin.com/in/adewunmi-adelaja-2b3b1635/ "Adewunmi Adelaja"), [Nissim Ranade](https://www.linkedin.com/in/nissim-ranade-4029b3b5 "Nissim Ranade"), Santiago Medina,  Astrid Deschênes and 
 [Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau "Pascal Belleau")
 
 ## License ##
