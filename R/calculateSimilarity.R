@@ -52,17 +52,23 @@ hamming_distance_digit1 <- function(allele) {
 #' @param sample_pair_data a tible with columns GeneName (genes), Allele (alleles),
 #' Digit1 (digit 1) and sample (see example data)
 #'
-#' @author Santiago Medina, Nissim Ranade
 #' @return  a tibble with one row and column HammingDistance & column data
 #' corresponding to the same_allele information
-#' @export
+#'
+#' @examples
+#'
+#' ## Load example dataset
+#' data("example_sample_pair_data")
+#'
+#' ## Computes the Hamming distance
+#' #sample_pair_distance(example_sample_pair_data)
+#'
+#' @author Santiago Medina, Nissim Ranade
+#'
 #' @importFrom tidyr nest unnest spread
 #' @importFrom dplyr group_by %>% summarise filter pull select mutate
 #' @importFrom utils data
 #' @importFrom purrr map
-#' @examples
-#' data("example_sample_pair_data") # example data
-#' sample_pair_distance(example_sample_pair_data)
 sample_pair_distance <- function(sample_pair_data) {
     # make sure only two samples are given
     stopifnot(length(unique(sample_pair_data$SampleName)) == 2)
@@ -93,23 +99,28 @@ sample_pair_distance <- function(sample_pair_data) {
 }
 
 
-#' calculate hamming distance between samples
+#' @title calculate hamming distance between samples
 #'
-#' Takes the parsed hla database and computes the hamming distance
+#' @description Takes the parsed hla database and computes the hamming distance
 #' for each pair of samples
 #'
 #' @param hla_data data frame with allele data
+#'
+#' @return TODO
+#'
+#' @examples
+#'
+#' ## Load example dataset
+#' data(example_calculateSimilarity)
+#'
+#' ## Calculate similarity metrics
+#' #calculateSimilarity(example_calculateSimilarity)
 #'
 #' @importFrom dplyr filter mutate select group_by inner_join as_tibble rename %>%
 #' @importFrom tidyr unnest nest
 #' @importFrom utils combn
 #' @importFrom purrr map_lgl possibly map2
-#' @return
 #' @export
-#'
-#' @examples
-#' data(example_calculateSimilarity)
-#' calculateSimilarity(example_calculateSimilarity)
 calculateSimilarity <- function(hla_data) {
     hla_data <- select(hla_data, SampleName, GeneName, AlleleName, AlleleGroup)
     ssample_pair_distance <- possibly(sample_pair_distance, otherwise = FALSE)

@@ -14,6 +14,14 @@ Takes the parsed hla database and computes the hamming distance
 for each pair of samples
 }
 \examples{
+
+## Load example dataset
 data(example_calculateSimilarity)
-calculateSimilarity(example_calculateSimilarity)
+
+## Calculate similarity metrics
+#calculateSimilarity(example_calculateSimilarity)
+
+}
+\author{
+Santiago Medina, Nissim Ranade
 }

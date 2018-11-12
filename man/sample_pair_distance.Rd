@@ -21,6 +21,16 @@ sum over the genes keeping information of which allele was used for the distance
 \examples{
 data("example_sample_pair_data") # example data
 sample_pair_distance(example_sample_pair_data)
+sum over the genes keeping information of which allele was used for the distance.
+}
+\examples{
+
+## Load example dataset
+data("example_sample_pair_data")
+
+## Computes the Hamming distance
+#sample_pair_distance(example_sample_pair_data)
+
 }
 \author{
 Santiago Medina, Nissim Ranade
