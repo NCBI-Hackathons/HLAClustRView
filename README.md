@@ -1,9 +1,8 @@
-
 [![Build Status](https://travis-ci.org/NCBI-Hackathons/HLAClustRView.svg?branch=master)](https://travis-ci.org/NCBI-Hackathons/HLAClustRView)
 
-<center>
+<p align="center">
 <img src="/vignettes/HLAClustRViewLogo.png" alt=""/>
-</center>
+</p>
 
 # HLA typing clustering and visualization based on specific similarity metrics #
 
@@ -23,9 +22,10 @@ most up-to-date information.
 
 ## Package Workflow ##
 
-<center>
+
+<p align="center">
 <img src="/vignettes/HLAdesign.jpg" alt=""/>
-</center>
+</>
 
 ## Citing ##
 
