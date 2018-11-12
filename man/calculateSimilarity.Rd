@@ -22,3 +22,7 @@ Calculate hamming distance between samples
 \author{
 Santiago Medina, Nissim Ranade
 }
+\examples{
+data(example_calculateSimilarity)
+calculateSimilarity(example_calculateSimilarity)
+}
