@@ -12,3 +12,7 @@ calculateSimilarity(hla_data)
 \description{
 calculate hamming distance between samples
 }
+\examples{
+data(example_calculateSimilarity)
+calculateSimilarity(example_calculateSimilarity)
+}
