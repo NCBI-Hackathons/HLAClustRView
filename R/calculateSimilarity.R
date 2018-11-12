@@ -47,7 +47,7 @@ hamming_distance_digit1 <- function(allele) {
 
 #' @title Sample Pair Distance
 #'
-#' @decription Computes the Hamming Distance for a pair of samples and then
+#' @description Computes the Hamming Distance for a pair of samples and then
 #' aggregates the sum over the genes keeping information of which allele was
 #' used for the distance.
 #'

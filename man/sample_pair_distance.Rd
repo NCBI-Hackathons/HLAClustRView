@@ -15,7 +15,9 @@ a tibble with one row and a column for the total hamming distance
 and n columns more where n is the number of genes
 }
 \description{
-Sample Pair Distance
+Computes the Hamming Distance for a pair of samples and then
+aggregates the sum over the genes keeping information of which allele was
+used for the distance.
 }
 \examples{
 data("example_sample_pair_data") # example data
