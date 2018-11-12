@@ -19,9 +19,11 @@ clusters.
 
 The HLA genes plays a primary biological role in 
 the regulation of the immune system and in the outcomes of human organ 
-transplantation. However, the official HLA typing format is uneasy to process. 
+transplantation. However, the official HLA typing format is tedious to process.
+So far, not much analysis has been done from the clustering perspective for
+this type of data.
 The goal of the **HLAClustRView** package is to implement appropriate 
-similarity metrics from HLA typing to unable sample clustering and more complex
+similarity metrics on HLA typing to enable sample clustering and more complex
 analysis.
 
 ## Description of Package Functionality ##
