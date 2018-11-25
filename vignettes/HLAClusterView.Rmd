@@ -1,6 +1,6 @@
 ---
 title: HLAClustRView
-author: Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschenes and Pascal Belleau
+author: Pascal Belleau, Adewunmi Adelaja, Astrid Deschênes, Santiago Medina, Nissim Ranade, Allissa Dillman
 output:
   html_document:
     toc: yes
@@ -40,19 +40,31 @@ redistribute this software.
 If you use the *`r packageDescription("HLAClustRView")[["Package"]]`* package 
 for a publication, we would ask you to cite the following:
 
-> Nissim Ranade, Santiago Medina, Adewunmi Adelaja, Astrid Deschênes and Pascal Belleau (2018). HLAClustRView: HLA typing clustering and
-  visualization based on specific similarity metrics. R package version 0.99.0.
+```{r citation, comment='', echo=T, include=T, message=FALSE, error=FALSE}
+citation("HLAClustRView")
+```
 
 # Introduction #
 
-The human leukocyte antigen (HLA) complex plays a primary biological role in 
-the regulation of the immune system. It also plays a critical role in the
-outcomes of human organ transplantation [@Choo2007]. 
+The human leukocyte antigen (HLA) complex plays an important biological role in 
+the regulation of the immune system. HLA alleles encode major 
+histocompatibility complex (MHC) protein, which display peptide antigens for 
+recognition by T cells. MHCs are essential for antiviral, antibacterial, and 
+anti-tumor immunity [TODO Kumar2012].  
+Further, inheritance of specific HLA Alleles are implicated in autoimmune 
+disorders, such as inflammatory bowel disease, type 1 diabetes, rheumatoid 
+arthritis, and systemic lupus erythematosus [TODO Gutierrez-Arcelus2016]. 
+Furthermore, HLA gene products play a critical role in the outcomes of human 
+organ transplantation [@Choo2007]. 
 
 The set of genes that form the HLA complex are highly polymorphic and the 
-novel alleles are still discovered [@Abraham2018]. Because of their high 
-polymorphic status, accurate typing of HLA genes with short-read sequencing 
-data is a challenging task. Software specialized in HLA typing such
+novel alleles are still discovered [@Abraham2018].High polymorphism of 
+HLA alleles provides some immunologic advantages against infectious disease, 
+it also presents challenges for organ transplantation [TODO Kumar2012]. 
+Successful tissue and organ transplantation requires that donors and 
+recipients have compatible HLA alleles[TODO Kumar2012]. Because of their 
+high polymorphic status, accurate typing of HLA genes with short-read 
+sequencing data is a challenging task. Software specialized in HLA typing such
 as xHLA [@Xie2017] and HLAProfiler [@Buchkovich2017], had to be developped. 
 
 Since 1998, the IMGT/HLA Database [@Robinson2015] has provided curated 
@@ -89,22 +101,51 @@ TODO
 
 # An analysis step by step #
 
-### 1. Loading the HLAClustRView package
+### 1. Install HLAClustRView package
+
+The *devtools* package provides *install_github()* that enables installing 
+packages from GitHub.
+
+```{r installPackage, warning=FALSE, message=FALSE, eval=FALSE}
+library(devtools)
+install_github("NCBI-Hackathons/HLAClustRView")
+```
+
+### 2. Loading the HLAClustRView package
 
 ```{r loadingPackage, warning=FALSE, message=FALSE} 
 library(HLAClustRView)
 ```
 
-### 2. Parsing HLA typing samples file
+### 3. Load HLA typing samples file
 
 The file containing the HLA typing for all analysed samples needs to be loaded.
-This task is done by the *prepareHLADataset()* function.
+This task is done by the *parseHLADb()* function.
 
-### 3. Calculating similarity metric
+```{r parseSample, warning=FALSE, message=FALSE}
+HLAdata <- parseHLADb(hlaDbPath = "./Samples_HLA_typing.txt")
+head(HLAdata)
+```
+
+### 4. Parse HLA typing data
+
+The HLA data needs to formatting before inputting to similarity calculation. 
+The function *parse_hla_data()* is used for that.
+
+```{r prepareData, warning=FALSE, message=FALSE}
+HLAdataReady <- parse_hla_data(hladb = HLAdata)
+```
+
+### 5. Calculating similarity metric
 
 The Hamming distance based on first HLA typing field can be calculated through
-the *hamming_distance_digit1()* function.
+the *calculateSimilarity()* function.
 
+```{r similarityCalcul, warning=FALSE, message=FALSE}
+## TODO Problem with code
+#hammingMetric <- calculateSimilarity(HLAdataReady)
+#head(hammingMetric)
+```
 
 # Session info
 

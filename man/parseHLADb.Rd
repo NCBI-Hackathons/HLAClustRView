@@ -2,22 +2,32 @@
 % Please edit documentation in R/parseHLADb.R
 \name{parseHLADb}
 \alias{parseHLADb}
-\title{TODO}
+\title{parseHLADb}
 \usage{
 parseHLADb(hlaDbPath)
 }
 \arguments{
-\item{hlaDbPath}{TODO}
+\item{hlaDbPath}{Filepath to a text file}
 }
 \value{
-TODO
+HLADb object with the following column names:
+"SampleName"  "AlleleName"  "GeneName"    "AlleleGroup" "Protein"     "SynSubst"
+"NonCoding"   "Suffix"
 }
 \description{
-TODO
+Parses a text file containing HLA allele names into an HLADb object
 }
 \examples{
+#ex <- parseHLADb("pathToFile.txt")
+#head(ex)
+# SampleName AlleleName GeneName AlleleGroup Protein SynSubst NonCoding Suffix
+# 1  ERR188053          1        A          31      01       02        01   <NA>
+# 2  ERR188053          2        A          68      01       01        01   <NA>
+# 3  ERR188053          1        B          27      05       02      <NA>   <NA>
+# 4  ERR188053          2        B          27      05       02      <NA>   <NA>
+# 5  ERR188053          1        C          02      02       02        01   <NA>
+# 6  ERR188053          2        C          02      02       02        01   <NA>
 
-## TODO
 
 }
 \author{

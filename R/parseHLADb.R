@@ -1,14 +1,24 @@
-#' @title TODO
-#'
-#' @description TODO
-#'
-#' @param hlaDbPath TODO
-#'
-#' @return TODO
-#'
+#' @title
+#'parseHLADb
+#' @description
+#'Parses a text file containing HLA allele names into an HLADb object
+#' @param hlaDbPath
+#'Filepath to a text file
+#' @return
+#' HLADb object with the following column names:
+#' "SampleName"  "AlleleName"  "GeneName"    "AlleleGroup" "Protein"     "SynSubst"
+#' "NonCoding"   "Suffix"
 #' @examples
+#'#ex <- parseHLADb("pathToFile.txt")
+#'#head(ex)
+#'# SampleName AlleleName GeneName AlleleGroup Protein SynSubst NonCoding Suffix
+#'# 1  ERR188053          1        A          31      01       02        01   <NA>
+#'# 2  ERR188053          2        A          68      01       01        01   <NA>
+#'# 3  ERR188053          1        B          27      05       02      <NA>   <NA>
+#'# 4  ERR188053          2        B          27      05       02      <NA>   <NA>
+#'# 5  ERR188053          1        C          02      02       02        01   <NA>
+#'# 6  ERR188053          2        C          02      02       02        01   <NA>
 #'
-#' ## TODO
 #'
 #' @author Adewunmi Adelaja
 #'
@@ -21,19 +31,18 @@ parseHLADb <-function (hlaDbPath)
     # Input validation:
     #     must be valid database path
     # minimum expected files must be present
-
     db <- data.frame
-
     options(stringsAsFactors = FALSE)
 
-     #check if RData file is present
+     #check if RDS file is present
     folderName <- dirname(hlaDbPath);
     rdsFileName <-paste(folderName,'hladb.rds', sep = '/')
     if (!file.exists(rdsFileName))
     {
-    fileName <- paste(folderName, 'E_GEUVexp.txt',sep = '/')
-    file.exists(fileName)
-    data <- read.table(fileName, header = TRUE, stringsAsFactors = FALSE)
+
+    if (file.exists(hlaDbPath))
+    {
+    data <- read.table(hlaDbPath, header = TRUE, stringsAsFactors = FALSE)
     rownames(data) <- data[,1]
     data <- data[,2:ncol(data)]
 
@@ -51,15 +60,28 @@ parseHLADb <-function (hlaDbPath)
     colnames(db)<-colName
 
     #create HlADb class
-    hla <-setClass('HLADb',
-                  contains = c("data.frame","list")                  )
-    db<-hla(db)
-    saveRDS(db, file= rdsFileName)
+    #hla <-setClass('HLADb',
+    #              contains = c("data.frame"))
+    #db<-hla(db)
+
+    res<-list()
+    res[[1]]<- db
+    class(res) <- "HLADb"
+
+    #saveRDS(db, file= rdsFileName)
+    }
+        else{
+            print("Can't find hlaDbPath.")
+        }
 
     }else
     {
         db <-readRDS(rdsFileName)
     }
+
+    #
+    #remove samples with NA allele groups
+    drop <- db[is.na(db$AlleleGroup), 'SampleName']
+    db <- db[db$SampleName != drop,]
     return (db)
-#
 }

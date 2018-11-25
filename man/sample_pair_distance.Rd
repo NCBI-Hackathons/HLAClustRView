@@ -7,21 +7,24 @@
 sample_pair_distance(sample_pair_data)
 }
 \arguments{
-\item{sample_pair_data}{a \code{tible} with columns HLAgene (genes), Allele (alleles),
+\item{sample_pair_data}{a tible with columns GeneName (genes), Allele (alleles),
 Digit1 (digit 1) and sample (see example data)}
 }
 \value{
-a tibble with one row and a column for the total hamming distance
-and n columns more where n is the number of genes
+a tibble with one row and column HammingDistance & column data
+corresponding to the same_allele information
 }
 \description{
-Computes the Hamming Distance for a pair of samples and then
-aggregates the sum over the genes keeping information of which allele was
-used for the distance.
+Computes the Hamming Distance for a pair of samples and then aggregates the
+sum over the genes keeping information of which allele was used for the distance
 }
 \examples{
-data("example_sample_pair_data") # example data
-sample_pair_distance(example_sample_pair_data)
+
+## Load example dataset
+data("example_sample_pair_data")
+
+## Computes the Hamming distance
+#sample_pair_distance(example_sample_pair_data)
 
 }
 \author{

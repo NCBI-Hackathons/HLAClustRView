@@ -8,8 +8,8 @@ Description: This package implements specialized similarity metrics that
     bind RNA-seq expression (when available) to the clusters.
 Version: 0.99.0
 Date: 2018-11-09
-Author: Nissim Ranade, Santiago Medina, Adewunmi Adelaja, 
-    Astrid Deschênes and Pascal Belleau
+Author:  Pascal Belleau, Adewunmi Adelaja, Astrid Deschênes,
+    Santiago Medina, Nissim Ranade, Allissa Dillman
 Maintainer: Pascal Belleau <belleau@cshl.edu>
 License: MIT + file LICENSE
 Encoding: UTF-8

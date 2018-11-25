@@ -2,22 +2,25 @@
 % Please edit documentation in R/splitTyping.R
 \name{splitTyping}
 \alias{splitTyping}
-\title{TODO}
+\title{splitTyping}
 \usage{
 splitTyping(aChar)
 }
 \arguments{
-\item{aChar}{TODO}
+\item{aChar}{Character array containing well-formed HLA allele
+see http://hla.alleles.org/nomenclature/naming.html}
 }
 \value{
-TODO
+n x 6 matrix of fields
 }
 \description{
-TODO
+Converts a well-formed HLA allele name to a matrix of fields
 }
 \examples{
-
-## TODO
+output <- splitTyping("HLA-DRB1*13:01:01:02")
+print(output)
+#[,1] [,2] [,3] [,4] [,5] [,6]
+#"HLA-DRB1" "13" "01" "01" "02" NA
 
 }
 \author{
