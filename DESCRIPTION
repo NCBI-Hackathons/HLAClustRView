@@ -24,4 +24,5 @@ Imports: purrr,
     tibble,
     utils,
     methods,
-    stringr
+    stringr,
+    data.table
