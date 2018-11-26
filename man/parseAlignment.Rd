@@ -11,15 +11,17 @@ parseAlignment(fileName)
 \url{http://hla.alleles.org/alleles/text_index.html}}
 }
 \value{
-Return a class \code{HLAGene}
+an object of class \code{HLAGene}
 }
 \description{
-
+TODO
 }
 \details{
-
+TODO
 }
 \examples{
+
+## TODO
 
 }
 \author{

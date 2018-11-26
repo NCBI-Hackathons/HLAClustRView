@@ -7,20 +7,22 @@
 extractRef(seq, startPos)
 }
 \arguments{
-\item{seq}{A \code{string} contening the reference sequence.}
+\item{seq}{a \code{string} contening the reference sequence.}
 
-\item{startPos}{A \code{integer} corresponding to the position in the string
+\item{startPos}{a \code{integer} corresponding to the position in the string
 where the sequence is starting}
 }
 \value{
-A \code{list} with two fields. The first is \code{refSeq} which is
+a \code{list} with two fields. The first is \code{refSeq} which is
 containing the sequence of the reference. The second is seqDiff is a
 \code{string} representing the alignment format for the current sequence.
 }
 \description{
-
+TODO
 }
 \examples{
+
+## TODO
 
 }
 \author{
