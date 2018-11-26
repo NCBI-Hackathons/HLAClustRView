@@ -1,45 +1,52 @@
 #' @title Process the HLA alignement type for type (nuc, prot, gen) in a
 #' directory.
 #'
-#' @description
+#' @description TODO
 #'
 #' @param hlaDbPath the path to the directory of the alignment file from
 #' \url{http://hla.alleles.org/alleles/text_index.html}
 #'
-#' @param seqType Sequence type nuc for CDS sequence, gen for genomic, and
-#' prot for protein
+#' @param seqType a \code{character} string, the sequence type of the file to
+#' parse. The choices are: "nuc" for CDS sequence, "gen" for genomic, and
+#' "prot" for protein. Default: "nuc".
 #'
-#' @return Return a class \code{HLAdb}
+#' @return an object of class \code{HLAdb}
 #'
-#' @details
+#' @details TODO
 #'
 #' @examples
+#'
+#' ## TODO
 #'
 #' @author Pascal Belleau
 #' @importFrom data.table data.table
 #' @export
 
-parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")){
+parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
 
-    if(! seqType %in% c("nuc", "gen", "prot")){
-        stop(paste0("Not validate sequence type for parseHLADbAlignment", seqType, "\n"))
+    ## Validate that the sequence type is known
+    if(! seqType %in% c("nuc", "gen", "prot")) {
+        stop(paste0("Not validate sequence type for parseHLADbAlignment",
+                        seqType, "\n"))
     }
 
-    files <- dir(path = hlaDbPath, pattern = paste0("*_",seqType,".txt"))
+    files <- dir(path = hlaDbPath, pattern = paste0("*_", seqType, ".txt"))
 
     HLAdb <- list(refSeq=list(), posInit=list(), HLAAlignment=data.table())
     refSeq <- list()
     posInit <- list()
     HLAAlignment <- list()
-    for(fileName in files){
-        tmp <- parseAlignment(paste0(hlaDbPath, "/",fileName))
+    for(fileName in files) {
+        tmp <- parseAlignment(paste0(hlaDbPath, "/", fileName))
         geneName <- gsub(paste0("_", seqType), "", fileName)
         refSeq[[geneName]] <- tmp$refSeq
         posInit[[geneName]] <- tmp$posInit
         HLAAlignment[[geneName]] <- tmp$HLAalignment
     }
 
-    HLAdb <- list(refSeq=refSeq, posInit=posInit, HLAAlignment=rbindlist(HLAAlignment))
+    ## Create object to return
+    HLAdb <- list(refSeq=refSeq, posInit=posInit,
+                  HLAAlignment=rbindlist(HLAAlignment))
     class(HLAdb) <- "HLAdb"
     return(HLAdb)
 
@@ -47,25 +54,23 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")){
 
 #' @title Pre-process HLA alignment file.
 #'
-#' @description
+#' @description TODO
 #'
 #' @param fileName the name of the alignment file from
 #' \url{http://hla.alleles.org/alleles/text_index.html}
 #'
-#' @return Return a class \code{HLAGene}
+#' @return an object of class \code{HLAGene}
 #'
-#' @details
+#' @details TODO
 #'
 #' @examples
+#'
+#' ## TODO
 #'
 #' @author Pascal Belleau
 #' @importFrom data.table data.table
 #' @export
-
-
-
-
-parseAlignment <- function(fileName){
+parseAlignment <- function(fileName) {
     # Position where the sequence start
     startPosFile <- 20
     maxTyping <- 50000
@@ -206,23 +211,23 @@ parseAlignment <- function(fileName){
 
 #' @title Process the line contening the ref seq
 #'
-#' @description
+#' @description TODO
 #'
-#' @param seq A \code{string} contening the reference sequence.
+#' @param seq a \code{string} contening the reference sequence.
 #'
-#' @param startPos A \code{integer} corresponding to the position in the string
+#' @param startPos a \code{integer} corresponding to the position in the string
 #' where the sequence is starting
 #'
-#' @return A \code{list} with two fields. The first is \code{refSeq} which is
+#' @return a \code{list} with two fields. The first is \code{refSeq} which is
 #' containing the sequence of the reference. The second is seqDiff is a
 #' \code{string} representing the alignment format for the current sequence.
 #'
 #' @examples
 #'
+#' ## TODO
+#'
 #' @author Pascal Belleau
 #' @keywords internal
-
-
 extractRef <- function(seq, startPos){
 
     tmpSeq <- substr(seq, startPos, nchar(seq))
@@ -258,7 +263,7 @@ extractRef <- function(seq, startPos){
 
 #' @title Process the line contening the alignment to the reference
 #'
-#' @description
+#' @description TODO
 #'
 #' @param seq A \code{string} contening the reference sequence.
 #'
@@ -269,10 +274,10 @@ extractRef <- function(seq, startPos){
 #'
 #' @examples
 #'
+#' ## TODO
+#'
 #' @author Pascal Belleau
 #' @keywords internal
-
-
 extractSeq <- function(seq, startPos){
 
     tmpSeq <- substr(seq, startPos, nchar(seq))
@@ -299,31 +304,31 @@ extractSeq <- function(seq, startPos){
 
 #' @title Extract the typing string from line contening the alignment
 #'
-#' @description
+#' @description TODO
 #'
-#' @param seq A \code{string} contening the sequence.
+#' @param seq a \code{string} contening the sequence.
 #'
 #'
 #' @return TODO
 #'
 #' @examples
 #'
+#' ## TODO
+#'
 #' @author Pascal Belleau
 #' @keywords internal
-
-
 extractTyping <- function(seq, endPos){
 
     tmpSeq <- substr(seq, 2, endPos)
 
     flag <- TRUE
     nameTyping <- ""
-    for(i in seq_len(nchar(tmpSeq))){
+    for (i in seq_len(nchar(tmpSeq))) {
         b <- substr(tmpSeq, i, i)
-        if(b != " "){
+        if(b != " ") {
             nameTyping <- paste0(nameTyping, b)
         }
-        else{
+        else {
             break
         }
 
@@ -334,19 +339,19 @@ extractTyping <- function(seq, endPos){
 
 #' @title TODO
 #'
-#' @description
+#' @description TODO
 #'
-#' @param seq A \code{string} contening the sequence.
+#' @param seq a \code{string} contening the sequence.
 #'
 #'
 #' @return TODO
 #'
 #' @examples
 #'
+#' ## TODO
+#'
 #' @author Pascal Belleau
 #' @keywords internal
-
-
 getTypingPos <- function(seqProcess, curTyping){
 
     if(is.na(curTyping[4])){
