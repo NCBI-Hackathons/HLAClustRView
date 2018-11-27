@@ -36,7 +36,7 @@ most up-to-date information.
 
 * **Version:** 0.99.0
 * **Depends:** R (>= 3.3)
-* **Imports:** purrr, dplyr, tidyr, tibble, utils, methods, stringr
+* **Imports:** purrr, dplyr, tidyr, tibble, utils, methods, stringr, data.table
 * **Suggests:** testthat, knitr, rmarkdown
     
 ## Package Workflow ##
