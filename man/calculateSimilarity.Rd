@@ -10,7 +10,8 @@ calculateSimilarity(hla_data)
 \item{hla_data}{data frame with allele data}
 }
 \value{
-TODO
+a \code{tibble} object containing the Hamming distance value between
+each possible pair of samples. TODO
 }
 \description{
 Takes the parsed hla database and computes the hamming distance
@@ -21,7 +22,7 @@ for each pair of samples
 ## Load example dataset
 data(example_calculateSimilarity)
 
-## Calculate similarity metrics
-#calculateSimilarity(example_calculateSimilarity)
+## Calculate hamming distance metric
+calculateSimilarity(example_calculateSimilarity)
 
 }

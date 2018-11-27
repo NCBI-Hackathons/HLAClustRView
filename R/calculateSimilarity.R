@@ -7,68 +7,83 @@
 #' (see example)
 #' @author Santiago Medina, Nissim Ranade
 #' @return One row tibble with minimum hamming distance &
-#' logical value column indicating whether same allele was used If the distance is the
-#' same for both then NA is returned
+#' logical value column indicating whether same allele was used if the
+#' distance is the same for both then NA is returned
 #'
 #' @examples
-#' d <-
-#' tibble::tribble(
+#'
+#' ## Create a demo dataset
+#' d <- tibble::tribble(
 #'    ~SampleName, ~AlleleName, ~AlleleGroup,
 #'    "s1", 1, 1,
 #'    "s1", 2, 3,
 #'    "s2", 1, 1,
-#'    "s2", 2, 5,
-#')
-#' hamming_distance_digit1(d)
+#'    "s2", 2, 5
+#' )
+#'
+#' ## Calculate the hamming distance on the demo dataset
+#' HLAClustRView:::hamming_distance_digit1(d)
+#'
 #' @importFrom dplyr %>% mutate group_by summarise filter slice
 #' @importFrom purrr reduce
-#' @export
+#' @importFrom rlang .data
+#' @importFrom tidyr crossing
+#' @keywords internal
 hamming_distance_digit1 <- function(allele) {
+
     stopifnot(nrow(allele) == 4)
+
     hdist <-
         allele %>%
-        split(.$SampleName) %>%
-        reduce(.f = tidyr::crossing) %>% # biparty graph to compute simularities
+        split(allele$SampleName) %>%
+        reduce(.f = crossing) %>% # biparty graph to compute simularities
         mutate(
-            is_similar = AlleleGroup != AlleleGroup1,
-            same_allele = AlleleName == AlleleName1
+            is_similar = .data$AlleleGroup != .data$AlleleGroup1,
+            same_allele = .data$AlleleName == .data$AlleleName1
             ) %>%
-        group_by(same_allele) %>%
-        summarise(distance = sum(is_similar)) %>%
-        filter(distance == min(distance))
+        group_by(.data$same_allele) %>%
+        summarise(distance = sum(.data$is_similar)) %>%
+        filter(.data$distance == min(.data$distance))
+
+    result <- hdist
 
     ## check if the minimum distance is the same
     if (nrow(hdist) == 2) {
-        mutate(hdist, same_allele = NA) %>%
+        result <- mutate(hdist, same_allele = NA) %>%
             slice(1:1)
     }
-    else hdist
+
+    return(result)
 }
 
-#' Sample Pair Distance
+#' @title Sample Pair Distance
 #'
-#' Computes the Hamming Distance for a pair of samples and then aggregates the
-#' sum over the genes keeping information of which allele was used for the distance
-#' @param sample_pair_data a tible with columns GeneName (genes), Allele (alleles),
-#' Digit1 (digit 1) and sample (see example data)
+#' @description Computes the Hamming Distance for a pair of samples and then
+#' aggregates the
+#' sum over the genes keeping information of which allele was used for
+#' the distance
 #'
-#' @return  a tibble with one row and column HammingDistance & column data
-#' corresponding to the same_allele information
+#' @param sample_pair_data a \code{tibble} with columns GeneName (genes),
+#' Allele (alleles), Digit1 (digit 1) and sample (see example data)
+#'
+#' @return  a \code{tibble} object with one row and column HammingDistance &
+#' column data corresponding to the same_allele information
 #'
 #' @examples
 #'
 #' ## Load example dataset
 #' data("example_sample_pair_data")
 #'
-#' ## Computes the Hamming distance
-#' #sample_pair_distance(example_sample_pair_data)
+#' ## Computes the Hamming distance for one pair of samples
+#' sample_pair_distance(example_sample_pair_data)
 #'
 #' @author Santiago Medina, Nissim Ranade
 #'
 #' @importFrom tidyr nest unnest spread
-#' @importFrom dplyr group_by %>% summarise filter pull select mutate
+#' @importFrom dplyr group_by %>% summarise filter pull select mutate n
 #' @importFrom utils data
 #' @importFrom purrr map
+#' @importFrom rlang .data
 #' @export
 sample_pair_distance <- function(sample_pair_data) {
     # make sure only two samples are given
@@ -78,24 +93,24 @@ sample_pair_distance <- function(sample_pair_data) {
     # to get the distance
     complete_genes <-
         sample_pair_data %>%
-        group_by(GeneName) %>%
+        group_by(.data$GeneName) %>%
         summarise(total = n()) %>%
-        filter(total == 4) %>%
-        pull(GeneName)
+        filter(.data$total == 4) %>%
+        pull(.data$GeneName)
 
     distances_per_gene <-
         sample_pair_data %>%
-        filter(GeneName %in% complete_genes) %>% # keep complete cases
-        group_by(GeneName) %>%
+        filter(.data$GeneName %in% complete_genes) %>% # keep complete cases
+        group_by(.data$GeneName) %>%
         nest() %>%
-        mutate(x = map(data, hamming_distance_digit1)) %>%
+        mutate(x = map(.data$data, hamming_distance_digit1)) %>%
         select(-data) %>%
-        unnest(x)
+        unnest(.data$x)
 
     distances_per_gene %>%
-        mutate(HammingDistance = sum(distance)) %>%
-        select(-distance) %>%
-        group_by(HammingDistance) %>%
+        mutate(HammingDistance = sum(.data$distance)) %>%
+        select(-.data$distance) %>%
+        group_by(.data$HammingDistance) %>%
         nest()
 }
 
@@ -107,30 +122,34 @@ sample_pair_distance <- function(sample_pair_data) {
 #'
 #' @param hla_data data frame with allele data
 #'
-#' @return TODO
+#' @return a \code{tibble} object containing the Hamming distance value between
+#' each possible pair of samples. TODO
 #'
 #' @examples
 #'
 #' ## Load example dataset
 #' data(example_calculateSimilarity)
 #'
-#' ## Calculate similarity metrics
-#' #calculateSimilarity(example_calculateSimilarity)
+#' ## Calculate hamming distance metric
+#' calculateSimilarity(example_calculateSimilarity)
 #'
 #' @importFrom dplyr filter mutate select group_by inner_join as_tibble rename %>%
 #' @importFrom tidyr unnest nest
 #' @importFrom utils combn
 #' @importFrom purrr map_lgl possibly map2
+#' @importFrom rlang .data
 #' @export
 calculateSimilarity <- function(hla_data) {
-    hla_data <- select(hla_data, SampleName, GeneName, AlleleName, AlleleGroup)
+
+    hla_data <- select(hla_data, .data$SampleName, .data$GeneName,
+                        .data$AlleleName, .data$AlleleGroup)
+
     ssample_pair_distance <- possibly(sample_pair_distance, otherwise = FALSE)
 
     map_data_to_distance <- function(s1, s2) {
         # get's the data for s1 and s2 and applys the distance function
-        filter(hla_data, SampleName %in% c(s1, s2)) %>%
+        filter(hla_data, .data$SampleName %in% c(s1, s2)) %>%
             ssample_pair_distance()
-
     }
 
     sample_pairs <-
@@ -138,23 +157,25 @@ calculateSimilarity <- function(hla_data) {
         combn(m = 2) %>%
         t() %>%
         as_tibble() %>%
-        rename(SampleName1 = V1, SampleName2 = V2)
+        rename(SampleName1 = .data$V1, SampleName2 = .data$V2)
 
     distances <-
         sample_pairs %>%
-        mutate(x = map2(SampleName1, SampleName2, map_data_to_distance)) %>%
-        mutate(is_error = map_lgl(x, is.logical)) %>%
-        filter(!is_error) %>%
-        select(-is_error) %>%
-        unnest(x)
+        mutate(x = map2(.data$SampleName1, .data$SampleName2,
+                            map_data_to_distance)) %>%
+        mutate(is_error = map_lgl(.data$x, is.logical)) %>%
+        filter(!.data$is_error) %>%
+        select(-.data$is_error) %>%
+        unnest(.data$x)
 
     distances %>%
-        select(-HammingDistance) %>%
+        select(-.data$HammingDistance) %>%
         unnest(data) %>%
-        group_by(SampleName1, SampleName2) %>%
+        group_by(.data$SampleName1, .data$SampleName2) %>%
         nest() %>%
         inner_join(
-            y = select(distances, SampleName1, SampleName2, HammingDistance),
+            y = select(distances, .data$SampleName1, .data$SampleName2,
+                        .data$HammingDistance),
             by = c("SampleName1", "SampleName2")
             ) %>%
         rename(AlleleName_info = data)
@@ -167,7 +188,7 @@ calculateSimilarity <- function(hla_data) {
 #'
 #' @param hladb hla database the output of function \code{parseHLADb}
 #'
-#' @return TODO
+#' @return a \code{tibble} object with the HLA information for each sample.
 #'
 #' @examples
 #'
@@ -175,6 +196,7 @@ calculateSimilarity <- function(hla_data) {
 #'
 #' @importFrom purrr map reduce set_names
 #' @importFrom dplyr mutate_all filter pull bind_cols as_tibble %>%
+#' @importFrom rlang .data
 #' @export
 parse_hla_data <- function(hladb) {
 
@@ -187,11 +209,10 @@ parse_hla_data <- function(hladb) {
 
     missing_samples <-
         hla_data %>%
-        filter(is.na(AlleleGroup)) %>%
-        pull(SampleName)
+        filter(is.na(.data$AlleleGroup)) %>%
+        pull(.data$SampleName)
 
     hla_data %>%
-        filter(!SampleName %in% missing_samples)
-
+        filter(!.data$SampleName %in% missing_samples)
 
 }
