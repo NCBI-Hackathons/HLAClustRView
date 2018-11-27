@@ -7,15 +7,17 @@
 getTypingPos(seqProcess, curTyping)
 }
 \arguments{
-\item{seq}{A \code{string} contening the sequence.}
+\item{seq}{a \code{string} contening the sequence.}
 }
 \value{
 TODO
 }
 \description{
-
+TODO
 }
 \examples{
+
+## TODO
 
 }
 \author{

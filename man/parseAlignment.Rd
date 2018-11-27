@@ -2,24 +2,26 @@
 % Please edit documentation in R/prepareHLAdb.R
 \name{parseAlignment}
 \alias{parseAlignment}
-\title{Pre-process HLA alignment file.}
+\title{Pre-process HLA Database alignment file.}
 \usage{
 parseAlignment(fileName)
 }
 \arguments{
-\item{fileName}{the name of the alignment file from
-\url{http://hla.alleles.org/alleles/text_index.html}}
+\item{fileName}{a \code{character} string, the name of the alignment file
+from \url{http://hla.alleles.org/alleles/text_index.html}}
 }
 \value{
-Return a class \code{HLAGene}
+an object of class \code{HLAGene}
 }
 \description{
-
+TODO
 }
 \details{
-
+TODO
 }
 \examples{
+
+## TODO
 
 }
 \author{
