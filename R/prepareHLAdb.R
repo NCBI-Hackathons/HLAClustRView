@@ -1,7 +1,13 @@
-#' @title Process the HLA alignement type for type (nuc, prot, gen) in a
-#' directory.
+#' @title Parse HLA Database alignement files for a specific aligment type
 #'
-#' @description TODO
+#' @description Parse HLA Database alignement files that are present in a
+#' directory, as specified by input, an
+#' generate a class object that can be used in further analysis. The function
+#' only parse one type of aligment file at the time. There is 3 types of
+#' aligment files that can be parsed: CDS sequence, genomic and protein.
+#'
+#' Beware that the names of the alignement files should not be changed as
+#' the name is used to identify the gene that is currently parsed.
 #'
 #' @param hlaDbPath the path to the directory of the alignment file from
 #' \url{http://hla.alleles.org/alleles/text_index.html}
@@ -10,18 +16,32 @@
 #' parse. The choices are: "nuc" for CDS sequence, "gen" for genomic, and
 #' "prot" for protein. Default: "nuc".
 #'
-#' @return an object of class \code{HLAdb}
+#' @return an object of class \code{HLAdb} with 3 entries. The entries are:
+#' \itemize{
+#' \item \code{refSeq} a \code{list} of reference sequences; one sequence
+#' per HLA gene
+#' \item \code{posInit} a \code{list} of starting positions of the alignment;
+#' one starting position per HLA gene
+#' \item \code{HLAAlignment} a \code{data.table} containing the information
+#' for each allele of each HLA gene
+#' }
 #'
-#' @details TODO
+#' @details See \url{http://hla.alleles.org/alleles/text_index.html}
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Get path where some HLA database files are stored
+#' directory <- system.file("extdata", package = "HLAClustRView")
 #'
-#' @author Pascal Belleau
-#' @importFrom data.table data.table
+#' ## Parse HLA database files of protein type
+#' HLAInfo <- parseHLADbAlignment(hlaDbPath=directory, seqType="prot")
+#'
+#' ## Show reference sequences
+#' HLAInfo$refSeq
+#'
+#' @author Pascal Belleau, Astrid Deschenes
+#' @importFrom data.table data.table rbindlist
 #' @export
-
 parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
 
     ## Validate that the sequence type is known
@@ -32,13 +52,13 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
 
     files <- dir(path = hlaDbPath, pattern = paste0("*_", seqType, ".txt"))
 
-    HLAdb <- list(refSeq=list(), posInit=list(), HLAAlignment=data.table())
     refSeq <- list()
     posInit <- list()
     HLAAlignment <- list()
+
     for(fileName in files) {
         tmp <- parseAlignment(paste0(hlaDbPath, "/", fileName))
-        geneName <- gsub(paste0("_", seqType), "", fileName)
+        geneName <- gsub(paste0("_", seqType, ".txt"), "", fileName)
         refSeq[[geneName]] <- tmp$refSeq
         posInit[[geneName]] <- tmp$posInit
         HLAAlignment[[geneName]] <- tmp$HLAalignment
@@ -49,15 +69,14 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
                   HLAAlignment=rbindlist(HLAAlignment))
     class(HLAdb) <- "HLAdb"
     return(HLAdb)
-
 }
 
-#' @title Pre-process HLA alignment file.
+#' @title Pre-process HLA Database alignment file.
 #'
 #' @description TODO
 #'
-#' @param fileName the name of the alignment file from
-#' \url{http://hla.alleles.org/alleles/text_index.html}
+#' @param fileName a \code{character} string, the name of the alignment file
+#' from \url{http://hla.alleles.org/alleles/text_index.html}
 #'
 #' @return an object of class \code{HLAGene}
 #'
