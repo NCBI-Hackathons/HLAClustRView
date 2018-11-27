@@ -25,8 +25,8 @@ the distance
 ## Load example dataset
 data("example_sample_pair_data")
 
-## Computes the Hamming distance
-#sample_pair_distance(example_sample_pair_data)
+## Computes the Hamming distance for one pair of samples
+sample_pair_distance(example_sample_pair_data)
 
 }
 \author{
