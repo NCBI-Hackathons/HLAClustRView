@@ -7,16 +7,18 @@
 sample_pair_distance(sample_pair_data)
 }
 \arguments{
-\item{sample_pair_data}{a tible with columns GeneName (genes), Allele (alleles),
-Digit1 (digit 1) and sample (see example data)}
+\item{sample_pair_data}{a \code{tibble} with columns GeneName (genes),
+Allele (alleles), Digit1 (digit 1) and sample (see example data)}
 }
 \value{
-a tibble with one row and column HammingDistance & column data
-corresponding to the same_allele information
+a \code{tibble} object with one row and column HammingDistance &
+column data corresponding to the same_allele information
 }
 \description{
-Computes the Hamming Distance for a pair of samples and then aggregates the
-sum over the genes keeping information of which allele was used for the distance
+Computes the Hamming Distance for a pair of samples and then
+aggregates the
+sum over the genes keeping information of which allele was used for
+the distance
 }
 \examples{
 

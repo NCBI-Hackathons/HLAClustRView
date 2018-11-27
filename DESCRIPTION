@@ -25,4 +25,5 @@ Imports: purrr,
     utils,
     methods,
     stringr,
-    data.table
+    data.table,
+    rlang

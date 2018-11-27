@@ -45,15 +45,18 @@ hamming_distance_digit1 <- function(allele) {
     else hdist
 }
 
-#' Sample Pair Distance
+#' @title Sample Pair Distance
 #'
-#' Computes the Hamming Distance for a pair of samples and then aggregates the
-#' sum over the genes keeping information of which allele was used for the distance
-#' @param sample_pair_data a tible with columns GeneName (genes), Allele (alleles),
-#' Digit1 (digit 1) and sample (see example data)
+#' @description Computes the Hamming Distance for a pair of samples and then
+#' aggregates the
+#' sum over the genes keeping information of which allele was used for
+#' the distance
 #'
-#' @return  a tibble with one row and column HammingDistance & column data
-#' corresponding to the same_allele information
+#' @param sample_pair_data a \code{tibble} with columns GeneName (genes),
+#' Allele (alleles), Digit1 (digit 1) and sample (see example data)
+#'
+#' @return  a \code{tibble} object with one row and column HammingDistance &
+#' column data corresponding to the same_allele information
 #'
 #' @examples
 #'
@@ -66,9 +69,10 @@ hamming_distance_digit1 <- function(allele) {
 #' @author Santiago Medina, Nissim Ranade
 #'
 #' @importFrom tidyr nest unnest spread
-#' @importFrom dplyr group_by %>% summarise filter pull select mutate
+#' @importFrom dplyr group_by %>% summarise filter pull select mutate n
 #' @importFrom utils data
 #' @importFrom purrr map
+#' @importFrom rlang .data
 #' @export
 sample_pair_distance <- function(sample_pair_data) {
     # make sure only two samples are given
@@ -78,24 +82,24 @@ sample_pair_distance <- function(sample_pair_data) {
     # to get the distance
     complete_genes <-
         sample_pair_data %>%
-        group_by(GeneName) %>%
+        group_by(.data$GeneName) %>%
         summarise(total = n()) %>%
-        filter(total == 4) %>%
-        pull(GeneName)
+        filter(.data$total == 4) %>%
+        pull(.data$GeneName)
 
     distances_per_gene <-
         sample_pair_data %>%
-        filter(GeneName %in% complete_genes) %>% # keep complete cases
-        group_by(GeneName) %>%
+        filter(.data$GeneName %in% complete_genes) %>% # keep complete cases
+        group_by(.data$GeneName) %>%
         nest() %>%
         mutate(x = map(data, hamming_distance_digit1)) %>%
         select(-data) %>%
-        unnest(x)
+        unnest(.data$x)
 
     distances_per_gene %>%
         mutate(HammingDistance = sum(distance)) %>%
         select(-distance) %>%
-        group_by(HammingDistance) %>%
+        group_by(.data$HammingDistance) %>%
         nest()
 }
 
