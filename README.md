@@ -55,7 +55,7 @@ for a publication, we would ask you to cite the following:
 
 ## Authors ##
 
-[Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau "Pascal Belleau") (Team Leader),
+[Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau "Pascal Belleau"),
 [Adewunmi Adelaja](https://www.linkedin.com/in/adewunmi-adelaja-2b3b1635/ "Adewunmi Adelaja"), 
 [Astrid Deschênes](https://www.linkedin.com/in/astriddeschenes "Astrid Deschênes"),
 [Santiago Medina](https://github.com/santiago1234), [Nissim Ranade](https://www.linkedin.com/in/nissim-ranade-4029b3b5 "Nissim Ranade") and Allissa Dillman
