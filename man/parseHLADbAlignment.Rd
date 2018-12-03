@@ -7,24 +7,25 @@
 parseHLADbAlignment(hlaDbPath, seqType = c("nuc", "gen", "prot"))
 }
 \arguments{
-\item{hlaDbPath}{a \code{character} string, the path to the directory of
+\item{hlaDbPath}{A \code{character} string, the path to the directory of
 the alignment files from
 \url{http://hla.alleles.org/alleles/text_index.html}. The directory must
 exist and contain at least one HLA alignment file.}
 
-\item{seqType}{a \code{character} string, the sequence type of the file to
+\item{seqType}{A \code{character} string, the sequence type of the file to
 parse. The choices are: "nuc" for CDS sequence, "gen" for genomic, and
 "prot" for protein. Default: "nuc".}
 }
 \value{
-an object of class \code{HLAdb} with 3 entries. The entries are:
+An object of class \code{HLAdb} with 3 entries. The entries are:
 \itemize{
-\item \code{refSeq} a \code{list} of reference sequences; one sequence
-per HLA gene
-\item \code{posInit} a \code{list} of starting positions of the alignment;
-one starting position per HLA gene
-\item \code{HLAAlignment} a \code{data.table} containing the information
-for each allele of each HLA gene
+\item \code{refSeq} A \code{list} of \code{character} string that
+represent reference sequences; one sequence
+per HLA gene.
+\item \code{posInit} A \code{list} of \code{integer};
+one starting position per HLA gene.
+\item \code{HLAAlignment} A \code{data.table} containing the information
+for each allele of each HLA gene.
 }
 }
 \description{

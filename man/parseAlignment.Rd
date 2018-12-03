@@ -2,26 +2,39 @@
 % Please edit documentation in R/prepareHLAdb.R
 \name{parseAlignment}
 \alias{parseAlignment}
-\title{Pre-process HLA Database alignment file.}
+\title{Pre-process HLA Database alignment file}
 \usage{
 parseAlignment(fileName)
 }
 \arguments{
-\item{fileName}{a \code{character} string, the name of the alignment file
-from \url{http://hla.alleles.org/alleles/text_index.html}}
+\item{fileName}{A \code{character} string, the name of the alignment file
+from \url{http://hla.alleles.org/alleles/text_index.html}.}
 }
 \value{
-an object of class \code{HLAGene}
+A \code{list} containing:
+\itemize{
+\item refSeq A \code{character} string that represent the reference
+sequence.
+\item posInit A \code{integer} that represent the starting position of the
+gene.
+\item HLAalignment A \code{data.table} containing the information for all
+types associated to the HLA gene.
+}
 }
 \description{
 Extract information from one HLA alignment file.
 }
 \details{
-TODO
+See \url{http://hla.alleles.org/alleles/text_index.html}
 }
 \examples{
 
-## TODO
+## Set the name of the aligment file to be processed
+fileInfo <- paste0(system.file("extdata", package = "HLAClustRView"),
+    "/DRA_prot.txt")
+
+## Parse aligment file
+HLAClustRView:::parseAlignment(fileName=fileInfo)
 
 }
 \author{
