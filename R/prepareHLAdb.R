@@ -1,12 +1,12 @@
-#' @title Parse HLA Database alignement files for a specific aligment type
+#' @title Parse HLA Database alignment files for a specific alignment type
 #'
-#' @description Parse HLA Database alignement files that are present in a
+#' @description Parse HLA Database alignment files that are present in a
 #' directory, as specified by input, an
 #' generate a class object that can be used in further analysis. The function
 #' only parse one type of aligment file at the time. There is 3 types of
-#' aligment files that can be parsed: CDS sequence, genomic and protein.
+#' alignment files that can be parsed: CDS sequence, genomic and protein.
 #'
-#' Beware that the names of the alignement files should not be changed as
+#' Beware that the names of the alignment files should not be changed as
 #' the name is used to identify the gene that is currently parsed.
 #'
 #' @param hlaDbPath A \code{character} string, the path to the directory of
