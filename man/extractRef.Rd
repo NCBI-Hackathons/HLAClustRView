@@ -29,4 +29,7 @@ sequence <- " DOB*01:01:01:01       MGSGWV PWVVALLVNL TRLDSSMTQG TDSPEDFVIQ"
 HLAClustRView:::extractRef(seq=sequence, startPos=20)
 
 }
+\author{
+Pascal Belleau, Astrid Deschenes
+}
 \keyword{internal}
