@@ -7,8 +7,10 @@
 parseHLADbAlignment(hlaDbPath, seqType = c("nuc", "gen", "prot"))
 }
 \arguments{
-\item{hlaDbPath}{the path to the directory of the alignment file from
-\url{http://hla.alleles.org/alleles/text_index.html}}
+\item{hlaDbPath}{a \code{character} string, the path to the directory of
+the alignment files from
+\url{http://hla.alleles.org/alleles/text_index.html}. The directory must
+exist and contain at least one HLA alignment file.}
 
 \item{seqType}{a \code{character} string, the sequence type of the file to
 parse. The choices are: "nuc" for CDS sequence, "gen" for genomic, and

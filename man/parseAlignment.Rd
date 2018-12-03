@@ -14,7 +14,7 @@ from \url{http://hla.alleles.org/alleles/text_index.html}}
 an object of class \code{HLAGene}
 }
 \description{
-TODO
+Extract information from one HLA alignment file.
 }
 \details{
 TODO
@@ -25,5 +25,6 @@ TODO
 
 }
 \author{
-Pascal Belleau
+Pascal Belleau, Astrid Deschenes
 }
+\keyword{internal}
