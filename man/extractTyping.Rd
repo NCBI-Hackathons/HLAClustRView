@@ -7,10 +7,10 @@
 extractTyping(seq, endPos)
 }
 \arguments{
-\item{seq}{a \code{character} string contening the sequence}
+\item{seq}{A \code{character} string contening the sequence.}
 
-\item{endPos}{a \code{integer} fixing the end of the introduction
-section of the sequence}
+\item{endPos}{A \code{integer} fixing the end of the introduction
+section of the sequence.}
 }
 \value{
 a \code{character} string containing the HLA type of a empty
