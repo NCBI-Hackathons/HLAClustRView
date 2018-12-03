@@ -13,11 +13,9 @@ Author:  Pascal Belleau, Adewunmi Adelaja, Astrid Deschênes,
 Maintainer: Pascal Belleau <belleau@cshl.edu>
 License: MIT + file LICENSE
 Encoding: UTF-8
-Depends: R (>= 3.3)
-Suggests: testthat, knitr, rmarkdown
 NeedsCompilation: no
 VignetteBuilder: knitr
-RoxygenNote: 6.1.1
+Depends: R (>= 3.3)
 Imports: purrr,
     dplyr,
     tidyr,
@@ -25,4 +23,9 @@ Imports: purrr,
     utils,
     methods,
     stringr,
-    data.table
+    data.table,
+    rlang
+Suggests: testthat,
+    knitr,
+    rmarkdown
+RoxygenNote: 6.1.1

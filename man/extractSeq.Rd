@@ -2,28 +2,34 @@
 % Please edit documentation in R/prepareHLAdb.R
 \name{extractSeq}
 \alias{extractSeq}
-\title{Process the line contening the alignment to the reference}
+\title{Process the line containing the alignment to the reference}
 \usage{
 extractSeq(seq, startPos)
 }
 \arguments{
-\item{seq}{A \code{string} contening the reference sequence.}
+\item{seq}{A \code{character} string containing the alignment sequence.}
 
-\item{startPos}{A \code{integer} corresponding to the position in the string
-where the sequence is starting}
+\item{startPos}{A \code{integer} corresponding to the position in the
+\code{character} string where the sequence is starting.}
 }
 \value{
-TODO
+A \code{character} string representing the aligment sequence
+compared to the reference sequence.
 }
 \description{
-TODO
+Extract the information about the alignment compared to the
+reference sequence.
 }
 \examples{
 
-## TODO
+## Define a alignment sequence string
+sequence <- " DOB*01:01:01:02       ------ ---------- ---------- "
+
+## Extract the alignment section
+HLAClustRView:::extractSeq(seq=sequence, startPos=20)
 
 }
 \author{
-Pascal Belleau
+Pascal Belleau, Astrid Deschenes
 }
 \keyword{internal}

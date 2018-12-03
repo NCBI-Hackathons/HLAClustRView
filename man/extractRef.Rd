@@ -2,30 +2,34 @@
 % Please edit documentation in R/prepareHLAdb.R
 \name{extractRef}
 \alias{extractRef}
-\title{Process the line contening the ref seq}
+\title{Process the line contening the reference sequence}
 \usage{
 extractRef(seq, startPos)
 }
 \arguments{
-\item{seq}{a \code{string} contening the reference sequence.}
+\item{seq}{A \code{character} string contening the reference sequence.}
 
-\item{startPos}{a \code{integer} corresponding to the position in the string
-where the sequence is starting}
+\item{startPos}{A \code{integer} corresponding to the position in the string
+where the sequence is starting.}
 }
 \value{
-a \code{list} with two fields. The first is \code{refSeq} which is
+A \code{list} with two entries. The first is \code{refSeq} which is
 containing the sequence of the reference. The second is seqDiff is a
 \code{string} representing the alignment format for the current sequence.
 }
 \description{
-TODO
+Extract the information about the reference sequence.
 }
 \examples{
 
-## TODO
+## String with the sequence information
+sequence <- " DOB*01:01:01:01       MGSGWV PWVVALLVNL TRLDSSMTQG TDSPEDFVIQ"
+
+## Extract sequence information
+HLAClustRView:::extractRef(seq=sequence, startPos=20)
 
 }
 \author{
-Pascal Belleau
+Pascal Belleau, Astrid Deschenes
 }
 \keyword{internal}

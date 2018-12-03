@@ -7,7 +7,10 @@
 getTypingPos(seqProcess, curTyping)
 }
 \arguments{
-\item{seq}{a \code{string} contening the sequence.}
+\item{curTyping}{A \code{vector} of \code{character} strings defining
+the HLA type. The \code{vector} should have 6 entries.}
+
+\item{seq}{A \code{character} string containing the sequence.}
 }
 \value{
 TODO

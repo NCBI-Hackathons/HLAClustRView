@@ -10,7 +10,7 @@ parse_hla_data(hladb)
 \item{hladb}{hla database the output of function \code{parseHLADb}}
 }
 \value{
-TODO
+a \code{tibble} object with the HLA information for each sample.
 }
 \description{
 Converts object to tibble, removes samples with missing values
