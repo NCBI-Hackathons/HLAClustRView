@@ -78,12 +78,12 @@ test_that("extractTyping() must retun good result 02", {
 context("extractRef() results")
 
 test_that("extractRef() must retun good result 01", {
-    sequence <- " DOB*01:01:01:02       MGSGWV PWVVALLVNL TRLDSSMTQG"
+    sequence <- " DOB*01:01:01:01       MGSGWV PWVVALLVNL TRLDSSMTQG TDSPEDFVIQ AKADCYFTNG"
     result <- HLAClustRView:::extractRef(seq=sequence, startPos=20)
 
     expected <- list()
-    expected[["refSeq"]] <- "NLTRLDSSMTQG"
-    expected[["seqDiff"]] <- "------------"
+    expected[["refSeq"]] <- "    MGSGWVPWVVALLVNLTRLDSSMTQGTDSPEDFVIQAKADCYFTNG"
+    expected[["seqDiff"]] <- "    ----------------------------------------------"
 
     expect_equal(result, expected)
 })
@@ -93,8 +93,26 @@ test_that("extractRef() must retun good result 02", {
     result <- HLAClustRView:::extractRef(seq=sequence, startPos=21)
 
     expected <- list()
-    expected[["refSeq"]] <- "CCCGAACCCTCCTCCTGCTACTCTCGGGG"
-    expected[["seqDiff"]] <- "-----------------------------"
+    expected[["refSeq"]] <- "TGGCCGTCATGGCGCCCCGAACCCTCCTCCTGCTACTCTCGGGG"
+    expected[["seqDiff"]] <- "--------------------------------------------"
 
+    expect_equal(result, expected)
+})
+
+context("extractSeq() results")
+
+test_that("extractSeq() must retun good result 01", {
+    sequence <- " F*01:06           --- --- --- --- --- --- --- --- --- -|-- "
+    result <- HLAClustRView:::extractSeq(seq=sequence, startPos=20)
+
+    expected <- "----------------------------|--"
+    expect_equal(result, expected)
+})
+
+test_that("extractSeq() must retun good result 02", {
+    sequence <- " G*01:17           ----H----- --******** ********** ****"
+    result <- HLAClustRView:::extractSeq(seq=sequence, startPos=20)
+
+    expected <- "----H-------**********************"
     expect_equal(result, expected)
 })

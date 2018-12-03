@@ -279,6 +279,7 @@ parseAlignment <- function(fileName) {
 #' ## Extract sequence information
 #' HLAClustRView:::extractRef(seq=sequence, startPos=20)
 #'
+#' @author Pascal Belleau, Astrid Deschenes
 #' @keywords internal
 extractRef <- function(seq, startPos) {
 
@@ -289,7 +290,7 @@ extractRef <- function(seq, startPos) {
     flag <- TRUE
 
     for (i in seq_len(nchar(tmpSeq))) {
-        b <- substr(tmpSeq, startPos - 1 + i, startPos - 1 + i)
+        b <- substr(seq, startPos - 1 + i, startPos - 1 + i)
         if (flag) {
             refSeq <- paste0(refSeq, b)
 
@@ -315,18 +316,24 @@ extractRef <- function(seq, startPos) {
 
 #' @title Process the line containing the alignment to the reference
 #'
-#' @description TODO
+#' @description Extract the information about the alignment compared to the
+#' reference sequence.
 #'
-#' @param seq A \code{character} string containing the reference sequence.
+#' @param seq A \code{character} string containing the alignment sequence.
 #'
 #' @param startPos A \code{integer} corresponding to the position in the
 #' \code{character} string where the sequence is starting.
 #'
-#' @return TODO
+#' @return A \code{character} string representing the aligment sequence
+#' compared to the reference sequence.
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Define a alignment sequence string
+#' sequence <- " DOB*01:01:01:02       ------ ---------- ---------- "
+#'
+#' ## Extract the alignment section
+#' HLAClustRView:::extractSeq(seq=sequence, startPos=20)
 #'
 #' @author Pascal Belleau, Astrid Deschenes
 #' @keywords internal
@@ -338,7 +345,7 @@ extractSeq <- function(seq, startPos) {
     flag <- TRUE
 
     for (i in seq_len(nchar(tmpSeq))) {
-        b <- substr(tmpSeq, startPos - 1 + i, startPos - 1 + i)
+        b <- substr(seq, startPos - 1 + i, startPos - 1 + i)
         if (flag) {
             seqDiff <- paste0(seqDiff, b)
             if (b != " ") {

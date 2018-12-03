@@ -7,20 +7,26 @@
 extractSeq(seq, startPos)
 }
 \arguments{
-\item{seq}{A \code{character} string containing the reference sequence.}
+\item{seq}{A \code{character} string containing the alignment sequence.}
 
 \item{startPos}{A \code{integer} corresponding to the position in the
 \code{character} string where the sequence is starting.}
 }
 \value{
-TODO
+A \code{character} string representing the aligment sequence
+compared to the reference sequence.
 }
 \description{
-TODO
+Extract the information about the alignment compared to the
+reference sequence.
 }
 \examples{
 
-## TODO
+## Define a alignment sequence string
+sequence <- " DOB*01:01:01:02       ------ ---------- ---------- "
+
+## Extract the alignment section
+HLAClustRView:::extractSeq(seq=sequence, startPos=20)
 
 }
 \author{
