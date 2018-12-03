@@ -130,8 +130,8 @@ parseAlignment <- function(fileName) {
     offSet <- ifelse(seqType == "cDNA", 1,0)
     cpt <- listPos[1] + 2 + offSet
 
-    while(cpt < maxTyping){
-        if(regexpr("[A-Z]", allLines[cpt], perl=TRUE)[1] == -1){
+    while(cpt < maxTyping) {
+        if (regexpr("[A-Z]", allLines[cpt], perl=TRUE)[1] == -1) {
             break
         }
         cpt <- cpt + 1
@@ -158,7 +158,7 @@ parseAlignment <- function(fileName) {
     # Loop on the position in allLine of the sequence type
     # before the reference sequence
     # The reference sequence position is + 2 + offSet
-    for(startLine in listPos){
+    for (startLine in listPos) {
         # Get the initial position of the sequence
         i <- 1
         s <- substr(allLines[startLine + offSet],startPosFile,startPosFile)
@@ -242,7 +242,6 @@ parseAlignment <- function(fileName) {
 
     HLAGene <- list(refSeq=refSeq, posInit=posInit, HLAalignment=HLAalignment)
 
-    class(HLAGene) <- "HLAGene"
     return(HLAGene)
 }
 
@@ -339,37 +338,47 @@ extractSeq <- function(seq, startPos){
 }
 
 
-#' @title Extract the typing string from line contening the alignment
+#' @title Extract the HLA typing string from one line of aligment
 #'
-#' @description TODO
+#' @description Extract the HLA typing string from a character string
+#' containing one line of alignment
 #'
-#' @param seq a \code{string} contening the sequence.
+#' @param seq a \code{character} string contening the sequence
 #'
+#' @param endPos a \code{integer} fixing the end of the introduction
+#' section of the sequence
 #'
-#' @return TODO
+#' @return a \code{character} string containing the HLA type of a empty
+#' \code{character} string
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## One line of aligment
+#' sequence <- " DOB*01:01:01:01       MGSGWV PWVVALLVNL TRLDSSMTQG"
 #'
-#' @author Pascal Belleau
+#' ## Position of the end of the introduction section
+#' endPosition <- 20
+#'
+#' ## Extract HLA type
+#' HLAClustRView:::extractTyping(seq=sequence, endPos=endPosition)
+#'
+#'
+#' @author Pascal Belleau, Astrid Deschenes
 #' @keywords internal
-extractTyping <- function(seq, endPos){
+extractTyping <- function(seq, endPos) {
 
     tmpSeq <- substr(seq, 2, endPos)
 
-    flag <- TRUE
     nameTyping <- ""
     for (i in seq_len(nchar(tmpSeq))) {
         b <- substr(tmpSeq, i, i)
-        if(b != " ") {
+        if (b != " ") {
             nameTyping <- paste0(nameTyping, b)
-        }
-        else {
+        } else {
             break
         }
-
     }
+
     return(nameTyping)
 }
 
@@ -378,8 +387,9 @@ extractTyping <- function(seq, endPos){
 #'
 #' @description TODO
 #'
-#' @param seq a \code{string} contening the sequence.
+#' @param seq a \code{character} string contening the sequence.
 #'
+#' @param curTyping TODO
 #'
 #' @return TODO
 #'
@@ -389,7 +399,7 @@ extractTyping <- function(seq, endPos){
 #'
 #' @author Pascal Belleau
 #' @keywords internal
-getTypingPos <- function(seqProcess, curTyping){
+getTypingPos <- function(seqProcess, curTyping) {
 
     if(is.na(curTyping[4])){
         curPos <- which(seqProcess$GeneName == curTyping[1] &

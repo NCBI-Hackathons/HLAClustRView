@@ -2,25 +2,38 @@
 % Please edit documentation in R/prepareHLAdb.R
 \name{extractTyping}
 \alias{extractTyping}
-\title{Extract the typing string from line contening the alignment}
+\title{Extract the HLA typing string from one line of aligment}
 \usage{
 extractTyping(seq, endPos)
 }
 \arguments{
-\item{seq}{a \code{string} contening the sequence.}
+\item{seq}{a \code{character} string contening the sequence}
+
+\item{endPos}{a \code{integer} fixing the end of the introduction
+section of the sequence}
 }
 \value{
-TODO
+a \code{character} string containing the HLA type of a empty
+\code{character} string
 }
 \description{
-TODO
+Extract the HLA typing string from a character string
+containing one line of alignment
 }
 \examples{
 
-## TODO
+## One line of aligment
+sequence <- " DOB*01:01:01:01       MGSGWV PWVVALLVNL TRLDSSMTQG"
+
+## Position of the end of the introduction section
+endPosition <- 20
+
+## Extract HLA type
+HLAClustRView:::extractTyping(seq=sequence, endPos=endPosition)
+
 
 }
 \author{
-Pascal Belleau
+Pascal Belleau, Astrid Deschenes
 }
 \keyword{internal}

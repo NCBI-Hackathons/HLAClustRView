@@ -7,7 +7,9 @@
 getTypingPos(seqProcess, curTyping)
 }
 \arguments{
-\item{seq}{a \code{string} contening the sequence.}
+\item{curTyping}{TODO}
+
+\item{seq}{a \code{character} string contening the sequence.}
 }
 \value{
 TODO
