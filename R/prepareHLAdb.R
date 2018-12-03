@@ -9,8 +9,10 @@
 #' Beware that the names of the alignement files should not be changed as
 #' the name is used to identify the gene that is currently parsed.
 #'
-#' @param hlaDbPath the path to the directory of the alignment file from
-#' \url{http://hla.alleles.org/alleles/text_index.html}
+#' @param hlaDbPath a \code{character} string, the path to the directory of
+#' the alignment files from
+#' \url{http://hla.alleles.org/alleles/text_index.html}. The directory must
+#' exist and contain at least one HLA alignment file.
 #'
 #' @param seqType a \code{character} string, the sequence type of the file to
 #' parse. The choices are: "nuc" for CDS sequence, "gen" for genomic, and
@@ -50,7 +52,23 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
                         seqType, "\n"))
     }
 
+    ## Validate that the directory is a string
+    if (!is.character(hlaDbPath)) {
+        stop("The hlaDbPath parameter must by a character string")
+    }
+
+    ## Validate that the directory exists
+    if (!dir.exists(hlaDbPath)) {
+        stop("The hlaDbPath parameter must by a valid directory")
+    }
+
     files <- dir(path = hlaDbPath, pattern = paste0("*_", seqType, ".txt"))
+
+    ## Validate that there is at least one file in the directory
+    if(length(files) == 0) {
+        stop(paste0("There must be at least one alignment file in the ",
+                    "hlaDbPath directory"))
+    }
 
     refSeq <- list()
     posInit <- list()
@@ -73,7 +91,7 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
 
 #' @title Pre-process HLA Database alignment file.
 #'
-#' @description TODO
+#' @description Extract information from one HLA alignment file.
 #'
 #' @param fileName a \code{character} string, the name of the alignment file
 #' from \url{http://hla.alleles.org/alleles/text_index.html}
@@ -86,9 +104,9 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
 #'
 #' ## TODO
 #'
-#' @author Pascal Belleau
+#' @author Pascal Belleau, Astrid Deschenes
 #' @importFrom data.table data.table
-#' @export
+#' @keywords internal
 parseAlignment <- function(fileName) {
     # Position where the sequence start
     startPosFile <- 20
