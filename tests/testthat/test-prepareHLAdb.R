@@ -13,6 +13,12 @@ test_that("parseHLADbAlignment() must retun an error when directory is a number"
     expect_error(parseHLADbAlignment(hlaDbPath = 33, seqType = "nuc"), message)
 })
 
+test_that("parseHLADbAlignment() must retun an error when no a valid sequence type", {
+    message <- "Not validate sequence type parameter for parseHLADbAlignment: toto"
+    expect_error(parseHLADbAlignment(hlaDbPath = directory, seqType = "toto"), message)
+})
+
+
 test_that("parseHLADbAlignment() must retun an error when directory does not exist", {
     path_to_test <- "./3_21_33eddger_39kdf_23sk2-2221fvd_qqqqqqqqqq_2"
     if (!dir.exists(path_to_test)) {

@@ -48,8 +48,8 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
 
     ## Validate that the sequence type is known
     if(! seqType %in% c("nuc", "gen", "prot")) {
-        stop(paste0("Not validate sequence type for parseHLADbAlignment",
-                        seqType, "\n"))
+        stop(paste0("Not validate sequence type parameter for ",
+                        "parseHLADbAlignment: ", seqType))
     }
 
     ## Validate that the directory is a string
