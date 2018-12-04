@@ -143,7 +143,6 @@ test_that("extractSeq() must return good result 02", {
 
     typing <- matrix(data=c("DOA", "01", "01", "01", "02", NA), nrow=1)
 
-
     result <- HLAClustRView:::getTypingPos(seqProcess=seqData, curTyping=typing)
 
     expected <- 4
@@ -156,7 +155,6 @@ test_that("extractSeq() must return NA when typing not present", {
                           Noncoding=c("01", "02", "03", "02"), Suffix=rep(NA, 4))
 
     typing <- matrix(data=c("DOA", "01", "01", "01", "03", NA), nrow=1)
-
 
     result <- HLAClustRView:::getTypingPos(seqProcess=seqData, curTyping=typing)
 
