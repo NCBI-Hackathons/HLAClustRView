@@ -404,24 +404,43 @@ extractTyping <- function(seq, endPos) {
 }
 
 
-#' @title TODO
+#' @title Get the position in the HLA table of the corresponding HLA
+#' typing
 #'
-#' @description TODO
+#' @description Get the position in the HLA table of the corresponding HLA
+#' typing. The HLA typing can use up to 6 fields for the identification.
 #'
 #' @param seq A \code{character} string containing the sequence.
 #'
-#' @param curTyping A \code{vector} of \code{character} strings defining
-#' the HLA type. The \code{vector} should have 6 entries.
+#' @param curTyping A \code{vector} of \code{character} string defining
+#' the HLA type. The \code{vector} should have 6 fields.
 #'
-#' @return TODO
+#' @return A \code{integer} representing the position, in the data.table, of
+#' the HLA typing. If the HLA typing is not present, an empty \code{integer}
+#' is returned.
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Information about HLA alignment file
+#' fileInfo <- paste0(system.file("extdata", package = "HLAClustRView"),
+#'     "/DRA_prot.txt")
 #'
-#' @author Pascal Belleau
+#' ## Parse HLA alignment file
+#' ## DRAInfo$HLAalignment contains the HLA table
+#' DRAInfo <- HLAClustRView:::parseAlignment(fileName=fileInfo)
+#'
+#' ## Create a vector with the information about one HLA typing
+#' typing <- matrix(data=c("DRA", "01", "01", "02", NA, NA), nrow=1)
+#'
+#' ## Get the position of the specific typing in the HLA table
+#' HLAClustRView:::getTypingPos(seqProcess=DRAInfo$HLAalignment,
+#'     curTyping=typing)
+#'
+#' @author Pascal Belleau, Astrid Deschenes
 #' @keywords internal
 getTypingPos <- function(seqProcess, curTyping) {
+
+    curPos <- integer()
 
     if(is.na(curTyping[4])){
         curPos <- which(seqProcess$GeneName == curTyping[1] &
