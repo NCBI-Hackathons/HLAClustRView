@@ -2,28 +2,45 @@
 % Please edit documentation in R/prepareHLAdb.R
 \name{getTypingPos}
 \alias{getTypingPos}
-\title{TODO}
+\title{Get the position in the HLA table of the corresponding HLA
+typing}
 \usage{
 getTypingPos(seqProcess, curTyping)
 }
 \arguments{
-\item{curTyping}{A \code{vector} of \code{character} strings defining
-the HLA type. The \code{vector} should have 6 entries.}
+\item{curTyping}{A \code{vector} of \code{character} string defining
+the HLA type. The \code{vector} should have 6 fields.}
 
 \item{seq}{A \code{character} string containing the sequence.}
 }
 \value{
-TODO
+A \code{integer} representing the position, in the data.table, of
+the HLA typing. If the HLA typing is not present, an empty \code{integer}
+is returned.
 }
 \description{
-TODO
+Get the position in the HLA table of the corresponding HLA
+typing. The HLA typing can use up to 6 fields for the identification.
 }
 \examples{
 
-## TODO
+## Information about HLA alignment file
+fileInfo <- paste0(system.file("extdata", package = "HLAClustRView"),
+    "/DRA_prot.txt")
+
+## Parse HLA alignment file
+## DRAInfo$HLAalignment contains the HLA table
+DRAInfo <- HLAClustRView:::parseAlignment(fileName=fileInfo)
+
+## Create a vector with the information about one HLA typing
+typing <- matrix(data=c("DRA", "01", "01", "02", NA, NA), nrow=1)
+
+## Get the position of the specific typing in the HLA table
+HLAClustRView:::getTypingPos(seqProcess=DRAInfo$HLAalignment,
+    curTyping=typing)
 
 }
 \author{
-Pascal Belleau
+Pascal Belleau, Astrid Deschenes
 }
 \keyword{internal}
