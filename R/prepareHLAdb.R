@@ -301,7 +301,7 @@ extractRef <- function(seq, startPos) {
                 seqDiff <- paste0(seqDiff, " ")
             }
         } else {
-            if (b != " ") {
+            if (!(b %in% c(" ", "|"))) {
                 refSeq <- paste0(refSeq, b)
                 if (regexpr("[A-Z]", b, perl=TRUE)[1] >= 1) {
                     seqDiff <- paste0(seqDiff, "-")
@@ -352,7 +352,7 @@ extractSeq <- function(seq, startPos) {
                 flag <- FALSE
             }
         } else {
-            if (b != " ") {
+            if (!(b %in% c(" ", "|"))) {
                 seqDiff <- paste0(seqDiff, b)
             }
         }
