@@ -105,7 +105,7 @@ test_that("extractSeq() must return good result 01", {
     sequence <- " F*01:06           --- --- --- --- --- --- --- --- --- -|-- "
     result <- HLAClustRView:::extractSeq(seq=sequence, startPos=20)
 
-    expected <- "----------------------------|--"
+    expected <- "------------------------------"
     expect_equal(result, expected)
 })
 
