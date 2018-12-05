@@ -14,7 +14,8 @@ the HLA type. The \code{vector} should have 6 fields.}
 \item{seq}{A \code{character} string containing the sequence.}
 }
 \value{
-A \code{integer} representing the position, in the data.table, of
+A \code{integer} or a \code{vector} of \code{integer} representing
+the position(s), in the data.table, of
 the HLA typing. If the HLA typing is not present, an empty \code{integer}
 is returned.
 }

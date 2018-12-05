@@ -136,7 +136,7 @@ test_that("getTypingPos() must return good result 01", {
 })
 
 
-test_that("extractSeq() must return good result 02", {
+test_that("getTypingPos() must return good result 02", {
     seqData <- data.table(GeneName=c(rep("DOB", 3), "DOA"), AlleleGroup=rep("01", 4),
                           Protein=rep("01", 4), SynSubst=rep("01", 4),
                           Noncoding=c("01", "02", "03", "02"), Suffix=rep(NA, 4))
@@ -149,7 +149,47 @@ test_that("extractSeq() must return good result 02", {
     expect_equal(result, expected)
 })
 
-test_that("extractSeq() must return NA when typing not present", {
+
+test_that("getTypingPos() must return good result 03", {
+    seqData <- data.table(GeneName=c(rep("DOB", 3), "DOA"), AlleleGroup=rep("01", 4),
+                          Protein=rep("01", 4), SynSubst=rep("01", 4),
+                          Noncoding=c("01", NA, "03", "02"), Suffix=c(NA, NA, "N", NA))
+
+    typing <- matrix(data=c("DOB", "01", "01", "01", NA, NA), nrow=1)
+
+    result <- HLAClustRView:::getTypingPos(seqProcess=seqData, curTyping=typing)
+
+    expected <- 2
+    expect_equal(result, expected)
+})
+
+test_that("getTypingPos() must return good result 04", {
+    seqData <- data.table(GeneName=c(rep("DOB", 3), "DOA"), AlleleGroup=rep("01", 4),
+                          Protein=rep("01", 4), SynSubst=rep("01", 4),
+                          Noncoding=c("01", "02", "03", "02"), Suffix=c(NA, "N", "N", NA))
+
+    typing <- matrix(data=c("DOB", "01", "01", "01", "03", "N"), nrow=1)
+
+    result <- HLAClustRView:::getTypingPos(seqProcess=seqData, curTyping=typing)
+
+    expected <- 3
+    expect_equal(result, expected)
+})
+
+test_that("getTypingPos() must return good result 05", {
+    seqData <- data.table(GeneName=c(rep("DOB", 3), "DOA"), AlleleGroup=rep("01", 4),
+                          Protein=rep("01", 4), SynSubst=c(NA, "01", "01", NA),
+                          Noncoding=c(NA, NA, "03", NA), Suffix=c(NA, NA, "N", NA))
+
+    typing <- matrix(data=c("DOA", "01", "01", NA, NA, NA), nrow=1)
+
+    result <- HLAClustRView:::getTypingPos(seqProcess=seqData, curTyping=typing)
+
+    expected <- 4
+    expect_equal(result, expected)
+})
+
+test_that("getTypingPos() must return NA when typing not present", {
     seqData <- data.table(GeneName=c(rep("DOB", 3), "DOA"), AlleleGroup=rep("01", 4),
                           Protein=rep("01", 4), SynSubst=rep("01", 4),
                           Noncoding=c("01", "02", "03", "02"), Suffix=rep(NA, 4))
@@ -161,3 +201,5 @@ test_that("extractSeq() must return NA when typing not present", {
     expected <- integer()
     expect_equal(result, expected)
 })
+
+

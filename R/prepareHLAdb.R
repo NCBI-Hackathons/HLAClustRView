@@ -415,7 +415,8 @@ extractTyping <- function(seq, endPos) {
 #' @param curTyping A \code{vector} of \code{character} string defining
 #' the HLA type. The \code{vector} should have 6 fields.
 #'
-#' @return A \code{integer} representing the position, in the data.table, of
+#' @return A \code{integer} or a \code{vector} of \code{integer} representing
+#' the position(s), in the data.table, of
 #' the HLA typing. If the HLA typing is not present, an empty \code{integer}
 #' is returned.
 #'
@@ -442,31 +443,31 @@ getTypingPos <- function(seqProcess, curTyping) {
 
     curPos <- integer()
 
-    if(is.na(curTyping[4])){
+    if (is.na(curTyping[4])) {
         curPos <- which(seqProcess$GeneName == curTyping[1] &
                         seqProcess$AlleleGroup == curTyping[2] &
                         seqProcess$Protein == curTyping[3] &
                         is.na(seqProcess$SynSubst))
-    } else if(is.na(curTyping[5])){
+    } else if (is.na(curTyping[5])) {
         curPos <- which(seqProcess$GeneName == curTyping[1] &
                         seqProcess$AlleleGroup == curTyping[2] &
                         seqProcess$Protein == curTyping[3] &
                         seqProcess$SynSubst == curTyping[4] &
-                        is.na(seqProcess$Noncoding) )
-    } else if(is.na(curTyping[6])){
+                        is.na(seqProcess$Noncoding))
+    } else if (is.na(curTyping[6])) {
         curPos <- which(seqProcess$GeneName == curTyping[1] &
                             seqProcess$AlleleGroup == curTyping[2] &
                             seqProcess$Protein == curTyping[3] &
                             seqProcess$SynSubst == curTyping[4] &
                             seqProcess$Noncoding == curTyping[5] &
-                            is.na(seqProcess$Suffix) )
+                            is.na(seqProcess$Suffix))
     } else {
         curPos <- which(seqProcess$GeneName == curTyping[1] &
                         seqProcess$AlleleGroup == curTyping[2] &
                         seqProcess$Protein == curTyping[3] &
-                        seqProcess$Noncoding == curTyping[4] &
-                        seqProcess$Noncoding == curTyping[6] &
-                        seqProcess$Suffix == curTyping[7] )
+                        seqProcess$SynSubst == curTyping[4] &
+                        seqProcess$Noncoding == curTyping[5] &
+                        seqProcess$Suffix == curTyping[6])
     }
 
     return(curPos)
