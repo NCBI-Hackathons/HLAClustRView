@@ -202,4 +202,39 @@ test_that("getTypingPos() must return NA when typing not present", {
     expect_equal(result, expected)
 })
 
+context("parseAlignment() results")
+
+test_that("parseAlignment() must return good result 01", {
+    fileName <- paste0(directory, "/DRA_prot.txt")
+    result <- HLAClustRView:::parseAlignment(fileName = fileName)
+
+    expected <- list()
+    expected$refSeq <- paste0("     MAISGVPVLGFFIIAVLMSAQESWAIKEEHVIIQAEFYLNPDQSGEFMFDF",
+                "DGDEIFHVDMAKKETVWRLEEFGRFASFEAQGALANIAVDKANLEIMTKRSNYTPITNVPPEVTVLTNSP",
+                "VELREPNVLICFIDKFTPPVVNVTWLRNGKPVTTGVSETVFLPREDHLFRKFHYLPFLPSTEDVYDCRVE",
+                "HWGLDEPLLKHWEFDAPSPLPETTENVVCALGLTVGLVGIIIGTIFIIKGVRKSNAAERRGPL")
+    expected$posInit <- 171L
+    expected$HLAalignment <- data.table:::data.table(
+            GeneName = c(rep("DRA", 7), rep("", 4)), AlleleGroup = c(rep("01", 7), rep("", 4)),
+            Protein = c(rep("01", 4), rep("02", 3), rep("", 4)),
+            SynSubst = c(rep("01", 3), "02", "01", "02", "03", rep("", 4)),
+            Noncoding = c("01", "02", "03", rep(NA, 4), rep("", 4)),
+            Suffix = c(rep(NA, 7), rep("", 4)),
+            SeqDiff = c(rep(paste0("     ------------------------------------------------",
+                "------------------------------------------------------------------------",
+                "------------------------------------------------------------------------",
+                "--------------------------------------------------------------"), 4),
+                paste0("     ****************************---------------------------------------",
+                "------------------------------------------------------------------------",
+                "------------------------------------------------------------------------",
+                "------------------------------L------------"),
+                rep(paste0("     ---------------------------------------------------------------",
+                    "--------------------------------------------------------------------",
+                    "--------------------------------------------------------------------",
+                    "------------------------------------------L------------"), 2),
+                rep("", 4)))
+
+    expect_true(is.list(result))
+    expect_equal(result, expected)
+})
 
