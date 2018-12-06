@@ -141,7 +141,7 @@ parseAlignment <- function(fileName) {
     }
 
     # Get the position of the reference
-    offSet <- ifelse(seqType == "cDNA", 1,0)
+    offSet <- ifelse(seqType == "cDNA", 1, 0)
     cpt <- listPos[1] + 2 + offSet
 
     while (cpt < maxTyping) {
@@ -182,7 +182,7 @@ parseAlignment <- function(fileName) {
             posInit <- paste0(posInit, s)
             s <- substr(allLines[startLine + offSet], startPosFile + i,
                         startPosFile + i)
-            i<-i+1
+            i <- i + 1
         }
         posInit <- as.integer(posInit)
 
@@ -192,7 +192,7 @@ parseAlignment <- function(fileName) {
         refSeq <- paste0(refSeq, parseRef$refSeq)
 
         # Parse the type of the reference sequence
-        if(startLine == listPos[1]){
+        if (startLine == listPos[1]) {
             nameTyping <- extractTyping(allLines[startSeq], startPosFile)
             curTyping <- splitTyping(nameTyping)
             HLAalignment$GeneName[1] <- curTyping[1]
@@ -247,7 +247,7 @@ parseAlignment <- function(fileName) {
         }
 
         # Just to prevent infinite loop
-        if(cpt == maxTyping){
+        if (cpt == maxTyping) {
             stop(paste0("The program reach the max of typing in ",
                         fileName, "\n"))
         }
