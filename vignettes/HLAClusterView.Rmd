@@ -120,10 +120,10 @@ library(HLAClustRView)
 ### 3. Load HLA typing samples file
 
 The file containing the HLA typing for all analysed samples needs to be loaded.
-This task is done by the *parseHLADb()* function.
+This task is done by the *readHLADataset()* function.
 
 ```{r parseSample, warning=FALSE, message=FALSE}
-HLAdata <- parseHLADb(hlaDbPath = "./Samples_HLA_typing.txt")
+HLAdata <- readHLADataset(hlaDbPath = "./Samples_HLA_typing.txt")
 head(HLAdata)
 ```
 
