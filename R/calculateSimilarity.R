@@ -75,7 +75,7 @@ hamming_distance_digit1 <- function(allele) {
 #' data("example_sample_pair_data")
 #'
 #' ## Computes the Hamming distance for one pair of samples
-#' sample_pair_distance(example_sample_pair_data)
+#' HLAClustRView:::sample_pair_distance(example_sample_pair_data)
 #'
 #' @author Santiago Medina, Nissim Ranade
 #'
@@ -84,7 +84,7 @@ hamming_distance_digit1 <- function(allele) {
 #' @importFrom utils data
 #' @importFrom purrr map
 #' @importFrom rlang .data
-#' @export
+#' @keywords internal
 sample_pair_distance <- function(sample_pair_data) {
     # make sure only two samples are given
     stopifnot(length(unique(sample_pair_data$SampleName)) == 2)
@@ -122,8 +122,8 @@ sample_pair_distance <- function(sample_pair_data) {
 #'
 #' @param hla_data data frame with allele data
 #'
-#' @return a \code{tibble} object containing the Hamming distance value between
-#' each possible pair of samples. TODO
+#' @return a \code{tibble} object containing the Hamming distance values
+#' between each possible pair of samples. TODO
 #'
 #' @examples
 #'
@@ -131,7 +131,9 @@ sample_pair_distance <- function(sample_pair_data) {
 #' data(example_calculateSimilarity)
 #'
 #' ## Calculate hamming distance metric
-#' calculateSimilarity(example_calculateSimilarity)
+#' calculateHamming(example_calculateSimilarity)
+#'
+#' @author Santiago Medina, Nissim Ranade
 #'
 #' @importFrom dplyr filter mutate select group_by inner_join as_tibble rename %>%
 #' @importFrom tidyr unnest nest
@@ -139,7 +141,7 @@ sample_pair_distance <- function(sample_pair_data) {
 #' @importFrom purrr map_lgl possibly map2
 #' @importFrom rlang .data
 #' @export
-calculateSimilarity <- function(hla_data) {
+calculateHamming <- function(hla_data) {
 
     hla_data <- select(hla_data, .data$SampleName, .data$GeneName,
                         .data$AlleleName, .data$AlleleGroup)
@@ -182,11 +184,13 @@ calculateSimilarity <- function(hla_data) {
 
 }
 
-#' @title Parse hladb
+#' @title Convert data.frame with HLA typing information to tibble object
 #'
-#' @description Converts object to tibble, removes samples with missing values
+#' @description Converts a data.frame that contains the HLA typing informatin
+#' to a tibble object. It also removes samples with missing values.
 #'
-#' @param hladb hla database the output of function \code{parseHLADb}
+#' @param hladb a \code{data.frame} with the HLA typing information from
+#' all samples.
 #'
 #' @return a \code{tibble} object with the HLA information for each sample.
 #'
@@ -194,10 +198,12 @@ calculateSimilarity <- function(hla_data) {
 #'
 #' ## TODO
 #'
+#' @author Santiago Medina
+#'
 #' @importFrom purrr map reduce set_names
 #' @importFrom dplyr mutate_all filter pull bind_cols as_tibble %>%
 #' @importFrom rlang .data
-#' @export
+#' @keywords internal
 parse_hla_data <- function(hladb) {
 
     hla_data <-
@@ -212,7 +218,6 @@ parse_hla_data <- function(hladb) {
         filter(is.na(.data$AlleleGroup)) %>%
         pull(.data$SampleName)
 
-    hla_data %>%
-        filter(!.data$SampleName %in% missing_samples)
-
+    return(hla_data %>%
+        filter(!.data$SampleName %in% missing_samples))
 }
