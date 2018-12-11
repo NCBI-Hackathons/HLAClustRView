@@ -24,6 +24,8 @@ Imports: purrr,
     methods,
     stringr,
     data.table,
+    stats,
+    graphics,
     rlang
 Suggests: testthat,
     knitr,
