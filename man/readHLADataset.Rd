@@ -4,12 +4,12 @@
 \alias{readHLADataset}
 \title{Extract HLA typing information for all samples present in a text file}
 \usage{
-readHLADataset(hlaDbPath)
+readHLADataset(hlaFilePath)
 }
 \arguments{
-\item{hlaDbPath}{a \code{character} string, the filepath to a text file
+\item{hlaFilePath}{a \code{character} string, the filepath to a text file
 containing the information about the samples typing. The name must
-correspond to an existing text file.}
+correspond to an existing text file. The text file must have a header.}
 }
 \value{
 a \code{data.frame} containing the following column names:
@@ -39,7 +39,7 @@ directory <- system.file("extdata", package = "HLAClustRView")
 fileName <- paste0(directory, "/Samples_HLA_typing.txt")
 
 ## Parse file to extract HLA typing for all samples
-ex <- readHLADataset(hlaDbPath=fileName)
+ex <- readHLADataset(hlaFilePath=fileName)
 
 ## Show the first lines of the output dataset
 head(ex)

@@ -123,7 +123,7 @@ The file containing the HLA typing for all analysed samples needs to be loaded.
 This task is done by the *readHLADataset()* function.
 
 ```{r parseSample, warning=FALSE, message=FALSE}
-HLAdata <- readHLADataset(hlaDbPath = "./Samples_HLA_typing.txt")
+HLAdata <- readHLADataset(hlaFilePath = "./Samples_HLA_typing.txt")
 head(HLAdata)
 ```
 
@@ -133,7 +133,7 @@ The HLA data needs to formatting before inputting to similarity calculation.
 The function *parse_hla_data()* is used for that.
 
 ```{r prepareData, warning=FALSE, message=FALSE}
-HLAdataReady <- HLAClustRView:::parse_hla_data(hladb = HLAdata)
+##HLAdataReady <- HLAClustRView:::parse_hla_data(hladb = HLAdata)
 ```
 
 ### 5. Calculating similarity metric
