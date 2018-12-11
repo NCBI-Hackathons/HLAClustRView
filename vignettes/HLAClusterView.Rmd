@@ -133,17 +133,17 @@ The HLA data needs to formatting before inputting to similarity calculation.
 The function *parse_hla_data()* is used for that.
 
 ```{r prepareData, warning=FALSE, message=FALSE}
-HLAdataReady <- parse_hla_data(hladb = HLAdata)
+HLAdataReady <- HLAClustRView:::parse_hla_data(hladb = HLAdata)
 ```
 
 ### 5. Calculating similarity metric
 
 The Hamming distance based on first HLA typing field can be calculated through
-the *calculateSimilarity()* function.
+the *calculateHamming()* function.
 
 ```{r similarityCalcul, warning=FALSE, message=FALSE}
 ## TODO Problem with code
-#hammingMetric <- calculateSimilarity(HLAdataReady)
+#hammingMetric <- calculateHamming(HLAdataReady)
 #head(hammingMetric)
 ```
 

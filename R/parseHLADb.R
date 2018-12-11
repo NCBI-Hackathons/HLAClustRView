@@ -5,17 +5,21 @@
 #' HLADb object.
 #'
 #' @param hlaDbPath a \code{character} string, the filepath to a text file
-#' containing the information about the samples typing.
+#' containing the information about the samples typing. The name must
+#' correspond to an existing text file.
 #'
 #' @return a \code{data.frame} containing the following column names:
 #' \itemize{
 #' \item \code{SampleName} The name of the sample.
 #' \item \code{AllelName} The name of the allele (1 or 2).
 #' \item \code{GeneName} The name of the HLA gene.
-#' \item \code{AlleleGroup} TODO
-#' \item \code{Protein} TODO
-#' \item \code{SynSubst} TODO
-#' \item \code{NonCoding} TODO
+#' \item \code{AlleleGroup} The section identifying the subtype group.
+#' \item \code{Protein} The section identifying the nucleotide substitutions
+#' group.
+#' \item \code{SynSubst} The section identifying the synonymous nucleotide
+#' substitutions group.
+#' \item \code{NonCoding} The section identifying the non-coding
+#' polymorphisms group.
 #' \item \code{Suffix} The suffix of the HLA typing or \code{NA}.
 #' }
 #'
@@ -73,7 +77,7 @@ readHLADataset <-function (hlaDbPath)
     #split alleles numbers from gene name
     nameList <- rep(str_split(rNames, '_'), times = ncol(tData))
     sampleNames <- rep(colnames(tData), each = nrow(tData))
-    geneNames <-matrix(unlist(nameList),  ncol = 2,byrow=TRUE)
+    geneNames <-matrix(unlist(nameList),  ncol = 2, byrow=TRUE)
     colName <-c('SampleName', 'AlleleName', 'GeneName', 'AlleleGroup',
                     'Protein', 'SynSubst', 'NonCoding', 'Suffix')
 
@@ -107,5 +111,6 @@ readHLADataset <-function (hlaDbPath)
     #remove samples with NA allele groups
     drop <- db[is.na(db$AlleleGroup), 'SampleName']
     db <- db[!db$SampleName %in% drop,]
-    return (db)
+
+    return(db)
 }

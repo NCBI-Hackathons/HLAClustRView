@@ -2,21 +2,27 @@
 % Please edit documentation in R/calculateSimilarity.R
 \name{parse_hla_data}
 \alias{parse_hla_data}
-\title{Parse hladb}
+\title{Convert data.frame with HLA typing information to tibble object}
 \usage{
 parse_hla_data(hladb)
 }
 \arguments{
-\item{hladb}{hla database the output of function \code{parseHLADb}}
+\item{hladb}{a \code{data.frame} with the HLA typing information from
+all samples.}
 }
 \value{
 a \code{tibble} object with the HLA information for each sample.
 }
 \description{
-Converts object to tibble, removes samples with missing values
+Converts a data.frame that contains the HLA typing informatin
+to a tibble object. It also removes samples with missing values.
 }
 \examples{
 
 ## TODO
 
 }
+\author{
+Santiago Medina
+}
+\keyword{internal}

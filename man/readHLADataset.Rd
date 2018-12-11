@@ -8,7 +8,8 @@ readHLADataset(hlaDbPath)
 }
 \arguments{
 \item{hlaDbPath}{a \code{character} string, the filepath to a text file
-containing the information about the samples typing.}
+containing the information about the samples typing. The name must
+correspond to an existing text file.}
 }
 \value{
 a \code{data.frame} containing the following column names:
@@ -16,10 +17,13 @@ a \code{data.frame} containing the following column names:
 \item \code{SampleName} The name of the sample.
 \item \code{AllelName} The name of the allele (1 or 2).
 \item \code{GeneName} The name of the HLA gene.
-\item \code{AlleleGroup} TODO
-\item \code{Protein} TODO
-\item \code{SynSubst} TODO
-\item \code{NonCoding} TODO
+\item \code{AlleleGroup} The section identifying the subtype group.
+\item \code{Protein} The section identifying the nucleotide substitutions
+group.
+\item \code{SynSubst} The section identifying the synonymous nucleotide
+substitutions group.
+\item \code{NonCoding} The section identifying the non-coding
+polymorphisms group.
 \item \code{Suffix} The suffix of the HLA typing or \code{NA}.
 }
 }
