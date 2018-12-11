@@ -41,8 +41,8 @@ fileName <- paste0(directory, "/Samples_HLA_typing.txt")
 ## Parse file to extract HLA typing for all samples
 ex <- readHLADataset(hlaFilePath=fileName)
 
-## Show the first lines of the output dataset
-head(ex)
+## Show the output HLADataset object
+print(ex)
 
 
 }

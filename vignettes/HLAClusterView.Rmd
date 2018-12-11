@@ -120,26 +120,18 @@ library(HLAClustRView)
 ### 3. Load HLA typing samples file
 
 The file containing the HLA typing for all analysed samples needs to be loaded.
-This task is done by the *readHLADataset()* function.
+This task is done by the *readHLADataset()* function. The output is an object
+of class *HLADataset*.
 
 ```{r parseSample, warning=FALSE, message=FALSE}
 HLAdata <- readHLADataset(hlaFilePath = "./Samples_HLA_typing.txt")
-head(HLAdata)
+HLAdata
 ```
 
-### 4. Parse HLA typing data
+### 4. Calculating similarity metric
 
-The HLA data needs to formatting before inputting to similarity calculation. 
-The function *parse_hla_data()* is used for that.
-
-```{r prepareData, warning=FALSE, message=FALSE}
-##HLAdataReady <- HLAClustRView:::parse_hla_data(hladb = HLAdata)
-```
-
-### 5. Calculating similarity metric
-
-The Hamming distance based on first HLA typing field can be calculated through
-the *calculateHamming()* function.
+The Hamming distance, which is based on first HLA typing field, can be 
+calculated through the *calculateHamming()* function.
 
 ```{r similarityCalcul, warning=FALSE, message=FALSE}
 ## TODO Problem with code

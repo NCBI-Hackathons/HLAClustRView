@@ -2,20 +2,28 @@
 % Please edit documentation in R/calculateSimilarity.R
 \name{calculateHamming}
 \alias{calculateHamming}
-\title{calculate hamming distance between samples}
+\title{Calculate Hamming distance between all samples}
 \usage{
 calculateHamming(hla_data)
 }
 \arguments{
-\item{hla_data}{data frame with allele data}
+\item{hla_data}{a \code{HLADataset} object containing a \code{tibble}
+object with the HLA typing information for all samples.}
 }
 \value{
 a \code{tibble} object containing the Hamming distance values
 between each possible pair of samples. TODO
 }
 \description{
-Takes the parsed hla database and computes the hamming distance
-for each pair of samples
+Takes an object containing HLA typing information for all
+samples and computes the Hamming distance
+for each pair of samples.
+}
+\details{
+The Hamming distance is given by
+\eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)} where
+\code{s1} and \code{s2} are two samples and \code{A1} and \code{A2} are
+there alleles.
 }
 \examples{
 

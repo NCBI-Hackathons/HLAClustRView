@@ -32,8 +32,8 @@
 #' ## Parse file to extract HLA typing for all samples
 #' ex <- readHLADataset(hlaFilePath=fileName)
 #'
-#' ## Show the first lines of the output dataset
-#' head(ex)
+#' ## Show the output HLADataset object
+#' print(ex)
 #'
 #'
 #' @author Adewunmi Adelaja
@@ -80,9 +80,9 @@ readHLADataset <-function (hlaFilePath)
     db <- parse_hla_data(db)
 
     ## Prepare HLADataset object
-    ##res <- list()
-    ##res[["data"]] <- db
-    ##class(res) <- "HLADataset"
+    res <- list()
+    res[["data"]] <- db
+    class(res) <- "HLADataset"
 
-    return(db)
+    return(res)
 }

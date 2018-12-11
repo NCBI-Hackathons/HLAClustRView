@@ -8,13 +8,13 @@ make_distance_matrix(outMet)
 }
 \arguments{
 \item{outMet}{tibble with hamming distance for sample
-pairs \code{calculateSimilarity}}
+pairs \code{calculateHamming}}
 }
 \value{
 TODO
 }
 \description{
-This function takes the output of \code{calculateSimilarity}
+This function takes the output of \code{calculateHamming}
 function and returns a distance matrix to use for clustering
 }
 \examples{
