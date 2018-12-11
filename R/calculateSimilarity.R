@@ -202,8 +202,9 @@ calculateHamming <- function(hla_data) {
 
 #' @title Convert data.frame with HLA typing information to tibble object
 #'
-#' @description Converts a data.frame that contains the HLA typing informatin
-#' to a tibble object. It also removes samples with missing values.
+#' @description Converts a data.frame that contains the HLA typing informatiOn
+#' to a tibble object. It also removes samples with missing allele group
+#' information.
 #'
 #' @param hladb a \code{data.frame} with the HLA typing information from
 #' all samples.
@@ -221,6 +222,17 @@ calculateHamming <- function(hla_data) {
 #'
 #' ## Convert the data.frame to a tibble object
 #' HLAClustRView:::parse_hla_data(demo)
+#'
+#' ## Create a data.frame with missing information
+#' demoMissing <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
+#'     AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
+#'     AlleleGroup=c("02", "02", NA, "03"), Protein=c("01", "01", "01", "02"),
+#'     SynSubst=c("01", "02", "01", "01"), NonCoding=c("01", "01", NA, NA),
+#'     Suffix=c(NA, NA, NA, NA))
+#'
+#' ## Convert the data.frame to a tibble object
+#' HLAClustRView:::parse_hla_data(demoMissing)
+#'
 #'
 #' @author Santiago Medina
 #'

@@ -14,8 +14,9 @@ all samples.}
 a \code{tibble} object with the HLA information for each sample.
 }
 \description{
-Converts a data.frame that contains the HLA typing informatin
-to a tibble object. It also removes samples with missing values.
+Converts a data.frame that contains the HLA typing informatiOn
+to a tibble object. It also removes samples with missing allele group
+information.
 }
 \examples{
 
@@ -28,6 +29,17 @@ demo <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
 
 ## Convert the data.frame to a tibble object
 HLAClustRView:::parse_hla_data(demo)
+
+## Create a data.frame with missing information
+demoMissing <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
+    AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
+    AlleleGroup=c("02", "02", NA, "03"), Protein=c("01", "01", "01", "02"),
+    SynSubst=c("01", "02", "01", "01"), NonCoding=c("01", "01", NA, NA),
+    Suffix=c(NA, NA, NA, NA))
+
+## Convert the data.frame to a tibble object
+HLAClustRView:::parse_hla_data(demoMissing)
+
 
 }
 \author{
