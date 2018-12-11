@@ -4,6 +4,7 @@ library(HLAClustRView)
 library(tibble)
 
 data("example_sample_pair_data")
+data("example_calculateSimilarity")
 
 
 context("Teste hamming_distance_digit1() function")
@@ -111,3 +112,45 @@ test_that("parse_hla_data() should return good result 03", {
     expect_equal(res, expected)
 })
 
+
+# test function calculateHamming()  --------------------------------------
+
+context("Test calculateHamming() function")
+
+test_that("calculateHamming() should return good result 01", {
+    demo <- subset(example_calculateSimilarity, example_calculateSimilarity$SampleName %in% c("s1", "s3"))
+
+    res <- calculateHamming(demo)
+
+    alleleInfo <- list()
+    alleleInfo[[1]] <-  tibble(GeneName=c("A", "C", "B"), same_allele=c(NA, FALSE, NA))
+    expected <- tibble(SampleName1=c("s1"), SampleName2=c("s3"),
+                       AlleleName_info=alleleInfo,
+                       HammingDistance=c(5L))
+
+    expect_equal(res$SampleName1, expected$SampleName1)
+    expect_equal(res$SampleName2, expected$SampleName2)
+    expect_equal(res$HammingDistance, expected$HammingDistance)
+    expect_equal(res$AlleleName_info, alleleInfo)
+})
+
+test_that("calculateHamming() should return good result 02", {
+    demo <- subset(example_calculateSimilarity, example_calculateSimilarity$SampleName %in% c("s3", "s4", "s5"))
+
+    res <- calculateHamming(demo)
+
+    alleleInfo <- list()
+    alleleInfo[[1]] <-  tibble(GeneName=c("A", "B", "C"), same_allele=c(NA, NA, FALSE))
+    alleleInfo[[2]] <-  tibble(GeneName=c("B", "C"), same_allele=c(NA, NA))
+    alleleInfo[[3]] <-  tibble(GeneName=c("B", "C"), same_allele=c(TRUE, NA))
+
+    expected <- tibble(SampleName1=c("s3", "s3", "s4"),
+                       SampleName2=c("s4", "s5", "s5"),
+                       AlleleName_info=alleleInfo,
+                       HammingDistance=c(5L, 4L, 3L))
+
+    expect_equal(res$SampleName1, expected$SampleName1)
+    expect_equal(res$SampleName2, expected$SampleName2)
+    expect_equal(res$HammingDistance, expected$HammingDistance)
+    expect_equal(res$AlleleName_info, alleleInfo)
+})
