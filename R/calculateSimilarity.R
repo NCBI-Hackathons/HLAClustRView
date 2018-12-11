@@ -1,14 +1,21 @@
-#' Compute the hamming distance between two alleles
+#' @title Compute the Hamming distance between two samples
 #'
-#' This function computes the hamming distance for two samples and two alleles,
-#'  the hamming distance is given by
-#' \eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)}
-#' @param allele tibble with 3 columns: SampleName, AlleleName, AlleleGroup,
-#' (see example)
-#' @author Santiago Medina, Nissim Ranade
-#' @return One row tibble with minimum hamming distance &
-#' logical value column indicating whether same allele was used if the
-#' distance is the same for both then NA is returned
+#' @description Computes the Hamming distance for two samples using both
+#' alleles. See details section for more information about the Hamming
+#' distance.
+#'
+#' @details The Hamming distance is given by
+#' \eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)} where
+#' \code{s1} and \code{s2} are two samples and \code{A1} and \code{A2} are
+#' there alleles.
+#'
+#' @param allele a \code{tibble} object with 3 mendatory columns:
+#' "SampleName", "AlleleName" and "AlleleGroup".
+#'
+#' @return a \code{tibble} object with one row containing the minimum
+#' Hamming distance and a \code{logical} column indicating whether
+#' same allele was used. If the
+#' distance is the same for both, then \code{NA} is returned.
 #'
 #' @examples
 #'
@@ -23,6 +30,8 @@
 #'
 #' ## Calculate the hamming distance on the demo dataset
 #' HLAClustRView:::hamming_distance_digit1(d)
+#'
+#' @author Santiago Medina, Nissim Ranade
 #'
 #' @importFrom dplyr %>% mutate group_by summarise filter slice
 #' @importFrom purrr reduce
@@ -115,15 +124,22 @@ sample_pair_distance <- function(sample_pair_data) {
 }
 
 
-#' @title calculate hamming distance between samples
+#' @title Calculate Hamming distance between all samples
 #'
-#' @description Takes the parsed hla database and computes the hamming distance
-#' for each pair of samples
+#' @description Takes an object containing HLA typing information for all
+#' samples and computes the Hamming distance
+#' for each pair of samples.
 #'
-#' @param hla_data data frame with allele data
+#' @param hla_data a \code{HLADataset} object containing a \code{tibble}
+#' object with the HLA typing information for all samples.
 #'
 #' @return a \code{tibble} object containing the Hamming distance values
 #' between each possible pair of samples. TODO
+#'
+#' @details The Hamming distance is given by
+#' \eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)} where
+#' \code{s1} and \code{s2} are two samples and \code{A1} and \code{A2} are
+#' there alleles.
 #'
 #' @examples
 #'
@@ -196,7 +212,15 @@ calculateHamming <- function(hla_data) {
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Create a data.frame as demo
+#' demo <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
+#'     AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
+#'     AlleleGroup=c("02", "02", "03", "03"), Protein=c("01", "01", "01", "02"),
+#'     SynSubst=c("01", "02", "01", "01"), NonCoding=c("01", "01", NA, NA),
+#'     Suffix=c(NA, NA, NA, NA))
+#'
+#' ## Convert the data.frame to a tibble object
+#' HLAClustRView:::parse_hla_data(demo)
 #'
 #' @author Santiago Medina
 #'
