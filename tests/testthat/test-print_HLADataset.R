@@ -1,4 +1,4 @@
-### Unit tests for functions in prepareHLAdb.R file
+### Unit tests for functions in print.HLADataset.R file
 
 library(HLAClustRView)
 
