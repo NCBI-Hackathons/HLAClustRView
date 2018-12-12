@@ -16,3 +16,13 @@ test_that("print() for HLADataset object must return identical object", {
 
     expect_equal(result, demoHLADataset)
 })
+
+test_that("print() for HLADataset object without data must return identical object", {
+
+    demo <- demoHLADataset
+    demo[["data"]] <- NULL
+
+    result <- print(demo)
+
+    expect_equal(result, demo)
+})
