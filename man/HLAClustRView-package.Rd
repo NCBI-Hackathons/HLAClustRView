@@ -11,6 +11,16 @@ quantify the similarity between HLA typing from multiple samples. Using
 these metrics, the package enables hierarchical cluster analysis and can
 bind RNA-seq expression (when available) to the clusters.
 }
+\seealso{
+\itemize{
+    \item \code{\link{readHLADataset}} {for extracting HLA typing
+    information for all samples present in a text file}
+    \item \code{\link{calculateHamming}} {for calculating the Hamming
+    distance metric between all samples}
+    \item \code{\link{parseHLADbAlignment} {for parsing HLA Database
+    alignment files for a specific alignment type}}
+}
+}
 \author{
 Pascal Belleau, Adewunmi Adelaja, Astrid Deschenes,
 Santiago Medina, Nissim Ranade and Allissa Dillman

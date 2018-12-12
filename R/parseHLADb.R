@@ -8,19 +8,29 @@
 #' containing the information about the samples typing. The name must
 #' correspond to an existing text file. The text file must have a header.
 #'
-#' @return a \code{data.frame} containing the following column names:
+#' @return a \code{list} of class \code{HLADataset}
+#' containing the following elements:
 #' \itemize{
-#' \item \code{SampleName} The name of the sample.
-#' \item \code{AllelName} The name of the allele (1 or 2).
-#' \item \code{GeneName} The name of the HLA gene.
-#' \item \code{AlleleGroup} The section identifying the subtype group.
-#' \item \code{Protein} The section identifying the nucleotide substitutions
-#' group.
-#' \item \code{SynSubst} The section identifying the synonymous nucleotide
-#' substitutions group.
-#' \item \code{NonCoding} The section identifying the non-coding
-#' polymorphisms group.
-#' \item \code{Suffix} The suffix of the HLA typing or \code{NA}.
+#' \item \code{data} a \code{tibble} object containing the HLA typing
+#' information for all samples. The columns are:
+#' \itemize{
+#' \item \code{SampleName} a \code{character} string that represent the
+#' name of the sample.
+#' \item \code{AllelName} a \code{character} string that represent the
+#' name of the allele (1 or 2).
+#' \item \code{GeneName} a \code{character} string that represent the
+#' name of the HLA gene.
+#' \item \code{AlleleGroup} a \code{character} string that represent the
+#' section identifying the subtype group.
+#' \item \code{Protein} a \code{character} string that represent the
+#' section identifying the nucleotide substitutions group.
+#' \item \code{SynSubst} a \code{character} string that represent the
+#' section identifying the synonymous nucleotide substitutions group.
+#' \item \code{NonCoding} a \code{character} string that represent the
+#' section identifying the non-coding polymorphisms group.
+#' \item \code{Suffix} a \code{character} string that represent the
+#' suffix of the HLA typing or \code{NA}.
+#' }
 #' }
 #'
 #' @examples
@@ -41,7 +51,7 @@
 #' @importFrom stringr str_split
 #' @importFrom utils read.table
 #' @export
-readHLADataset <-function (hlaFilePath)
+readHLADataset <- function(hlaFilePath)
 {
     ## Validate that the parameter is a character string
     if (!is.character(hlaFilePath)) {

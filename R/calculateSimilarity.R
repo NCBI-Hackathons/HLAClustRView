@@ -130,8 +130,9 @@ sample_pair_distance <- function(sample_pair_data) {
 #' samples and computes the Hamming distance
 #' for each pair of samples.
 #'
-#' @param hla_data a \code{HLADataset} object containing a \code{tibble}
-#' object with the HLA typing information for all samples.
+#' @param hla_data a \code{list} of class \code{HLADataset} containing a
+#' \code{tibble} object with the HLA typing information for all samples. At
+#' least 2 samples must be present be able to calculate the metric.
 #'
 #' @return a \code{tibble} object containing the Hamming distance values
 #' between each possible pair of samples. TODO
@@ -144,10 +145,10 @@ sample_pair_distance <- function(sample_pair_data) {
 #' @examples
 #'
 #' ## Load example dataset
-#' data(example_calculateSimilarity)
+#' data(demoHLADataset)
 #'
 #' ## Calculate hamming distance metric
-#' calculateHamming(example_calculateSimilarity)
+#' calculateHamming(demoHLADataset)
 #'
 #' @author Santiago Medina, Nissim Ranade
 #'
@@ -158,6 +159,23 @@ sample_pair_distance <- function(sample_pair_data) {
 #' @importFrom rlang .data
 #' @export
 calculateHamming <- function(hla_data) {
+
+    ## Validate that a HLADataset is passed as argument
+    if (!"HLADataset" %in% class(hla_data)) {
+        stop("hla_data must be of class \"HLADataset\"")
+    }
+
+    ## Validate that the HLA information is present and that
+    ## at least 2 samples are present
+    if(!is.null(hla_data$data)) {
+        if (length(unique(hla_data$data$SampleName)) < 2) {
+            stop("hla_data must contain information for at least 2 samples")
+        }
+    } else {
+        stop("A entry called \"data\" is missing from hla_data")
+    }
+
+    hla_data <- hla_data$data
 
     hla_data <- select(hla_data, .data$SampleName, .data$GeneName,
                         .data$AlleleName, .data$AlleleGroup)

@@ -7,8 +7,9 @@
 calculateHamming(hla_data)
 }
 \arguments{
-\item{hla_data}{a \code{HLADataset} object containing a \code{tibble}
-object with the HLA typing information for all samples.}
+\item{hla_data}{a \code{list} of class \code{HLADataset} containing a
+\code{tibble} object with the HLA typing information for all samples. At
+least 2 samples must be present be able to calculate the metric.}
 }
 \value{
 a \code{tibble} object containing the Hamming distance values
@@ -28,10 +29,10 @@ there alleles.
 \examples{
 
 ## Load example dataset
-data(example_calculateSimilarity)
+data(demoHLADataset)
 
 ## Calculate hamming distance metric
-calculateHamming(example_calculateSimilarity)
+calculateHamming(demoHLADataset)
 
 }
 \author{

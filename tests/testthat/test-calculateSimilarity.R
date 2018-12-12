@@ -4,7 +4,7 @@ library(HLAClustRView)
 library(tibble)
 
 data("example_sample_pair_data")
-data("example_calculateSimilarity")
+data("demoHLADataset")
 
 
 context("Teste hamming_distance_digit1() function")
@@ -117,10 +117,52 @@ test_that("parse_hla_data() should return good result 03", {
 
 context("Test calculateHamming() function")
 
-test_that("calculateHamming() should return good result 01", {
-    demo <- subset(example_calculateSimilarity, example_calculateSimilarity$SampleName %in% c("s1", "s3"))
 
-    res <- calculateHamming(demo)
+test_that("calculateHamming() should return an error when numerical for hla_data", {
+    message <- "hla_data must be of class \"HLADataset\""
+    expect_error(calculateHamming(33), message)
+})
+
+test_that("calculateHamming() should return an error when string for hla_data", {
+    message <- "hla_data must be of class \"HLADataset\""
+    expect_error(calculateHamming("Canada"), message)
+})
+
+test_that("calculateHamming() should return an error when data.frame for hla_data", {
+    message <- "hla_data must be of class \"HLADataset\""
+    demo <- data.frame(SampleName=c("s1", "s2"), GeneName=c("A", "A"))
+    expect_error(calculateHamming(demo), message)
+})
+
+test_that("calculateHamming() should return an error when only one sample", {
+    tempData <- demoHLADataset
+    infoSamples <- tempData$data
+    demo <- subset(infoSamples, infoSamples$SampleName %in% c("s1"))
+
+    tempData$data <- demo
+
+    message <- "hla_data must contain information for at least 2 samples"
+    expect_error(calculateHamming(tempData), message)
+})
+
+test_that("calculateHamming() should return an error when not data", {
+    tempData <- demoHLADataset
+
+    tempData$data <- NULL
+
+    message <- "A entry called \"data\" is missing from hla_data"
+    expect_error(calculateHamming(tempData), message)
+})
+
+
+test_that("calculateHamming() should return good result 01", {
+    tempData <- demoHLADataset
+    infoSamples <- tempData$data
+    demo <- subset(infoSamples, infoSamples$SampleName %in% c("s1", "s3"))
+
+    tempData$data <- demo
+
+    res <- calculateHamming(tempData)
 
     alleleInfo <- list()
     alleleInfo[[1]] <-  tibble(GeneName=c("A", "C", "B"), same_allele=c(NA, FALSE, NA))
@@ -135,9 +177,13 @@ test_that("calculateHamming() should return good result 01", {
 })
 
 test_that("calculateHamming() should return good result 02", {
-    demo <- subset(example_calculateSimilarity, example_calculateSimilarity$SampleName %in% c("s3", "s4", "s5"))
+    tempData <- demoHLADataset
+    infoSamples <- tempData$data
+    demo <- subset(infoSamples, infoSamples$SampleName %in% c("s3", "s4", "s5"))
 
-    res <- calculateHamming(demo)
+    tempData$data <- demo
+
+    res <- calculateHamming(tempData)
 
     alleleInfo <- list()
     alleleInfo[[1]] <-  tibble(GeneName=c("A", "B", "C"), same_allele=c(NA, NA, FALSE))
