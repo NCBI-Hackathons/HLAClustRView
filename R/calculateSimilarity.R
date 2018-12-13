@@ -19,13 +19,16 @@
 #'
 #' @examples
 #'
+#' ## Load package
+#' library(tibble)
+#'
 #' ## Create a demo dataset
 #' d <- tibble::tribble(
-#'    ~SampleName, ~AlleleName, ~AlleleGroup,
-#'    "s1", 1, 1,
-#'    "s1", 2, 3,
-#'    "s2", 1, 1,
-#'    "s2", 2, 5
+#'     ~SampleName, ~AlleleName, ~AlleleGroup,
+#'     "s1", 1, 1,
+#'     "s1", 2, 3,
+#'     "s2", 1, 1,
+#'     "s2", 2, 5
 #' )
 #'
 #' ## Calculate the hamming distance on the demo dataset

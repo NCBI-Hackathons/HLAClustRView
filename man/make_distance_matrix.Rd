@@ -7,7 +7,7 @@
 make_distance_matrix(outMet)
 }
 \arguments{
-\item{outMet}{tibble with hamming distance for sample
+\item{outMet}{a \code{tibble} object with hamming distance for sample
 pairs \code{calculateHamming}}
 }
 \value{

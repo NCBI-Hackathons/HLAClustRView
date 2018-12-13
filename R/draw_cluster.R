@@ -3,8 +3,8 @@
 #' @description This function takes the output of \code{calculateHamming}
 #' function and returns a distance matrix to use for clustering
 #'
-#' @param outMet tibble with hamming distance for sample
-#'     pairs \code{calculateHamming}
+#' @param outMet a \code{tibble} object with hamming distance for sample
+#' pairs \code{calculateHamming}
 #'
 #' @return TODO
 #'

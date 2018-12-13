@@ -19,15 +19,14 @@ Depends: R (>= 3.3)
 Imports: purrr,
     dplyr,
     tidyr,
-    tibble,
     utils,
-    methods,
     stringr,
     data.table,
     stats,
     graphics,
     rlang
 Suggests: testthat,
+    tibble,
     knitr,
     rmarkdown
 RoxygenNote: 6.1.1
