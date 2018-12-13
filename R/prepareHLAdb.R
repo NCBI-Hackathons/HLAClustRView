@@ -85,7 +85,7 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
 
     ## Create object to return
     HLAdb <- list(refSeq=refSeq, posInit=posInit,
-                  HLAAlignment=rbindlist(HLAAlignment))
+                    HLAAlignment=rbindlist(HLAAlignment))
     class(HLAdb) <- "HLAdb"
     return(HLAdb)
 }
@@ -163,12 +163,12 @@ parseAlignment <- function(fileName) {
     # data.table of each type with a representation of the diffence
     # between the sequence and the reference.
     HLAalignment <- data.table(GeneName=character(nbType),
-                               AlleleGroup=character(nbType),
-                               Protein=character(nbType),
-                               SynSubst=character(nbType),
-                               Noncoding=character(nbType),
-                               Suffix=character(nbType),
-                               SeqDiff=character(nbType))
+                                AlleleGroup=character(nbType),
+                                Protein=character(nbType),
+                                SynSubst=character(nbType),
+                                Noncoding=character(nbType),
+                                Suffix=character(nbType),
+                                SeqDiff=character(nbType))
 
     # Loop on the position in allLine of the sequence type
     # before the reference sequence

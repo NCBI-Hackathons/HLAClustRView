@@ -107,6 +107,34 @@ NULL
 #'
 NULL
 
-
-
+#' This dataset contains the allele and digit1 information for
+#' HLA genes in one pair of samples.
+#'
+#' This dataset can be used to test the \code{sample_pair_distance} function.
+#'
+#' @name example_sample_pair_data
+#'
+#' @aliases example_sample_pair_data
+#'
+#' @docType data
+#'
+#' @format A \code{tibble} object with 10 rows and 4 variables:
+#' \itemize{
+#'     \item{SampleName}{sample id}
+#'     \item{GeneName}{hla gene id}
+#'     \item{AlleleName}{allele information, 1 or 2}
+#'     \item{AlleleGroup}{allele group data}
+#' }
+#'
+#' @return TODO
+#'
+#' @usage data(example_sample_pair_data)
+#'
+#' @keywords datasets
+#'
+#' @examples
+#'
+#' ## TODO
+#'
+NULL
 
