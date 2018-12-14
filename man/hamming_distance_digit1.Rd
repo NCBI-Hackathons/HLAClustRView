@@ -41,7 +41,7 @@ d <- tibble::tribble(
     "s2", 2, 5
 )
 
-## Calculate the hamming distance on the demo dataset
+## Calculate the Hamming distance on the demo dataset
 HLAClustRView:::hamming_distance_digit1(d)
 
 }

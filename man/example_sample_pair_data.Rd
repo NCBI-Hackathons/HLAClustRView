@@ -5,25 +5,49 @@
 \alias{example_sample_pair_data}
 \title{This dataset contains the allele and digit1 information for
 HLA genes in one pair of samples.}
-\format{A \code{tibble} object with 10 rows and 4 variables:
+\format{a \code{tibble} object with 10 rows and 4 variables:
 \itemize{
-    \item{SampleName}{sample id}
-    \item{GeneName}{hla gene id}
-    \item{AlleleName}{allele information, 1 or 2}
-    \item{AlleleGroup}{allele group data}
+    \item \code{SampleName} a \code{character} string that represent the
+name of the sample.
+    \item \code{AllelName} a \code{character} string that represent the
+name of the allele (1 or 2).
+    \item \code{GeneName} a \code{character} string that represent the
+name of the HLA gene.
+    \item \code{AlleleGroup} a \code{character} string that represent the
+section identifying the subtype group.
 }}
 \usage{
 data(example_sample_pair_data)
 }
 \value{
-TODO
+a \code{tibble} object with 10 rows and 4 variables:
+\itemize{
+    \item \code{SampleName} a \code{character} string that represent the
+name of the sample.
+    \item \code{AllelName} a \code{character} string that represent the
+name of the allele (1 or 2).
+    \item \code{GeneName} a \code{character} string that represent the
+name of the HLA gene.
+    \item \code{AlleleGroup} a \code{character} string that represent the
+section identifying the subtype group.
+}
 }
 \description{
 This dataset can be used to test the \code{sample_pair_distance} function.
 }
 \examples{
 
-## TODO
+## Load dataset
+data(example_sample_pair_data)
 
+## Computes the Hamming distance for one pair of samples
+HLAClustRView:::sample_pair_distance(example_sample_pair_data)
+
+}
+\seealso{
+\itemize{
+    \item \code{\link{calculateHamming}} {for calculating the Hamming
+    distance metric between all samples}
+}
 }
 \keyword{datasets}

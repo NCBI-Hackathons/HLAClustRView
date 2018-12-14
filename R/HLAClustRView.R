@@ -18,9 +18,7 @@
 #' Pascal Belleau <belleau@@cshl.edu>
 #'
 #' @seealso
-
 #' \itemize{
-
 #'     \item \code{\link{readHLADataset}} {for extracting HLA typing
 #'     information for all samples present in a text file}
 #'     \item \code{\link{calculateHamming}} {for calculating the Hamming
@@ -66,7 +64,29 @@ NULL
 #'
 #' @docType data
 #'
-#' @format TODO
+#' @format a \code{list} of class \code{HLADataset}
+#' containing the following elements:
+#' \itemize{
+#' \item \code{data} a \code{tibble} object containing the HLA typing
+#' information for all samples. The columns are:
+#' \itemize{
+#' \item \code{SampleName} a \code{character} string that represent the
+#' name of the sample.
+#' \item \code{AllelName} a \code{character} string that represent the
+#' name of the allele (1 or 2).
+#' \item \code{GeneName} a \code{character} string that represent the
+#' name of the HLA gene.
+#' \item \code{AlleleGroup} a \code{character} string that represent the
+#' section identifying the subtype group.
+#' \item \code{Protein} a \code{character} string that represent the
+#' section identifying the nucleotide substitutions group.
+#' \item \code{SynSubst} a \code{character} string that represent the
+#' section identifying the synonymous nucleotide substitutions group.
+#' \item \code{NonCoding} a \code{character} string that represent the
+#' section identifying the non-coding polymorphisms group.
+#' \item \code{Suffix} a \code{character} string that represent the
+#' suffix of the HLA typing or \code{NA}.
+#' }}
 #'
 #' @return a \code{list} of class \code{HLADataset}
 #' containing the following elements:
@@ -101,7 +121,7 @@ NULL
 #' ## Load example dataset
 #' data(demoHLADataset)
 #'
-#' ## Calculate hamming distance metric
+#' ## Calculate Hamming distance metric
 #' calculateHamming(demoHLADataset)
 #'
 #'
@@ -118,15 +138,35 @@ NULL
 #'
 #' @docType data
 #'
-#' @format A \code{tibble} object with 10 rows and 4 variables:
+#' @format a \code{tibble} object with 10 rows and 4 variables:
 #' \itemize{
-#'     \item{SampleName}{sample id}
-#'     \item{GeneName}{hla gene id}
-#'     \item{AlleleName}{allele information, 1 or 2}
-#'     \item{AlleleGroup}{allele group data}
+#'     \item \code{SampleName} a \code{character} string that represent the
+#' name of the sample.
+#'     \item \code{AllelName} a \code{character} string that represent the
+#' name of the allele (1 or 2).
+#'     \item \code{GeneName} a \code{character} string that represent the
+#' name of the HLA gene.
+#'     \item \code{AlleleGroup} a \code{character} string that represent the
+#' section identifying the subtype group.
 #' }
 #'
-#' @return TODO
+#' @return a \code{tibble} object with 10 rows and 4 variables:
+#' \itemize{
+#'     \item \code{SampleName} a \code{character} string that represent the
+#' name of the sample.
+#'     \item \code{AllelName} a \code{character} string that represent the
+#' name of the allele (1 or 2).
+#'     \item \code{GeneName} a \code{character} string that represent the
+#' name of the HLA gene.
+#'     \item \code{AlleleGroup} a \code{character} string that represent the
+#' section identifying the subtype group.
+#' }
+#'
+#' @seealso
+#' \itemize{
+#'     \item \code{\link{calculateHamming}} {for calculating the Hamming
+#'     distance metric between all samples}
+#' }
 #'
 #' @usage data(example_sample_pair_data)
 #'
@@ -134,7 +174,11 @@ NULL
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Load dataset
+#' data(example_sample_pair_data)
+#'
+#' ## Computes the Hamming distance for one pair of samples
+#' HLAClustRView:::sample_pair_distance(example_sample_pair_data)
 #'
 NULL
 
