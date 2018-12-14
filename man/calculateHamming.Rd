@@ -31,7 +31,7 @@ there alleles.
 ## Load example dataset
 data(demoHLADataset)
 
-## Calculate hamming distance metric
+## Calculate Hamming distance metric
 calculateHamming(demoHLADataset)
 
 }

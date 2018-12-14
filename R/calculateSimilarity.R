@@ -31,7 +31,7 @@
 #'     "s2", 2, 5
 #' )
 #'
-#' ## Calculate the hamming distance on the demo dataset
+#' ## Calculate the Hamming distance on the demo dataset
 #' HLAClustRView:::hamming_distance_digit1(d)
 #'
 #' @author Santiago Medina, Nissim Ranade
@@ -150,7 +150,7 @@ sample_pair_distance <- function(sample_pair_data) {
 #' ## Load example dataset
 #' data(demoHLADataset)
 #'
-#' ## Calculate hamming distance metric
+#' ## Calculate Hamming distance metric
 #' calculateHamming(demoHLADataset)
 #'
 #' @author Santiago Medina, Nissim Ranade
