@@ -116,6 +116,13 @@ NULL
 #'
 #' @keywords datasets
 #'
+#' @seealso
+#' \itemize{
+#'     \item \code{\link{calculateHamming}} {for calculating the Hamming
+#'     distance metric between all samples}
+#' }
+#'
+#'
 #' @examples
 #'
 #' ## Load example dataset
@@ -166,6 +173,8 @@ NULL
 #' \itemize{
 #'     \item \code{\link{calculateHamming}} {for calculating the Hamming
 #'     distance metric between all samples}
+#'     \item \code{\link{readHLADataset}} {for extracting HLA typing
+#'     information for all samples present in a text file}
 #' }
 #'
 #' @usage data(example_sample_pair_data)

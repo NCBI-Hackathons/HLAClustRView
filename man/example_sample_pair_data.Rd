@@ -48,6 +48,8 @@ HLAClustRView:::sample_pair_distance(example_sample_pair_data)
 \itemize{
     \item \code{\link{calculateHamming}} {for calculating the Hamming
     distance metric between all samples}
+    \item \code{\link{readHLADataset}} {for extracting HLA typing
+    information for all samples present in a text file}
 }
 }
 \keyword{datasets}
