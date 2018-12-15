@@ -53,7 +53,7 @@ recognition by T cells. MHCs are essential for antiviral, antibacterial, and
 anti-tumor immunity [@Kumar2012].  
 Further, inheritance of specific HLA Alleles are implicated in autoimmune 
 disorders, such as inflammatory bowel disease, type 1 diabetes, rheumatoid 
-arthritis, and systemic lupus erythematosus [TODO Gutierrez-Arcelus2016]. 
+arthritis, and systemic lupus erythematosus [@Gutierrez-Arcelus2016a]. 
 Furthermore, HLA gene products play a critical role in the outcomes of human 
 organ transplantation [@Choo2007]. 
 
