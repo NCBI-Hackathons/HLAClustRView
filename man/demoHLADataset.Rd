@@ -70,4 +70,10 @@ calculateHamming(demoHLADataset)
 
 
 }
+\seealso{
+\itemize{
+    \item \code{\link{calculateHamming}} {for calculating the Hamming
+    distance metric between all samples}
+}
+}
 \keyword{datasets}
