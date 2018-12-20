@@ -95,9 +95,29 @@ TODO
 To enable quantification of the similarity between two HLA typing, similarity
 metric must be used.
 
-## Hamming distance based on first HLA typing field 
+## Hamming distance based on first HLA typing field ##
 
-TODO
+In information theory, this Hamming distance is broadly applied to quantify similarity among data strings. The Hamming distance between two binary strings of equivalent length is usually calculated by summing the differing positions between the two strings. This Hamming distance has also applications in computational biology where is can be used to approximate pattern matching between sequences [@Ristov2016].  
+
+We used the first HLA typing field, which designates the allele type based on genetic similarity, to define a Hamming like distance. The metic is define as the minimal differing allele type sums 
+
+<br>
+
+<center>
+
+![](Hamming_Eqn_01.jpg ""){width=85%}
+
+</center>
+
+<br>
+
+where:  
+
+<center>
+
+![](Hamming_Eqn_02.jpg ""){width=30%}
+
+</center>
 
 # An analysis step by step #
 
