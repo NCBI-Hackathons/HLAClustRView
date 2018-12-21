@@ -1,0 +1,35 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+
+h1.title {
+  font-size: 26.0pt;
+  color: #63960d;
+  line-height: 1.3em;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  border-bottom: none;
+}
+
+h1 {
+  font-size: 20.0pt;
+  font-weight: bold;
+  line-height: 1.4em;
+  border-bottom: 1px #2a84bd solid;
+}
+
+h1, h2, h3 {
+  color: #2a84bd;
+}
+
+h2 {
+  font-size: 19pt;
+}
+
+
+h3, h4 {
+  font-size: 14pt;
+  font-style: italic;
+}
+

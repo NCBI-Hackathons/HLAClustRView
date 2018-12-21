@@ -4,6 +4,7 @@ author: Pascal Belleau, Adewunmi Adelaja, Astrid Deschênes, Santiago Medina, Ni
 output:
   html_document:
     toc: yes
+    css: style.css
   pdf_document:
     toc: yes
 bibliography: biblio.bibtex
@@ -20,6 +21,7 @@ library(HLAClustRView)
 ```
 
 <br />
+
 
 **Package**: `r packageDescription("HLAClustRView")[["Package"]]` <br />
 **Authors**: `r packageDescription("HLAClustRView")[["Author"]]` <br />
@@ -92,32 +94,36 @@ TODO
 
 # Metrics which estimate similarity between two HLA typing 
 
-To enable quantification of the similarity between two HLA typing, similarity
-metric must be used.
+To enable quantification of the similarity between two HLA typing, a similarity
+metric must be used. The *HLAClustRView* package implements 2 types of metric.
 
 ## Hamming distance based on first HLA typing field ##
 
 In information theory, this Hamming distance is broadly applied to quantify similarity among data strings. The Hamming distance between two binary strings of equivalent length is usually calculated by summing the differing positions between the two strings. This Hamming distance has also applications in computational biology where is can be used to approximate pattern matching between sequences [@Ristov2016].  
 
-We used the first HLA typing field, which designates the allele type based on genetic similarity, to define a Hamming like distance. The metic is define as the minimal differing allele type sums 
+We used the first HLA typing field, which designates the allele type based on genetic similarity, to define a Hamming like distance. The metrcic is defined as the sum of the minimal differing allele types for each HLA gene. As alleles are not phased, all combinaisons between alleles of the two samples are tested. The combinaison with the minimal difference is retained for the calculation of the metric.
 
 <br>
 
 <center>
 
-![](Hamming_Eqn_01.jpg ""){width=85%}
+![](Hamming_Eqn_01.jpg ""){width=75%}
 
 </center>
 
 <br>
 
-where:  
-
 <center>
 
-![](Hamming_Eqn_02.jpg ""){width=30%}
+![](Hamming_Eqn_02.jpg ""){width=22%}
 
 </center>
+
+where:
+
+* <font size="+1">a~1~ and a~2~ are the two alleles of the first sample for a given gene</font>
+* <font size="+1">b~1~ and b~2~ are the two alleles of the second sample for a given gene</font>
+
 
 # An analysis step by step #
 
