@@ -74,23 +74,7 @@ information about polymorphism in the human genes of the immune system.
 The naming of HLA genes, allele sequences, and their quality control under the 
 responsibility of the [WHO Nomenclature Committee for Factors of the HLA System](http://hla.alleles.org/nomenclature/committee.html).
 
-# Workflow #
 
-The *`r packageDescription("HLAClustRView")[["Package"]]`* package is splitted
-in 3 main sections: input, process and visualization. The Figure 1 shows the
-workflow within each section. 
-
-<center>
-
-![Figure 1. HLAClustRView workflow](HLAdesign.jpg "HLAClustRView design")
-
-</center>
-
-
-<br>
-<br>
-
-TODO
 
 # Metrics which estimate similarity between two HLA typing 
 
@@ -128,6 +112,24 @@ where:
 
 TODO
 
+# Workflow #
+
+The *`r packageDescription("HLAClustRView")[["Package"]]`* package is splitted
+in 3 main sections: input, process and visualization. The Figure 1 shows the
+workflow within each section. 
+
+<center>
+
+![Figure 1. HLAClustRView workflow](HLAdesign.jpg "HLAClustRView design")
+
+</center>
+
+
+<br>
+<br>
+
+TODO
+
 # An analysis step by step #
 
 ### 1. Install HLAClustRView package
@@ -157,20 +159,19 @@ HLAdata <- readHLADataset(hlaFilePath = "./Samples_HLA_typing.txt")
 HLAdata
 ```
 
-### 4. Calculating similarity metric
+### 4. Calculating Hamming like metric
 
-The Hamming distance, which is based on first HLA typing field, can be 
+The Hamming like distance, which is based on first HLA typing field, can be 
 calculated through the *calculateHamming()* function.
 
 ```{r similarityCalcul, warning=FALSE, message=FALSE}
-## TODO Problem with code
-#hammingMetric <- calculateHamming(HLAdataReady)
-#head(hammingMetric)
+hammingMetric <- calculateHamming(HLAdata)
+head(hammingMetric)
 ```
 
 # Session info
 
-Here is the output of sessionInfo() on the system on which this document 
+Here is the output of *sessionInfo()* on the system on which this document 
 was compiled:
 
 ```{r sessionInfo, echo=FALSE}
