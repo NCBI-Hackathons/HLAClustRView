@@ -26,9 +26,10 @@ the distance
 data("example_sample_pair_data")
 
 ## Computes the Hamming distance for one pair of samples
-sample_pair_distance(example_sample_pair_data)
+HLAClustRView:::sample_pair_distance(example_sample_pair_data)
 
 }
 \author{
 Santiago Medina, Nissim Ranade
 }
+\keyword{internal}

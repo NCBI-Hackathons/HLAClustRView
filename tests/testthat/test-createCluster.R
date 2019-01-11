@@ -2,10 +2,14 @@
 
 library(HLAClustRView)
 
-### Tests createCluster() results
+### Tests hclustHLA() results
 
-context("createCluster() results")
+context("hclustHLA() results")
 
-test_that("applyCNPmask() must failed when wrong dist input", {
-    expect_error(createCluster(dist = "hello"))
+test_that("hclustHLA() must failed when wrong dist input 01", {
+    expect_error(hclustHLA(dist = "hello"))
+})
+
+test_that("hclustHLA() must failed when wrong dist input 02", {
+    expect_error(hclustHLA(dist = 33))
 })

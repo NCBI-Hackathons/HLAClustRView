@@ -25,11 +25,8 @@ containing one line of alignment
 ## One line of aligment
 sequence <- " DOB*01:01:01:01       MGSGWV PWVVALLVNL TRLDSSMTQG"
 
-## Position of the end of the introduction section
-endPosition <- 20
-
 ## Extract HLA type
-HLAClustRView:::extractTyping(seq=sequence, endPos=endPosition)
+HLAClustRView:::extractTyping(seq=sequence, endPos=20)
 
 
 }

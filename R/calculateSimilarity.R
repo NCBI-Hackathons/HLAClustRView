@@ -1,28 +1,40 @@
-#' Compute the hamming distance between two alleles
+#' @title Compute the Hamming distance between two samples
 #'
-#' This function computes the hamming distance for two samples and two alleles,
-#'  the hamming distance is given by
-#' \eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)}
-#' @param allele tibble with 3 columns: SampleName, AlleleName, AlleleGroup,
-#' (see example)
-#' @author Santiago Medina, Nissim Ranade
-#' @return One row tibble with minimum hamming distance &
-#' logical value column indicating whether same allele was used if the
-#' distance is the same for both then NA is returned
+#' @description Computes the Hamming distance for two samples using both
+#' alleles. See details section for more information about the Hamming
+#' distance.
+#'
+#' @details The Hamming distance is given by
+#' \eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)} where
+#' \code{s1} and \code{s2} are two samples and \code{A1} and \code{A2} are
+#' there alleles.
+#'
+#' @param allele a \code{tibble} object with 3 mendatory columns:
+#' "SampleName", "AlleleName" and "AlleleGroup".
+#'
+#' @return a \code{tibble} object with one row containing the minimum
+#' Hamming distance and a \code{logical} column indicating whether
+#' same allele was used. If the
+#' distance is the same for both, then \code{NA} is returned.
 #'
 #' @examples
 #'
+#' ## Load package
+#' library(tibble)
+#'
 #' ## Create a demo dataset
 #' d <- tibble::tribble(
-#'    ~SampleName, ~AlleleName, ~AlleleGroup,
-#'    "s1", 1, 1,
-#'    "s1", 2, 3,
-#'    "s2", 1, 1,
-#'    "s2", 2, 5
+#'     ~SampleName, ~AlleleName, ~AlleleGroup,
+#'     "s1", 1, 1,
+#'     "s1", 2, 3,
+#'     "s2", 1, 1,
+#'     "s2", 2, 5
 #' )
 #'
-#' ## Calculate the hamming distance on the demo dataset
+#' ## Calculate the Hamming distance on the demo dataset
 #' HLAClustRView:::hamming_distance_digit1(d)
+#'
+#' @author Santiago Medina, Nissim Ranade
 #'
 #' @importFrom dplyr %>% mutate group_by summarise filter slice
 #' @importFrom purrr reduce
@@ -75,7 +87,7 @@ hamming_distance_digit1 <- function(allele) {
 #' data("example_sample_pair_data")
 #'
 #' ## Computes the Hamming distance for one pair of samples
-#' sample_pair_distance(example_sample_pair_data)
+#' HLAClustRView:::sample_pair_distance(example_sample_pair_data)
 #'
 #' @author Santiago Medina, Nissim Ranade
 #'
@@ -84,7 +96,7 @@ hamming_distance_digit1 <- function(allele) {
 #' @importFrom utils data
 #' @importFrom purrr map
 #' @importFrom rlang .data
-#' @export
+#' @keywords internal
 sample_pair_distance <- function(sample_pair_data) {
     # make sure only two samples are given
     stopifnot(length(unique(sample_pair_data$SampleName)) == 2)
@@ -115,23 +127,33 @@ sample_pair_distance <- function(sample_pair_data) {
 }
 
 
-#' @title calculate hamming distance between samples
+#' @title Calculate Hamming distance between all samples
 #'
-#' @description Takes the parsed hla database and computes the hamming distance
-#' for each pair of samples
+#' @description Takes an object containing HLA typing information for all
+#' samples and computes the Hamming distance
+#' for each pair of samples.
 #'
-#' @param hla_data data frame with allele data
+#' @param hla_data a \code{list} of class \code{HLADataset} containing a
+#' \code{tibble} object with the HLA typing information for all samples. At
+#' least 2 samples must be present be able to calculate the metric.
 #'
-#' @return a \code{tibble} object containing the Hamming distance value between
-#' each possible pair of samples. TODO
+#' @return a \code{tibble} object containing the Hamming distance values
+#' between each possible pair of samples. TODO
+#'
+#' @details The Hamming distance is given by
+#' \eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)} where
+#' \code{s1} and \code{s2} are two samples and \code{A1} and \code{A2} are
+#' there alleles.
 #'
 #' @examples
 #'
 #' ## Load example dataset
-#' data(example_calculateSimilarity)
+#' data(demoHLADataset)
 #'
-#' ## Calculate hamming distance metric
-#' calculateSimilarity(example_calculateSimilarity)
+#' ## Calculate Hamming distance metric
+#' calculateHamming(demoHLADataset)
+#'
+#' @author Santiago Medina, Nissim Ranade
 #'
 #' @importFrom dplyr filter mutate select group_by inner_join as_tibble rename %>%
 #' @importFrom tidyr unnest nest
@@ -139,7 +161,24 @@ sample_pair_distance <- function(sample_pair_data) {
 #' @importFrom purrr map_lgl possibly map2
 #' @importFrom rlang .data
 #' @export
-calculateSimilarity <- function(hla_data) {
+calculateHamming <- function(hla_data) {
+
+    ## Validate that a HLADataset is passed as argument
+    if (!"HLADataset" %in% class(hla_data)) {
+        stop("hla_data must be of class \"HLADataset\"")
+    }
+
+    ## Validate that the HLA information is present and that
+    ## at least 2 samples are present
+    if(!is.null(hla_data$data)) {
+        if (length(unique(hla_data$data$SampleName)) < 2) {
+            stop("hla_data must contain information for at least 2 samples")
+        }
+    } else {
+        stop("A entry called \"data\" is missing from hla_data")
+    }
+
+    hla_data <- hla_data$data
 
     hla_data <- select(hla_data, .data$SampleName, .data$GeneName,
                         .data$AlleleName, .data$AlleleGroup)
@@ -182,22 +221,46 @@ calculateSimilarity <- function(hla_data) {
 
 }
 
-#' @title Parse hladb
+#' @title Convert data.frame with HLA typing information to tibble object
 #'
-#' @description Converts object to tibble, removes samples with missing values
+#' @description Converts a data.frame that contains the HLA typing informatiOn
+#' to a tibble object. It also removes samples with missing allele group
+#' information.
 #'
-#' @param hladb hla database the output of function \code{parseHLADb}
+#' @param hladb a \code{data.frame} with the HLA typing information from
+#' all samples.
 #'
 #' @return a \code{tibble} object with the HLA information for each sample.
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Create a data.frame as demo
+#' demo <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
+#'     AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
+#'     AlleleGroup=c("02", "02", "03", "03"), Protein=c("01", "01", "01", "02"),
+#'     SynSubst=c("01", "02", "01", "01"), NonCoding=c("01", "01", NA, NA),
+#'     Suffix=c(NA, NA, NA, NA))
+#'
+#' ## Convert the data.frame to a tibble object
+#' HLAClustRView:::parse_hla_data(demo)
+#'
+#' ## Create a data.frame with missing information
+#' demoMissing <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
+#'     AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
+#'     AlleleGroup=c("02", "02", NA, "03"), Protein=c("01", "01", "01", "02"),
+#'     SynSubst=c("01", "02", "01", "01"), NonCoding=c("01", "01", NA, NA),
+#'     Suffix=c(NA, NA, NA, NA))
+#'
+#' ## Convert the data.frame to a tibble object
+#' HLAClustRView:::parse_hla_data(demoMissing)
+#'
+#'
+#' @author Santiago Medina
 #'
 #' @importFrom purrr map reduce set_names
 #' @importFrom dplyr mutate_all filter pull bind_cols as_tibble %>%
 #' @importFrom rlang .data
-#' @export
+#' @keywords internal
 parse_hla_data <- function(hladb) {
 
     hla_data <-
@@ -212,7 +275,6 @@ parse_hla_data <- function(hladb) {
         filter(is.na(.data$AlleleGroup)) %>%
         pull(.data$SampleName)
 
-    hla_data %>%
-        filter(!.data$SampleName %in% missing_samples)
-
+    return(hla_data %>%
+        filter(!.data$SampleName %in% missing_samples))
 }

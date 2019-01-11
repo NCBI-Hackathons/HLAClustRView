@@ -2,36 +2,46 @@
 % Please edit documentation in R/calculateSimilarity.R
 \name{hamming_distance_digit1}
 \alias{hamming_distance_digit1}
-\title{Compute the hamming distance between two alleles}
+\title{Compute the Hamming distance between two samples}
 \usage{
 hamming_distance_digit1(allele)
 }
 \arguments{
-\item{allele}{tibble with 3 columns: SampleName, AlleleName, AlleleGroup,
-(see example)}
+\item{allele}{a \code{tibble} object with 3 mendatory columns:
+"SampleName", "AlleleName" and "AlleleGroup".}
 }
 \value{
-One row tibble with minimum hamming distance &
-logical value column indicating whether same allele was used if the
-distance is the same for both then NA is returned
+a \code{tibble} object with one row containing the minimum
+Hamming distance and a \code{logical} column indicating whether
+same allele was used. If the
+distance is the same for both, then \code{NA} is returned.
 }
 \description{
-This function computes the hamming distance for two samples and two alleles,
- the hamming distance is given by
-\eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)}
+Computes the Hamming distance for two samples using both
+alleles. See details section for more information about the Hamming
+distance.
+}
+\details{
+The Hamming distance is given by
+\eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)} where
+\code{s1} and \code{s2} are two samples and \code{A1} and \code{A2} are
+there alleles.
 }
 \examples{
 
+## Load package
+library(tibble)
+
 ## Create a demo dataset
 d <- tibble::tribble(
-   ~SampleName, ~AlleleName, ~AlleleGroup,
-   "s1", 1, 1,
-   "s1", 2, 3,
-   "s2", 1, 1,
-   "s2", 2, 5
+    ~SampleName, ~AlleleName, ~AlleleGroup,
+    "s1", 1, 1,
+    "s1", 2, 3,
+    "s2", 1, 1,
+    "s2", 2, 5
 )
 
-## Calculate the hamming distance on the demo dataset
+## Calculate the Hamming distance on the demo dataset
 HLAClustRView:::hamming_distance_digit1(d)
 
 }

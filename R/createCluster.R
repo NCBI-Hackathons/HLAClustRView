@@ -8,10 +8,11 @@
 #' @param method a string \code{character} string, the agglomeration method
 #' to be used for clustering.
 #'
+#' @param \ldots arguments passed to or from other methods.
+#'
 #' @return an object of class \code{hclust} which describes the tree produced
 #' by the clustering process. See \link[stats]{hclust}.
 #'
-#' @param \ldots arguments passed to or from other methods.
 #'
 #' @examples
 #'
@@ -22,6 +23,6 @@
 #'
 #' @importFrom stats hclust
 #' @export
-createCluster <- function(dist, method="complete", ...) {
+hclustHLA <- function(dist, method="complete", ...) {
     hclust(dist, method=method, ...)
 }

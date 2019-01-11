@@ -1,12 +1,12 @@
-#' @title Parse HLA Database alignement files for a specific aligment type
+#' @title Parse HLA Database alignment files for a specific alignment type
 #'
-#' @description Parse HLA Database alignement files that are present in a
+#' @description Parse HLA Database alignment files that are present in a
 #' directory, as specified by input, an
 #' generate a class object that can be used in further analysis. The function
 #' only parse one type of aligment file at the time. There is 3 types of
-#' aligment files that can be parsed: CDS sequence, genomic and protein.
+#' alignment files that can be parsed: CDS sequence, genomic and protein.
 #'
-#' Beware that the names of the alignement files should not be changed as
+#' Beware that the names of the alignment files should not be changed as
 #' the name is used to identify the gene that is currently parsed.
 #'
 #' @param hlaDbPath A \code{character} string, the path to the directory of
@@ -85,7 +85,7 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
 
     ## Create object to return
     HLAdb <- list(refSeq=refSeq, posInit=posInit,
-                  HLAAlignment=rbindlist(HLAAlignment))
+                    HLAAlignment=rbindlist(HLAAlignment))
     class(HLAdb) <- "HLAdb"
     return(HLAdb)
 }
@@ -141,7 +141,7 @@ parseAlignment <- function(fileName) {
     }
 
     # Get the position of the reference
-    offSet <- ifelse(seqType == "cDNA", 1,0)
+    offSet <- ifelse(seqType == "cDNA", 1, 0)
     cpt <- listPos[1] + 2 + offSet
 
     while (cpt < maxTyping) {
@@ -163,12 +163,12 @@ parseAlignment <- function(fileName) {
     # data.table of each type with a representation of the diffence
     # between the sequence and the reference.
     HLAalignment <- data.table(GeneName=character(nbType),
-                               AlleleGroup=character(nbType),
-                               Protein=character(nbType),
-                               SynSubst=character(nbType),
-                               Noncoding=character(nbType),
-                               Suffix=character(nbType),
-                               SeqDiff=character(nbType))
+                                AlleleGroup=character(nbType),
+                                Protein=character(nbType),
+                                SynSubst=character(nbType),
+                                Noncoding=character(nbType),
+                                Suffix=character(nbType),
+                                SeqDiff=character(nbType))
 
     # Loop on the position in allLine of the sequence type
     # before the reference sequence
@@ -182,7 +182,7 @@ parseAlignment <- function(fileName) {
             posInit <- paste0(posInit, s)
             s <- substr(allLines[startLine + offSet], startPosFile + i,
                         startPosFile + i)
-            i<-i+1
+            i <- i + 1
         }
         posInit <- as.integer(posInit)
 
@@ -192,7 +192,7 @@ parseAlignment <- function(fileName) {
         refSeq <- paste0(refSeq, parseRef$refSeq)
 
         # Parse the type of the reference sequence
-        if(startLine == listPos[1]){
+        if (startLine == listPos[1]) {
             nameTyping <- extractTyping(allLines[startSeq], startPosFile)
             curTyping <- splitTyping(nameTyping)
             HLAalignment$GeneName[1] <- curTyping[1]
@@ -247,7 +247,7 @@ parseAlignment <- function(fileName) {
         }
 
         # Just to prevent infinite loop
-        if(cpt == maxTyping){
+        if (cpt == maxTyping) {
             stop(paste0("The program reach the max of typing in ",
                         fileName, "\n"))
         }
@@ -380,11 +380,8 @@ extractSeq <- function(seq, startPos) {
 #' ## One line of aligment
 #' sequence <- " DOB*01:01:01:01       MGSGWV PWVVALLVNL TRLDSSMTQG"
 #'
-#' ## Position of the end of the introduction section
-#' endPosition <- 20
-#'
 #' ## Extract HLA type
-#' HLAClustRView:::extractTyping(seq=sequence, endPos=endPosition)
+#' HLAClustRView:::extractTyping(seq=sequence, endPos=20)
 #'
 #'
 #' @author Pascal Belleau, Astrid Deschenes
@@ -407,50 +404,70 @@ extractTyping <- function(seq, endPos) {
 }
 
 
-#' @title TODO
+#' @title Get the position in the HLA table of the corresponding HLA
+#' typing
 #'
-#' @description TODO
+#' @description Get the position in the HLA table of the corresponding HLA
+#' typing. The HLA typing can use up to 6 fields for the identification.
 #'
 #' @param seq A \code{character} string containing the sequence.
 #'
-#' @param curTyping A \code{vector} of \code{character} strings defining
-#' the HLA type. The \code{vector} should have 6 entries.
+#' @param curTyping A \code{vector} of \code{character} string defining
+#' the HLA type. The \code{vector} should have 6 fields.
 #'
-#' @return TODO
+#' @return A \code{integer} or a \code{vector} of \code{integer} representing
+#' the position(s), in the data.table, of
+#' the HLA typing. If the HLA typing is not present, an empty \code{integer}
+#' is returned.
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Information about HLA alignment file
+#' fileInfo <- paste0(system.file("extdata", package = "HLAClustRView"),
+#'     "/DRA_prot.txt")
 #'
-#' @author Pascal Belleau
+#' ## Parse HLA alignment file
+#' ## DRAInfo$HLAalignment contains the HLA table
+#' DRAInfo <- HLAClustRView:::parseAlignment(fileName=fileInfo)
+#'
+#' ## Create a vector with the information about one HLA typing
+#' typing <- matrix(data=c("DRA", "01", "01", "02", NA, NA), nrow=1)
+#'
+#' ## Get the position of the specific typing in the HLA table
+#' HLAClustRView:::getTypingPos(seqProcess=DRAInfo$HLAalignment,
+#'     curTyping=typing)
+#'
+#' @author Pascal Belleau, Astrid Deschenes
 #' @keywords internal
 getTypingPos <- function(seqProcess, curTyping) {
 
-    if(is.na(curTyping[4])){
+    curPos <- integer()
+
+    if (is.na(curTyping[4])) {
         curPos <- which(seqProcess$GeneName == curTyping[1] &
                         seqProcess$AlleleGroup == curTyping[2] &
                         seqProcess$Protein == curTyping[3] &
                         is.na(seqProcess$SynSubst))
-    } else if(is.na(curTyping[5])){
+    } else if (is.na(curTyping[5])) {
         curPos <- which(seqProcess$GeneName == curTyping[1] &
                         seqProcess$AlleleGroup == curTyping[2] &
                         seqProcess$Protein == curTyping[3] &
                         seqProcess$SynSubst == curTyping[4] &
-                        is.na(seqProcess$Noncoding) )
-    } else if(is.na(curTyping[6])){
+                        is.na(seqProcess$Noncoding))
+    } else if (is.na(curTyping[6])) {
         curPos <- which(seqProcess$GeneName == curTyping[1] &
                             seqProcess$AlleleGroup == curTyping[2] &
                             seqProcess$Protein == curTyping[3] &
                             seqProcess$SynSubst == curTyping[4] &
                             seqProcess$Noncoding == curTyping[5] &
-                            is.na(seqProcess$Suffix) )
+                            is.na(seqProcess$Suffix))
     } else {
         curPos <- which(seqProcess$GeneName == curTyping[1] &
                         seqProcess$AlleleGroup == curTyping[2] &
                         seqProcess$Protein == curTyping[3] &
-                        seqProcess$Noncoding == curTyping[4] &
-                        seqProcess$Noncoding == curTyping[6] &
-                        seqProcess$Suffix == curTyping[7] )
+                        seqProcess$SynSubst == curTyping[4] &
+                        seqProcess$Noncoding == curTyping[5] &
+                        seqProcess$Suffix == curTyping[6])
     }
 
     return(curPos)

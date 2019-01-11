@@ -1,14 +1,15 @@
 ---
-title: HLAClustRView
+title: HLA typing clustering and visualization based on specific similarity metrics
 author: Pascal Belleau, Adewunmi Adelaja, Astrid Deschênes, Santiago Medina, Nissim Ranade, Allissa Dillman
 output:
   html_document:
     toc: yes
+    css: style.css
   pdf_document:
     toc: yes
 bibliography: biblio.bibtex
 vignette: |
-  %\VignetteIndexEntry{TODO}     
+  %\VignetteIndexEntry{HLA typing clustering and visualization based on specific similarity metrics}     
   %\VignettePackage{HLAClustRView}
   %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown} 
@@ -20,6 +21,7 @@ library(HLAClustRView)
 ```
 
 <br />
+
 
 **Package**: `r packageDescription("HLAClustRView")[["Package"]]` <br />
 **Authors**: `r packageDescription("HLAClustRView")[["Author"]]` <br />
@@ -50,19 +52,19 @@ The human leukocyte antigen (HLA) complex plays an important biological role in
 the regulation of the immune system. HLA alleles encode major 
 histocompatibility complex (MHC) protein, which display peptide antigens for 
 recognition by T cells. MHCs are essential for antiviral, antibacterial, and 
-anti-tumor immunity [TODO Kumar2012].  
+anti-tumor immunity [@Kumar2012].  
 Further, inheritance of specific HLA Alleles are implicated in autoimmune 
 disorders, such as inflammatory bowel disease, type 1 diabetes, rheumatoid 
-arthritis, and systemic lupus erythematosus [TODO Gutierrez-Arcelus2016]. 
+arthritis, and systemic lupus erythematosus [@Gutierrez-Arcelus2016a]. 
 Furthermore, HLA gene products play a critical role in the outcomes of human 
 organ transplantation [@Choo2007]. 
 
 The set of genes that form the HLA complex are highly polymorphic and the 
 novel alleles are still discovered [@Abraham2018].High polymorphism of 
 HLA alleles provides some immunologic advantages against infectious disease, 
-it also presents challenges for organ transplantation [TODO Kumar2012]. 
+it also presents challenges for organ transplantation. 
 Successful tissue and organ transplantation requires that donors and 
-recipients have compatible HLA alleles[TODO Kumar2012]. Because of their 
+recipients have compatible HLA alleles[@Kumar2012]. Because of their 
 high polymorphic status, accurate typing of HLA genes with short-read 
 sequencing data is a challenging task. Software specialized in HLA typing such
 as xHLA [@Xie2017] and HLAProfiler [@Buchkovich2017], had to be developped. 
@@ -71,6 +73,44 @@ Since 1998, the IMGT/HLA Database [@Robinson2015] has provided curated
 information about polymorphism in the human genes of the immune system.
 The naming of HLA genes, allele sequences, and their quality control under the 
 responsibility of the [WHO Nomenclature Committee for Factors of the HLA System](http://hla.alleles.org/nomenclature/committee.html).
+
+
+
+# Metrics which estimate similarity between two HLA typing 
+
+To enable quantification of the similarity between two HLA typing, a similarity
+metric must be used. The *HLAClustRView* package implements 2 metrics.
+
+## Hamming distance based on first HLA typing field ##
+
+In information theory, this Hamming distance is broadly applied to quantify similarity among data strings. The Hamming distance between two binary strings of equivalent length is usually calculated by summing the differing positions between the two strings. This Hamming distance has also applications in computational biology where is can be used to approximate pattern matching between sequences [@Ristov2016].  
+
+We used the first HLA typing field, which designates the allele type based on genetic similarity, to define a Hamming like distance. The metrcic is defined as the sum of the minimal differing allele types for each HLA gene. As alleles are not phased, all combinaisons between alleles of the two samples are tested. The combinaison with the minimal difference is retained for the calculation of the metric.
+
+<br>
+
+<center>
+
+![](Hamming_Eqn_01.jpg ""){width=75%}
+
+</center>
+
+<br>
+
+<center>
+
+![](Hamming_Eqn_02.jpg ""){width=22%}
+
+</center>
+
+where:
+
+* <font size="+1">a~1~ and a~2~ are the two alleles of the first sample for a given gene</font>
+* <font size="+1">b~1~ and b~2~ are the two alleles of the second sample for a given gene</font>
+
+## Distance based on sequence similarity ##
+
+TODO
 
 # Workflow #
 
@@ -87,15 +127,6 @@ workflow within each section.
 
 <br>
 <br>
-
-TODO
-
-# Metrics which estimate similarity between two HLA typing 
-
-To enable quantification of the similarity between two HLA typing, similarity
-metric must be used.
-
-## Hamming distance based on first HLA typing field 
 
 TODO
 
@@ -120,36 +151,27 @@ library(HLAClustRView)
 ### 3. Load HLA typing samples file
 
 The file containing the HLA typing for all analysed samples needs to be loaded.
-This task is done by the *parseHLADb()* function.
+This task is done by the *readHLADataset()* function. The output is an object
+of class *HLADataset*.
 
 ```{r parseSample, warning=FALSE, message=FALSE}
-HLAdata <- parseHLADb(hlaDbPath = "./Samples_HLA_typing.txt")
-head(HLAdata)
+HLAdata <- readHLADataset(hlaFilePath = "./Samples_HLA_typing.txt")
+HLAdata
 ```
 
-### 4. Parse HLA typing data
+### 4. Calculating Hamming like metric
 
-The HLA data needs to formatting before inputting to similarity calculation. 
-The function *parse_hla_data()* is used for that.
-
-```{r prepareData, warning=FALSE, message=FALSE}
-HLAdataReady <- parse_hla_data(hladb = HLAdata)
-```
-
-### 5. Calculating similarity metric
-
-The Hamming distance based on first HLA typing field can be calculated through
-the *calculateSimilarity()* function.
+The Hamming like distance, which is based on first HLA typing field, can be 
+calculated through the *calculateHamming()* function.
 
 ```{r similarityCalcul, warning=FALSE, message=FALSE}
-## TODO Problem with code
-#hammingMetric <- calculateSimilarity(HLAdataReady)
-#head(hammingMetric)
+hammingMetric <- calculateHamming(HLAdata)
+head(hammingMetric)
 ```
 
 # Session info
 
-Here is the output of sessionInfo() on the system on which this document 
+Here is the output of *sessionInfo()* on the system on which this document 
 was compiled:
 
 ```{r sessionInfo, echo=FALSE}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/prepareHLAdb.R
 \name{parseHLADbAlignment}
 \alias{parseHLADbAlignment}
-\title{Parse HLA Database alignement files for a specific aligment type}
+\title{Parse HLA Database alignment files for a specific alignment type}
 \usage{
 parseHLADbAlignment(hlaDbPath, seqType = c("nuc", "gen", "prot"))
 }
@@ -29,13 +29,13 @@ for each allele of each HLA gene.
 }
 }
 \description{
-Parse HLA Database alignement files that are present in a
+Parse HLA Database alignment files that are present in a
 directory, as specified by input, an
 generate a class object that can be used in further analysis. The function
 only parse one type of aligment file at the time. There is 3 types of
-aligment files that can be parsed: CDS sequence, genomic and protein.
+alignment files that can be parsed: CDS sequence, genomic and protein.
 
-Beware that the names of the alignement files should not be changed as
+Beware that the names of the alignment files should not be changed as
 the name is used to identify the gene that is currently parsed.
 }
 \details{

@@ -2,21 +2,47 @@
 % Please edit documentation in R/calculateSimilarity.R
 \name{parse_hla_data}
 \alias{parse_hla_data}
-\title{Parse hladb}
+\title{Convert data.frame with HLA typing information to tibble object}
 \usage{
 parse_hla_data(hladb)
 }
 \arguments{
-\item{hladb}{hla database the output of function \code{parseHLADb}}
+\item{hladb}{a \code{data.frame} with the HLA typing information from
+all samples.}
 }
 \value{
 a \code{tibble} object with the HLA information for each sample.
 }
 \description{
-Converts object to tibble, removes samples with missing values
+Converts a data.frame that contains the HLA typing informatiOn
+to a tibble object. It also removes samples with missing allele group
+information.
 }
 \examples{
 
-## TODO
+## Create a data.frame as demo
+demo <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
+    AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
+    AlleleGroup=c("02", "02", "03", "03"), Protein=c("01", "01", "01", "02"),
+    SynSubst=c("01", "02", "01", "01"), NonCoding=c("01", "01", NA, NA),
+    Suffix=c(NA, NA, NA, NA))
+
+## Convert the data.frame to a tibble object
+HLAClustRView:::parse_hla_data(demo)
+
+## Create a data.frame with missing information
+demoMissing <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
+    AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
+    AlleleGroup=c("02", "02", NA, "03"), Protein=c("01", "01", "01", "02"),
+    SynSubst=c("01", "02", "01", "01"), NonCoding=c("01", "01", NA, NA),
+    Suffix=c(NA, NA, NA, NA))
+
+## Convert the data.frame to a tibble object
+HLAClustRView:::parse_hla_data(demoMissing)
+
 
 }
+\author{
+Santiago Medina
+}
+\keyword{internal}
