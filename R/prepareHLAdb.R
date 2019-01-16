@@ -348,7 +348,7 @@ extractRef <- function(seq, startPos) {
 extractSeq <- function(seq, startPos) {
 
     tmpSeq <- substr(seq, startPos, nchar(seq))
-
+    listCor <- list()
     seqDiff <- ""
     flag <- TRUE
 
