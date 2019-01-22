@@ -7,20 +7,27 @@
 splitTyping(aChar)
 }
 \arguments{
-\item{aChar}{Character array containing well-formed HLA allele
+\item{aChar}{a \code{character} array containing one or more well-formed
+HLA alleles,
 see http://hla.alleles.org/nomenclature/naming.html}
 }
 \value{
-n x 6 matrix of fields
+a n x 6 matrix of fields
 }
 \description{
 Converts a well-formed HLA allele name to a matrix of fields
 }
 \examples{
+
+## Split one HLA typing into an array of entries
 output <- splitTyping("HLA-DRB1*13:01:01:02")
+
 print(output)
-#[,1] [,2] [,3] [,4] [,5] [,6]
-#"HLA-DRB1" "13" "01" "01" "02" NA
+
+## Split one HLA typing into an array of entries
+output <- splitTyping(c("G*01:04:01:02", "DQA1*01:01:01:03"))
+
+print(output)
 
 }
 \author{
