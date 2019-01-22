@@ -17,15 +17,12 @@
 #'
 #' @examples
 #'
-#'
+#' ## TODO
 #'
 #' @author Pascal Belleau, Astrid Deschenes
 #' @importFrom data.table data.table rbindlist
 #' @export
-
-
-getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2){
-
+getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
 
     splitS1 <- splitTyping(typeS1)
     splitS2 <- splitTyping(typeS2)
@@ -42,8 +39,10 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2){
 
     seqCMP <- list(refSeq="", seqS1="", seqS2="")
     seqCMP$refSeq <- getSubSeq(refSeq, posInit, regionExt)
-    seqCMP$seqS1 <- getSubSeq(HLAInfo$HLAAlignment[posS1]$SeqDiff, posInit, regionExt)
-    seqCMP$seqS2 <- getSubSeq(HLAInfo$HLAAlignment[posS2]$SeqDiff, posInit, regionExt)
+    seqCMP$seqS1 <- getSubSeq(HLAInfo$HLAAlignment[posS1]$SeqDiff,
+                                posInit, regionExt)
+    seqCMP$seqS2 <- getSubSeq(HLAInfo$HLAAlignment[posS2]$SeqDiff,
+                                posInit, regionExt)
 
     return(seqCMP)
 }
@@ -65,19 +64,19 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2){
 #'
 #' @examples
 #'
-#'
+#' ## TODO
 #'
 #' @author Pascal Belleau, Astrid Deschenes
 #' @importFrom data.table data.table rbindlist
 #' @export
-
-
 getSubSeq <- function(seq, posInit, regionExt){
 
     subSeq <- ""
 
     for(i in seq_len(nrow(regionExt))){
-        subSeq <- paste0(subSeq, substr(seq, regionExt$start[i] - posInit, regionExt$end[i] - posInit))
+        subSeq <- paste0(subSeq, substr(seq,
+                            regionExt$start[i] - posInit,
+                            regionExt$end[i] - posInit))
     }
 
     return(subSeq)
