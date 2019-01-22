@@ -213,7 +213,7 @@ test_that("parseAlignment() must return good result 01", {
                 "DGDEIFHVDMAKKETVWRLEEFGRFASFEAQGALANIAVDKANLEIMTKRSNYTPITNVPPEVTVLTNSP",
                 "VELREPNVLICFIDKFTPPVVNVTWLRNGKPVTTGVSETVFLPREDHLFRKFHYLPFLPSTEDVYDCRVE",
                 "HWGLDEPLLKHWEFDAPSPLPETTENVVCALGLTVGLVGIIIGTIFIIKGVRKSNAAERRGPL")
-    expected$posInit <- 171L
+    expected$posInit <- -30L
     expected$HLAalignment <- data.table:::data.table(
             GeneName = c(rep("DRA", 7), rep("", 4)), AlleleGroup = c(rep("01", 7), rep("", 4)),
             Protein = c(rep("01", 4), rep("02", 3), rep("", 4)),
@@ -260,8 +260,8 @@ test_that("parseHLADbAlignment() must return good result 01", {
                               "HWGLDEPLLKHWEFDAPSPLPETTENVVCALGLTVGLVGIIIGTIFIIKGVRKSNAAERRGPL")
     expected[["refSeq"]] <- refSeq
 
-    posInit[["DOB"]] <- 171L
-    posInit[["DRA"]] <- 171L
+    posInit[["DOB"]] <- -30L
+    posInit[["DRA"]] <- -30L
 
     expected[["posInit"]] <- posInit
 

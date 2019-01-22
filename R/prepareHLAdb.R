@@ -170,6 +170,9 @@ parseAlignment <- function(fileName) {
                                 Suffix=character(nbType),
                                 SeqDiff=character(nbType))
 
+
+    posStart <- 1
+    flag <- TRUE
     # Loop on the position in allLine of the sequence type
     # before the reference sequence
     # The reference sequence position is + 2 + offSet
@@ -185,6 +188,11 @@ parseAlignment <- function(fileName) {
             i <- i + 1
         }
         posInit <- as.integer(posInit)
+        if(flag){
+            posStart <- posInit
+            flag <- FALSE
+        }
+
 
         # The reference sequence
         startSeq <- startLine + 2 + offSet
@@ -253,7 +261,7 @@ parseAlignment <- function(fileName) {
         }
     }
 
-    HLAGene <- list(refSeq=refSeq, posInit=posInit, HLAalignment=HLAalignment)
+    HLAGene <- list(refSeq=refSeq, posInit=posStart, HLAalignment=HLAalignment)
 
     return(HLAGene)
 }
@@ -340,7 +348,7 @@ extractRef <- function(seq, startPos) {
 extractSeq <- function(seq, startPos) {
 
     tmpSeq <- substr(seq, startPos, nchar(seq))
-
+    listCor <- list()
     seqDiff <- ""
     flag <- TRUE
 
