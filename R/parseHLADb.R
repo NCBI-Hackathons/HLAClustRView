@@ -1,8 +1,7 @@
 #' @title Extract HLA typing information for all samples present in a text file
 #'
 #' @description Parses a text file containing HLA allele typing for one or
-#' multiple samples and transforms it into an
-#' HLADb object.
+#' multiple samples and transforms it into an object.
 #'
 #' @param hlaFilePath a \code{character} string, the filepath to a text file
 #' containing the information about the samples typing. The name must
