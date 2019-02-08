@@ -84,29 +84,43 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
     return(seqCMP)
 }
 
-#' @title Get the subsequence
+#' @title Get the subsequence from a selected sequence for a specific region.
 #'
-#' @description Get from the object HLAdb two sequences and the reference
-#' for a region
+#' @description From a selected sequence, extract a subsequence using the list
+#' of specified regions.
 #'
-#' @param seq TODO
+#' @param seq a \code{character} string that represent the sequence used to
+#' extract the subsequence.
 #'
-#' @param posInit TODO
+#' @param posInit a \code{integer} that represent the starting position of the
+#' gene.
 #'
-#' @param regionExt TODO
+#' @param regionExt a \code{data.frame} containing a \code{start}
+#' and an \code{end} column. The \code{start} and \code{end} positions are both
+#' included in the extracted region.
 #'
-#' @return An object of class TODO
+#' @return a \code{character} string containing the extracted subsequence.
 #'
-#' @details TODO
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Sequence used for extraction
+#' sequence <- "    MGSGWVPWVVALLVNLTRLDSSMTQGTDSPEDFVIQAKADCYFTNGTEKVQFVVRFIF"
+#'
+#' ## The starting position of the gene
+#' position <- -10
+#'
+#' ## The region to extact
+#' regions <- data.frame(start=c(15, 25), end=c(20, 30))
+#'
+#' ## Extract subsequence
+#' HLAClustRView:::getSubSeq(seq = sequence, posInit = position,
+#'     regionExt = regions)
+#'
 #'
 #' @author Pascal Belleau, Astrid Deschenes
-#' @importFrom data.table rbindlist
-#' @export
-getSubSeq <- function(seq, posInit, regionExt){
+#' @keywords internal
+getSubSeq <- function(seq, posInit, regionExt) {
 
     subSeq <- ""
 
