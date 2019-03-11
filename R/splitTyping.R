@@ -6,24 +6,24 @@
 #' HLA alleles,
 #' see http://hla.alleles.org/nomenclature/naming.html
 #'
-#' @return a n x 6 matrix of fields
+#' @return a n x 6 \code{matrix} of fields
 #'
 #' @examples
 #'
 #' ## Split one HLA typing into an array of entries
-#' output <- splitTyping("HLA-DRB1*13:01:01:02")
+#' output <- HLAClustRView:::splitTyping("HLA-DRB1*13:01:01:02")
 #'
 #' print(output)
 #'
 #' ## Split one HLA typing into an array of entries
-#' output <- splitTyping(c("G*01:04:01:02", "DQA1*01:01:01:03"))
+#' output <- HLAClustRView:::splitTyping(c("G*01:04:01:02", "DQA1*01:01:01:03"))
 #'
 #' print(output)
 #'
 #' @author Adewunmi Adelaja
 #'
 #' @importFrom stringr str_extract
-#' @export
+#' @keywords internal
 splitTyping <- function (aChar) {
 
     prefix <- str_extract(aChar, "(^.*[:digit:])|(^[:alpha:]+$)")
