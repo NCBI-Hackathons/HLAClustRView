@@ -1,4 +1,4 @@
-### Unit tests for functions in parseHLADb.R file
+### Unit tests for functions in parseHLADataset.R file
 
 library(HLAClustRView)
 
