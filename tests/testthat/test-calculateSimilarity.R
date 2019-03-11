@@ -53,18 +53,18 @@ test_that("sample_pair_distance() should return good result", {
 })
 
 
-# test function parse_hla_data()  --------------------------------------
+# test function parse_hla_dataset()  --------------------------------------
 
-context("Test parse_hla_data() function")
+context("Test parse_hla_dataset() function")
 
-test_that("parse_hla_data() should return good result 01", {
+test_that("parse_hla_dataset() should return good result 01", {
     demo <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
                 AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
                 AlleleGroup=c("02", "02", "03", NA), Protein=c("01", "01", "01", "02"),
                 SynSubst=c("01", "02", "01", "03"), NonCoding=c("01", "01", NA, NA),
                 Suffix=c(NA, NA, "L", NA))
 
-    res <- HLAClustRView:::parse_hla_data(demo)
+    res <- HLAClustRView:::parse_hla_dataset(demo)
 
     expected <- tibble(SampleName=c("DEMO1", "DEMO1"),
                        AlleleName=c("1", "2"), GeneName=c("A", "A"),
@@ -76,14 +76,14 @@ test_that("parse_hla_data() should return good result 01", {
 })
 
 
-test_that("parse_hla_data() should return good result 02", {
+test_that("parse_hla_dataset() should return good result 02", {
     demo <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
                        AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
                        AlleleGroup=c("02", "02", "03", "03"), Protein=c("01", "01", "01", "02"),
                        SynSubst=c("01", "02", "01", "03"), NonCoding=c("01", "01", NA, NA),
                        Suffix=c(NA, NA, "L", NA))
 
-    res <- HLAClustRView:::parse_hla_data(demo)
+    res <- HLAClustRView:::parse_hla_dataset(demo)
 
     expected <- tibble(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
                        AlleleName=as.character(c(1, 2, 1, 2)), GeneName=c("A", "A", "A", "A"),
@@ -94,14 +94,14 @@ test_that("parse_hla_data() should return good result 02", {
     expect_equal(res, expected)
 })
 
-test_that("parse_hla_data() should return good result 03", {
+test_that("parse_hla_dataset() should return good result 03", {
     demo <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
                        AlleleName=c(1, NA, 1, 2), GeneName=c("A", "A", "A", "A"),
                        AlleleGroup=c("02", "02", "03", "03"), Protein=c("01", "01", "01", "02"),
                        SynSubst=c("01", "02", "01", "03"), NonCoding=c("01", "01", NA, NA),
                        Suffix=c(NA, NA, "L", NA))
 
-    res <- HLAClustRView:::parse_hla_data(demo)
+    res <- HLAClustRView:::parse_hla_dataset(demo)
 
     expected <- tibble(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
                        AlleleName=as.character(c(1, NA, 1, 2)), GeneName=c("A", "A", "A", "A"),
