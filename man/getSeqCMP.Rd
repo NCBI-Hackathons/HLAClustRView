@@ -63,10 +63,11 @@ regions <- data.frame(start=c(160, 200), end=c(180, 220))
 
 ## Extract the aligment information for the specified region included the
 ## reference sequence and the sequences for both allele typing
-getSeqCMP(HLAInfo = HLAInfo, regionExt = regions,
+HLAClustRView:::getSeqCMP(HLAInfo = HLAInfo, regionExt = regions,
     typeS1 = sample1, typeS2 = sample2)
 
 }
 \author{
 Pascal Belleau, Astrid Deschenes
 }
+\keyword{internal}
