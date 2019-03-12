@@ -86,7 +86,7 @@ readHLADataset <- function(hlaFilePath)
     db <- db[!db$SampleName %in% drop, ]
 
     ## Format data.frame into tibble
-    db <- parse_hla_data(db)
+    db <- parse_hla_dataset(db)
 
     ## Prepare HLADataset object
     res <- list()
@@ -103,7 +103,7 @@ readHLADataset <- function(hlaFilePath)
 #' to a tibble object. It also removes samples with missing allele group
 #' information.
 #'
-#' @param hladb a \code{data.frame} with the HLA typing information from
+#' @param hladata a \code{data.frame} with the HLA typing information from
 #' all samples.
 #'
 #' @return a \code{tibble} object with the HLA information for each sample.
@@ -118,7 +118,7 @@ readHLADataset <- function(hlaFilePath)
 #'     Suffix=c(NA, NA, NA, NA))
 #'
 #' ## Convert the data.frame to a tibble object
-#' HLAClustRView:::parse_hla_data(demo)
+#' HLAClustRView:::parse_hla_dataset(demo)
 #'
 #' ## Create a data.frame with missing information
 #' demoMissing <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
@@ -128,7 +128,7 @@ readHLADataset <- function(hlaFilePath)
 #'     Suffix=c(NA, NA, NA, NA))
 #'
 #' ## Convert the data.frame to a tibble object
-#' HLAClustRView:::parse_hla_data(demoMissing)
+#' HLAClustRView:::parse_hla_dataset(demoMissing)
 #'
 #'
 #' @author Santiago Medina
@@ -137,13 +137,13 @@ readHLADataset <- function(hlaFilePath)
 #' @importFrom dplyr mutate_all filter pull bind_cols as_tibble %>%
 #' @importFrom rlang .data
 #' @keywords internal
-parse_hla_data <- function(hladb) {
+parse_hla_dataset <- function(hladata) {
 
     hla_data <-
-        hladb %>%
+        hladata %>%
         map(as_tibble) %>%
         reduce(bind_cols) %>%
-        set_names(names(hladb)) %>%
+        set_names(names(hladata)) %>%
         mutate_all(.funs = as.character)
 
     missing_samples <-
