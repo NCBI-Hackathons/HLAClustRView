@@ -273,7 +273,7 @@ test_that("parseHLADbAlignment() must return good result 01", {
         SynSubst = c(rep("01", 4), "02", rep("03", 2), "01", "02", NA,
                         rep("01", 2), NA, rep("", 4), rep("01", 3), "02", "01", "02", "03", rep("", 4)),
         Noncoding = c(paste0("0", 1:4), NA, "01", "02", rep(NA, 3),
-                        "01", "02", NA, rep("", 4), paste0("0", 1:3), rep(NA, 4), rep("", 4)),
+                        "01", "02", NA, rep("", 4), paste0("0", seq_len(3)), rep(NA, 4), rep("", 4)),
         Suffix = c(rep(NA, 13), rep("", 4), rep(NA, 7), rep("", 4)),
         SeqDiff = c(rep(paste0("    --------------------------------------------------------------------",
                                 "-----------------------------------------------------------------------",

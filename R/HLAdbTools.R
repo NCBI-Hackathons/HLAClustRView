@@ -54,11 +54,11 @@
 #'
 #' ## Extract the aligment information for the specified region included the
 #' ## reference sequence and the sequences for both allele typing
-#' getSeqCMP(HLAInfo = HLAInfo, regionExt = regions,
+#' HLAClustRView:::getSeqCMP(HLAInfo = HLAInfo, regionExt = regions,
 #'     typeS1 = sample1, typeS2 = sample2)
 #'
 #' @author Pascal Belleau, Astrid Deschenes
-#' @export
+#' @keywords internal
 getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
 
     splitS1 <- splitTyping(typeS1)
