@@ -10,11 +10,12 @@ Version: 0.99.0
 Date: 2018-11-09
 Author:  Pascal Belleau, Adewunmi Adelaja, Astrid Deschênes,
     Santiago Medina, Nissim Ranade, Allissa Dillman
-Maintainer: Pascal Belleau <belleau@cshl.edu>
+Maintainer: Pascal Belleau <pascal_belleau@hotmail.com>
 License: MIT + file LICENSE
 Encoding: UTF-8
 NeedsCompilation: no
 VignetteBuilder: knitr
+biocViews: BiologicalQuestion, Software, ImmunoOncology, Clustering
 Depends: R (>= 3.3)
 Imports: purrr,
     dplyr,
