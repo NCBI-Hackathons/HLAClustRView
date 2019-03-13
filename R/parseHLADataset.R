@@ -152,5 +152,5 @@ parse_hla_dataset <- function(hladata) {
         pull(.data$SampleName)
 
     return(hla_data %>%
-               filter(!.data$SampleName %in% missing_samples))
+            filter(!.data$SampleName %in% missing_samples))
 }
