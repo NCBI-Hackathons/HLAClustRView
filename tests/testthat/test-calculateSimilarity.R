@@ -200,3 +200,56 @@ test_that("calculateHamming() should return good result 02", {
     expect_equal(res$HammingDistance, expected$HammingDistance)
     expect_equal(res$AlleleName_info, alleleInfo)
 })
+
+
+
+# test function makeDistanceMatrix()  --------------------------------------
+
+context("Test makeDistanceMatrix() function")
+
+test_that("makeDistanceMatrix() should return good result 01", {
+
+    inputTibble <- tibble(SampleName1=c("ERR188053", "ERR188053", "ERR188465"),
+                       SampleName2=c("ERR188465", "ERR188040", "ERR188040"),
+                       HammingDistance = c(17, 18, 19))
+
+    result <- HLAClustRView:::makeDistanceMatrix(inputTibble)
+
+    expected <- matrix(c(rep(0, 3), 17, 0, 0, 18, 19, 0), byrow = TRUE, nrow = 3)
+    rownames(expected) <- c("ERR188053", "ERR188465", "ERR188040")
+    colnames(expected) <- rownames(expected)
+
+    expect_equal(result, expected)
+})
+
+test_that("makeDistanceMatrix() should return good result 02", {
+
+    inputTibble <- tibble(SampleName1=c("A", "A", "A", "A", "A", "A",
+                                        "B", "B", "B", "B", "B",
+                                        "C", "C", "C", "C",
+                                        "D", "D", "D",
+                                        "E", "E",
+                                        "F"),
+                          SampleName2=c("B", "C", "D", "E", "F", "G",
+                                        "C", "D", "E", "F", "G",
+                                        "D", "E", "F", "G",
+                                        "E", "F", "G",
+                                        "F", "G",
+                                        "G"),
+                          HammingDistance = c(1:21))
+
+    result <- HLAClustRView:::makeDistanceMatrix(inputTibble)
+
+    expected <- matrix(c(rep(0, 7),
+                         1, rep(0, 6),
+                         2, 7, rep(0, 5),
+                         3, 8, 12, rep(0, 4),
+                         4, 9, 13, 16, rep(0, 3),
+                         5, 10, 14, 17, 19, rep(0, 2),
+                         6, 11, 15, 18, 20, 21, 0), byrow = TRUE, nrow = 7)
+    rownames(expected) <- c("A", "B", "C", "D", "E", "F", "G")
+    colnames(expected) <- rownames(expected)
+
+    expect_equal(result, expected)
+})
+
