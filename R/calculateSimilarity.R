@@ -62,7 +62,7 @@ hamming_distance_digit1 <- function(allele) {
     ## check if the minimum distance is the same
     if (nrow(hdist) == 2) {
         result <- mutate(hdist, same_allele = NA) %>%
-            slice(1:1)
+            slice(1)
     }
 
     return(result)
@@ -221,6 +221,7 @@ calculateHamming <- function(hla_data) {
 
 }
 
+
 #' @title Convert distance table to distance matrix
 #'
 #' @description This function takes the output of \code{calculateHamming}
@@ -240,27 +241,27 @@ calculateHamming <- function(hla_data) {
 #' hamming <- calculateHamming(demoHLADataset)
 #'
 #' ## Calculate Hamming distance matrix
-#' HLAClustRView:::make_distance_matrix(hamming)
+#' HLAClustRView:::makeDistanceMatrix(hamming)
 #'
-#' @author Santiago Medina, Pascal Belleau
+#' @author Santiago Medina, Pascal Belleau, Astrid Deschenes
 #' @keywords internal
-make_distance_matrix <- function(outMet) {
+makeDistanceMatrix <- function(outMet) {
     nbCase <- length(unique(outMet$SampleName1)) + 1
 
     matDia <- matrix(unlist(sapply(seq_len(nbCase),
-                FUN=function(x, outMetric, nbCase){
-                        l <- NULL
-                        if (x < nbCase) {
-                            l <- c(rep(0, x),
-                                    outMetric$HammingDistance[
-                                    ((x-1) * (nbCase-1) - ((x-1)*x)/2 + 1):
-                                    (x * (nbCase-1) - (x*(x+1))/2 +1)])
-                        } else {
-                            l <- rep(0, x)
-                        }
+                        FUN=function(x, outMetric, nbCase){
+                            l <- NULL
+                            if (x < nbCase) {
+                                pos <- ((x-1) * (nbCase) - ((x-1)*x)/2 + 1)
+                                l <- c(rep(0, x),
+                                            outMetric$HammingDistance[
+                                            pos:(pos+nbCase-x-1)])
+                            } else {
+                                l <- rep(0, x)
+                            }
 
-                        return(l)},
-                outMetric=outMet, nbCase=nbCase)), ncol=nbCase)
+                            return(l)},
+                        outMetric=outMet, nbCase=nbCase)), ncol=nbCase)
 
     # Add row names and column names to the distance matrix
     nameMat <- c(unique(unlist(outMet[,1])),
@@ -271,3 +272,5 @@ make_distance_matrix <- function(outMet) {
 
     return(matDia)
 }
+
+
