@@ -7,7 +7,7 @@ data("example_sample_pair_data")
 data("demoHLADataset")
 
 
-context("Teste hamming_distance_digit1() function")
+context("Test hamming_distance_digit1() function")
 
 d1 <- tibble::tribble(
         ~SampleName, ~AlleleName, ~AlleleGroup,
