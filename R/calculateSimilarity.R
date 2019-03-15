@@ -19,20 +19,15 @@
 #'
 #' @examples
 #'
-#' ## Load package
-#' library(tibble)
-#'
 #' ## Create a demo dataset
-#' d <- tibble::tribble(
-#'     ~SampleName, ~AlleleName, ~AlleleGroup,
-#'     "s1", 1, 1,
-#'     "s1", 2, 3,
-#'     "s2", 1, 1,
-#'     "s2", 2, 5
-#' )
+#' demoData <- data.frame(SampleName=c("s1", "s1", "s2", "s2"),
+#'         AlleleName=c(1, 2, 1, 2), AlleleGroup=c(1, 3, 1, 5))
+#'
+#' ## Transform to tibble object
+#' demoDataTibble <- dplyr::as_tibble(demoData)
 #'
 #' ## Calculate the Hamming distance on the demo dataset
-#' HLAClustRView:::hamming_distance_digit1(d)
+#' HLAClustRView:::hamming_distance_digit1(demoDataTibble)
 #'
 #' @author Santiago Medina, Nissim Ranade
 #'
@@ -219,29 +214,35 @@ calculateHamming <- function(hla_data) {
             ) %>%
         rename(AlleleName_info = data)
 
+
+    distanceMatrix <- makeDistanceMatrix(distances)
+
+    return(distanceMatrix)
 }
 
 
 #' @title Convert distance table to distance matrix
 #'
-#' @description This function takes the output of \code{calculateHamming}
-#' function and returns a distance matrix to use for clustering.
+#' @description This function takes a distance table under the form of a
+#' \code{tibble} object and transforms it into a distance matrix
+#' ready for clustering.
 #'
-#' @param outMet a \code{tibble} object with Hamming distance for sample
-#' pairs \code{calculateHamming}
+#' @param outMet a \code{tibble} object containing distance metric for sample
+#' pairs.
 #'
 #' @return a \code{matrix} containing the distance for sample pairs.
 #'
 #' @examples
 #'
-#' ## Load example dataset
-#' data(demoHLADataset)
+#' ## Tibble object containing a distance table
+#' pairedData <- data.frame(SampleName1=c("ERR053", "ERR053", "ERR465"),
+#'     SampleName2=c("ERR465", "ERR040", "ERR040"),
+#'     HammingDistance = c(17, 18, 19))
 #'
-#' ## Calculate Hamming distance metric
-#' hamming <- calculateHamming(demoHLADataset)
+#' tibbleData <- dplyr::as_tibble(pairedData)
 #'
-#' ## Calculate Hamming distance matrix
-#' HLAClustRView:::makeDistanceMatrix(hamming)
+#' ## Calculate distance matrix
+#' HLAClustRView:::makeDistanceMatrix(tibbleData)
 #'
 #' @author Santiago Medina, Pascal Belleau, Astrid Deschenes
 #' @keywords internal
