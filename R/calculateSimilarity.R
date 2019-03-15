@@ -248,7 +248,7 @@ calculateHamming <- function(hla_data) {
 makeDistanceMatrix <- function(outMet) {
     nbCase <- length(unique(outMet$SampleName1)) + 1
 
-    matDia <- matrix(unlist(sapply(seq_len(nbCase),
+    matDia <- matrix(unlist(vapply(seq_len(nbCase), FUN.VALUE = double(nbCase),
                         FUN=function(x, outMetric, nbCase){
                             l <- NULL
                             if (x < nbCase) {
