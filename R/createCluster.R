@@ -16,8 +16,14 @@
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Load example dataset
+#' data(demoHLADataset)
 #'
+#' ## Calculate Hamming distance metric
+#' hammingDistance <- calculateHamming(demoHLADataset)
+#'
+#' ## Run clustering
+#' hclustHLA(as.dist(hammingDistance))
 #'
 #' @author Astrid Deschenes
 #'
