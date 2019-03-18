@@ -7,26 +7,28 @@
 makeDistanceMatrix(outMet)
 }
 \arguments{
-\item{outMet}{a \code{tibble} object with Hamming distance for sample
-pairs \code{calculateHamming}}
+\item{outMet}{a \code{tibble} object containing distance metric for sample
+pairs.}
 }
 \value{
 a \code{matrix} containing the distance for sample pairs.
 }
 \description{
-This function takes the output of \code{calculateHamming}
-function and returns a distance matrix to use for clustering.
+This function takes a distance table under the form of a
+\code{tibble} object and transforms it into a distance matrix
+ready for clustering.
 }
 \examples{
 
-## Load example dataset
-data(demoHLADataset)
+## Tibble object containing a distance table
+pairedData <- data.frame(SampleName1=c("ERR053", "ERR053", "ERR465"),
+    SampleName2=c("ERR465", "ERR040", "ERR040"),
+    HammingDistance = c(17, 18, 19))
 
-## Calculate Hamming distance metric
-hamming <- calculateHamming(demoHLADataset)
+tibbleData <- dplyr::as_tibble(pairedData)
 
-## Calculate Hamming distance matrix
-HLAClustRView:::makeDistanceMatrix(hamming)
+## Calculate distance matrix
+HLAClustRView:::makeDistanceMatrix(tibbleData)
 
 }
 \author{
