@@ -21,7 +21,10 @@ Print a \code{HLADataset} object
 }
 \examples{
 
-## Load dataset
-## TODO
+## Load example dataset
+data(demoHLADataset)
+
+## Print HLA dataset
+print(demoHLADataset)
 
 }
