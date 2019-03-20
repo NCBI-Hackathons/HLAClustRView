@@ -12,8 +12,14 @@ calculateHamming(hla_data)
 least 2 samples must be present be able to calculate the metric.}
 }
 \value{
-a \code{tibble} object containing the Hamming distance values
-between each possible pair of samples. TODO
+a \code{list} of class \code{HLAMetric}
+containing the following elements:
+\itemize{
+\item \code{metric} a \code{character} string containing the name of the
+metric "Hamming Distance".
+\item \code{dist} a \code{matrix} that contains the Hamming distance between
+samples.
+}
 }
 \description{
 Takes an object containing HLA typing information for all

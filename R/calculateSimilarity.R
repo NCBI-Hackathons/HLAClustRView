@@ -132,8 +132,14 @@ sample_pair_distance <- function(sample_pair_data) {
 #' \code{tibble} object with the HLA typing information for all samples. At
 #' least 2 samples must be present be able to calculate the metric.
 #'
-#' @return a \code{tibble} object containing the Hamming distance values
-#' between each possible pair of samples. TODO
+#' @return a \code{list} of class \code{HLAMetric}
+#' containing the following elements:
+#' \itemize{
+#' \item \code{metric} a \code{character} string containing the name of the
+#' metric "Hamming Distance".
+#' \item \code{dist} a \code{matrix} that contains the Hamming distance between
+#' samples.
+#' }
 #'
 #' @details The Hamming distance is given by
 #' \eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)} where
@@ -217,7 +223,14 @@ calculateHamming <- function(hla_data) {
 
     distanceMatrix <- makeDistanceMatrix(distances)
 
-    return(distanceMatrix)
+
+    ## Prepare HLADataset object
+    res <- list()
+    res[["dist"]] <- distanceMatrix
+    res[["metric"]] <- "Hamming Distance"
+    class(res) <- "HLAMetric"
+
+    return(res)
 }
 
 

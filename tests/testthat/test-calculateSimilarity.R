@@ -164,9 +164,13 @@ test_that("calculateHamming() should return good result 01", {
 
     res <- calculateHamming(tempData)
 
-    expected <- matrix(c(0, 0, 5, 0), nrow=2, byrow = TRUE)
-    colnames(expected) <- c("s1", "s3")
-    rownames(expected) <- colnames(expected)
+
+    expected <- list()
+    expected$dist <- matrix(c(0, 0, 5, 0), nrow=2, byrow = TRUE)
+    colnames(expected$dist) <- c("s1", "s3")
+    rownames(expected$dist) <- colnames(expected$dist)
+    expected$metric <- "Hamming Distance"
+    class(expected) <- "HLAMetric"
 
     expect_equal(res, expected)
 })
@@ -189,6 +193,14 @@ test_that("calculateHamming() should return good result 02", {
     expected <- matrix(c(0, 0, 0, 5, 0, 0, 4, 3, 0), nrow=3, byrow = TRUE)
     colnames(expected) <- c("s3", "s4", "s5")
     rownames(expected) <- colnames(expected)
+
+
+    expected <- list()
+    expected$dist <- matrix(c(0, 0, 0, 5, 0, 0, 4, 3, 0), nrow=3, byrow = TRUE)
+    colnames(expected$dist) <- c("s3", "s4", "s5")
+    rownames(expected$dist) <- colnames(expected$dist)
+    expected$metric <- "Hamming Distance"
+    class(expected) <- "HLAMetric"
 
 
     expect_equal(res, expected)
