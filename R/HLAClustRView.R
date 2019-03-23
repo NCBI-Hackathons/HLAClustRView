@@ -30,7 +30,7 @@
 #' @keywords package
 NULL
 
-#' This dataset can be used TODO.
+#' This dataset contains the information from the HLA database.
 #'
 #' @name hladb
 #'
@@ -42,7 +42,9 @@ NULL
 #'
 #' @return TODO
 #'
-#' @usage TODO
+#' @usage data(hladb)
+#'
+#' @details See \url{http://hla.alleles.org/alleles/text_index.html}
 #'
 #' @keywords datasets
 #'
@@ -134,7 +136,7 @@ NULL
 #'
 NULL
 
-#' This dataset contains the allele and digit1 information for
+#' This dataset contains the allele information for
 #' HLA genes in one pair of samples.
 #'
 #' This dataset can be used to test the \code{sample_pair_distance} function.
