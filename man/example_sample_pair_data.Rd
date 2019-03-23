@@ -3,7 +3,7 @@
 \docType{data}
 \name{example_sample_pair_data}
 \alias{example_sample_pair_data}
-\title{This dataset contains the allele and digit1 information for
+\title{This dataset contains the allele information for
 HLA genes in one pair of samples.}
 \format{a \code{tibble} object with 10 rows and 4 variables:
 \itemize{

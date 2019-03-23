@@ -3,16 +3,19 @@
 \docType{data}
 \name{hladb}
 \alias{hladb}
-\title{This dataset can be used TODO.}
+\title{This dataset contains the information from the HLA database.}
 \format{TODO}
 \usage{
-TODO
+data(hladb)
 }
 \value{
 TODO
 }
 \description{
-This dataset can be used TODO.
+This dataset contains the information from the HLA database.
+}
+\details{
+See \url{http://hla.alleles.org/alleles/text_index.html}
 }
 \examples{
 
