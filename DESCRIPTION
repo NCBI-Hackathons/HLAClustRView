@@ -8,7 +8,7 @@ Description: This package implements specialized similarity metrics that
     bind RNA-seq expression (when available) to the clusters.
 Version: 0.99.0
 Date: 2018-11-09
-Author@R: c(person("Pascal", "Belleau", email="pascal_belleau@hotmail.com",
+Authors@R: c(person("Pascal", "Belleau", email="pascal_belleau@hotmail.com",
     role=c("cre", "aut"), comment = c(ORCID = "0000-0002-0802-1071")),
     person("Adewunmi", "Adelaja", email="pascal_belleau@hotmail.com",
     role=c("aut")),
