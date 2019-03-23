@@ -3,7 +3,7 @@
 #' @description Hierarchical cluster analysis on a set of similarity values
 #' related to HLA typing.
 #'
-#' @param dist an object of class \code{dist}. See \link[stats]{dist}.
+#' @param hlaMetric an object of class \code{HLAMetric}.
 #'
 #' @param method a string \code{character} string, the agglomeration method
 #' to be used for clustering.
@@ -16,13 +16,22 @@
 #'
 #' @examples
 #'
-#' ## TODO
+#' ## Load example dataset
+#' data(demoHLADataset)
 #'
+#' ## Calculate Hamming distance metric
+#' hammingDistance <- calculateHamming(demoHLADataset)
+#'
+#' ## Run clustering
+#' hclustHLA(hammingDistance)
 #'
 #' @author Astrid Deschenes
 #'
 #' @importFrom stats hclust
 #' @export
-hclustHLA <- function(dist, method="complete", ...) {
-    hclust(dist, method=method, ...)
+hclustHLA <- function(hlaMetric, method="complete", ...) {
+
+
+    distance <- as.dist(hlaMetric$dist)
+    hclust(distance, method=method, ...)
 }

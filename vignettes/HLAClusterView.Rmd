@@ -2,17 +2,17 @@
 title: HLA typing clustering and visualization based on specific similarity metrics
 author: Pascal Belleau, Adewunmi Adelaja, Astrid Deschênes, Santiago Medina, Nissim Ranade, Allissa Dillman
 output:
-  html_document:
-    toc: yes
-    css: style.css
-  pdf_document:
-    toc: yes
+    html_document:
+        toc: yes
+        css: style.css
+    pdf_document:
+        toc: yes
 bibliography: biblio.bibtex
 vignette: |
-  %\VignetteIndexEntry{HLA typing clustering and visualization based on specific similarity metrics}     
-  %\VignettePackage{HLAClustRView}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown} 
+    %\VignetteIndexEntry{HLA typing clustering and visualization based on specific similarity metrics}     
+    %\VignettePackage{HLAClustRView}
+    %\VignetteEncoding{UTF-8}
+    %\VignetteEngine{knitr::rmarkdown} 
 ---
 
 ```{r style, echo = FALSE, results = 'asis', warning=FALSE, message=FALSE}
@@ -53,7 +53,7 @@ the regulation of the immune system. HLA alleles encode major
 histocompatibility complex (MHC) protein, which display peptide antigens for 
 recognition by T cells. MHCs are essential for antiviral, antibacterial, and 
 anti-tumor immunity [@Kumar2012].  
-Further, inheritance of specific HLA Alleles are implicated in autoimmune 
+Further, inheritance of specific HLA alleles are implicated in autoimmune 
 disorders, such as inflammatory bowel disease, type 1 diabetes, rheumatoid 
 arthritis, and systemic lupus erythematosus [@Gutierrez-Arcelus2016a]. 
 Furthermore, HLA gene products play a critical role in the outcomes of human 
@@ -79,13 +79,23 @@ responsibility of the [WHO Nomenclature Committee for Factors of the HLA System]
 # Metrics which estimate similarity between two HLA typing 
 
 To enable quantification of the similarity between two HLA typing, a similarity
-metric must be used. The *HLAClustRView* package implements 2 metrics.
+metric must be used. The *HLAClustRView* package implements two metrics.
 
 ## Hamming distance based on first HLA typing field ##
 
-In information theory, this Hamming distance is broadly applied to quantify similarity among data strings. The Hamming distance between two binary strings of equivalent length is usually calculated by summing the differing positions between the two strings. This Hamming distance has also applications in computational biology where is can be used to approximate pattern matching between sequences [@Ristov2016].  
+In information theory, this Hamming distance is broadly applied to quantify 
+similarity among data strings. The Hamming distance between two binary strings 
+of equivalent length is usually calculated by summing the differing positions 
+between the two strings. This Hamming distance has also applications in 
+computational biology where is can be used to approximate pattern matching 
+between sequences [@Ristov2016].  
 
-We used the first HLA typing field, which designates the allele type based on genetic similarity, to define a Hamming like distance. The metrcic is defined as the sum of the minimal differing allele types for each HLA gene. As alleles are not phased, all combinaisons between alleles of the two samples are tested. The combinaison with the minimal difference is retained for the calculation of the metric.
+We used the first HLA typing field, which designates the allele type based 
+on genetic similarity, to define a Hamming-like distance. The metrcic is 
+defined as the sum of the minimal differing allele types for each HLA gene. 
+As alleles are not phased, all combinaisons between alleles of the two 
+samples are tested. The combinaison with the minimal difference is retained 
+for the calculation of the metric.
 
 <br>
 
@@ -132,7 +142,7 @@ TODO
 
 # An analysis step by step #
 
-### 1. Install HLAClustRView package
+### 1. Installing HLAClustRView package
 
 The *devtools* package provides *install_github()* that enables installing 
 packages from GitHub.
@@ -142,15 +152,15 @@ library(devtools)
 install_github("NCBI-Hackathons/HLAClustRView")
 ```
 
-### 2. Loading the HLAClustRView package
+### 2. Loading HLAClustRView package
 
 ```{r loadingPackage, warning=FALSE, message=FALSE} 
 library(HLAClustRView)
 ```
 
-### 3. Load HLA typing samples file
+### 3. Loading HLA typing samples file
 
-The file containing the HLA typing for all analysed samples needs to be loaded.
+The file containing the HLA typing for multiple samples needs to be loaded.
 This task is done by the *readHLADataset()* function. The output is an object
 of class *HLADataset*.
 
@@ -159,15 +169,28 @@ HLAdata <- readHLADataset(hlaFilePath = "./Samples_HLA_typing.txt")
 HLAdata
 ```
 
-### 4. Calculating Hamming like metric
+### 4. Calculating Hamming-like metric
 
-The Hamming like distance, which is based on first HLA typing field, can be 
-calculated through the *calculateHamming()* function.
+The Hamming-like distance, which is based on first HLA typing field, can be 
+calculated through the *calculateHamming()* function. The output is an object
+of class *HLAMetric*.
 
 ```{r similarityCalcul, warning=FALSE, message=FALSE}
 hammingMetric <- calculateHamming(HLAdata)
-head(hammingMetric)
+
+print(hammingMetric)
 ```
+
+
+### 5. Clustering using Hamming-like metric
+
+```{r clusteringHamming, warning=FALSE, message=FALSE, fig.align="center"}
+hammingClust <- hclustHLA(hammingMetric)
+
+plot(hammingClust, main="Dendogram based on HLA typing Hamming-like distance", 
+        xlab="Distance", sub= "")
+```
+
 
 # Session info
 

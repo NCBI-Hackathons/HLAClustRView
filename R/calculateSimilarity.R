@@ -19,20 +19,15 @@
 #'
 #' @examples
 #'
-#' ## Load package
-#' library(tibble)
-#'
 #' ## Create a demo dataset
-#' d <- tibble::tribble(
-#'     ~SampleName, ~AlleleName, ~AlleleGroup,
-#'     "s1", 1, 1,
-#'     "s1", 2, 3,
-#'     "s2", 1, 1,
-#'     "s2", 2, 5
-#' )
+#' demoData <- data.frame(SampleName=c("s1", "s1", "s2", "s2"),
+#'         AlleleName=c(1, 2, 1, 2), AlleleGroup=c(1, 3, 1, 5))
+#'
+#' ## Transform to tibble object
+#' demoDataTibble <- dplyr::as_tibble(demoData)
 #'
 #' ## Calculate the Hamming distance on the demo dataset
-#' HLAClustRView:::hamming_distance_digit1(d)
+#' HLAClustRView:::hamming_distance_digit1(demoDataTibble)
 #'
 #' @author Santiago Medina, Nissim Ranade
 #'
@@ -62,7 +57,7 @@ hamming_distance_digit1 <- function(allele) {
     ## check if the minimum distance is the same
     if (nrow(hdist) == 2) {
         result <- mutate(hdist, same_allele = NA) %>%
-            slice(1:1)
+            slice(1)
     }
 
     return(result)
@@ -137,8 +132,14 @@ sample_pair_distance <- function(sample_pair_data) {
 #' \code{tibble} object with the HLA typing information for all samples. At
 #' least 2 samples must be present be able to calculate the metric.
 #'
-#' @return a \code{tibble} object containing the Hamming distance values
-#' between each possible pair of samples. TODO
+#' @return a \code{list} of class \code{HLAMetric}
+#' containing the following elements:
+#' \itemize{
+#' \item \code{metric} a \code{character} string containing the name of the
+#' metric "Hamming Distance".
+#' \item \code{dist} a \code{matrix} that contains the Hamming distance between
+#' samples.
+#' }
 #'
 #' @details The Hamming distance is given by
 #' \eqn{min(s1A1 != s2A1 + s1A2 != s2A2, s1A1 != s2A2 + s1A2 != s2A1)} where
@@ -219,62 +220,71 @@ calculateHamming <- function(hla_data) {
             ) %>%
         rename(AlleleName_info = data)
 
+
+    distanceMatrix <- makeDistanceMatrix(distances)
+
+
+    ## Prepare HLADataset object
+    res <- list()
+    res[["dist"]] <- distanceMatrix
+    res[["metric"]] <- "Hamming Distance"
+    class(res) <- "HLAMetric"
+
+    return(res)
 }
 
-#' @title Convert data.frame with HLA typing information to tibble object
+
+#' @title Convert distance table to distance matrix
 #'
-#' @description Converts a data.frame that contains the HLA typing informatiOn
-#' to a tibble object. It also removes samples with missing allele group
-#' information.
+#' @description This function takes a distance table under the form of a
+#' \code{tibble} object and transforms it into a distance matrix
+#' ready for clustering.
 #'
-#' @param hladb a \code{data.frame} with the HLA typing information from
-#' all samples.
+#' @param outMet a \code{tibble} object containing distance metric for sample
+#' pairs.
 #'
-#' @return a \code{tibble} object with the HLA information for each sample.
+#' @return a \code{matrix} containing the distance for sample pairs.
 #'
 #' @examples
 #'
-#' ## Create a data.frame as demo
-#' demo <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
-#'     AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
-#'     AlleleGroup=c("02", "02", "03", "03"), Protein=c("01", "01", "01", "02"),
-#'     SynSubst=c("01", "02", "01", "01"), NonCoding=c("01", "01", NA, NA),
-#'     Suffix=c(NA, NA, NA, NA))
+#' ## Tibble object containing a distance table
+#' pairedData <- data.frame(SampleName1=c("ERR053", "ERR053", "ERR465"),
+#'     SampleName2=c("ERR465", "ERR040", "ERR040"),
+#'     HammingDistance = c(17, 18, 19))
 #'
-#' ## Convert the data.frame to a tibble object
-#' HLAClustRView:::parse_hla_data(demo)
+#' tibbleData <- dplyr::as_tibble(pairedData)
 #'
-#' ## Create a data.frame with missing information
-#' demoMissing <- data.frame(SampleName=c("DEMO1", "DEMO1", "DEMO2", "DEMO2"),
-#'     AlleleName=c(1, 2, 1, 2), GeneName=c("A", "A", "A", "A"),
-#'     AlleleGroup=c("02", "02", NA, "03"), Protein=c("01", "01", "01", "02"),
-#'     SynSubst=c("01", "02", "01", "01"), NonCoding=c("01", "01", NA, NA),
-#'     Suffix=c(NA, NA, NA, NA))
+#' ## Calculate distance matrix
+#' HLAClustRView:::makeDistanceMatrix(tibbleData)
 #'
-#' ## Convert the data.frame to a tibble object
-#' HLAClustRView:::parse_hla_data(demoMissing)
-#'
-#'
-#' @author Santiago Medina
-#'
-#' @importFrom purrr map reduce set_names
-#' @importFrom dplyr mutate_all filter pull bind_cols as_tibble %>%
-#' @importFrom rlang .data
+#' @author Santiago Medina, Pascal Belleau, Astrid Deschenes
 #' @keywords internal
-parse_hla_data <- function(hladb) {
+makeDistanceMatrix <- function(outMet) {
+    nbCase <- length(unique(outMet$SampleName1)) + 1
 
-    hla_data <-
-        hladb %>%
-        map(as_tibble) %>%
-        reduce(bind_cols) %>%
-        set_names(names(hladb)) %>%
-        mutate_all(.funs = as.character)
+    matDia <- matrix(unlist(vapply(seq_len(nbCase), FUN.VALUE = double(nbCase),
+                        FUN=function(x, outMetric, nbCase){
+                            l <- NULL
+                            if (x < nbCase) {
+                                pos <- ((x-1) * (nbCase) - ((x-1)*x)/2 + 1)
+                                l <- c(rep(0, x),
+                                            outMetric$HammingDistance[
+                                            pos:(pos+nbCase-x-1)])
+                            } else {
+                                l <- rep(0, x)
+                            }
 
-    missing_samples <-
-        hla_data %>%
-        filter(is.na(.data$AlleleGroup)) %>%
-        pull(.data$SampleName)
+                            return(l)},
+                        outMetric=outMet, nbCase=nbCase)), ncol=nbCase)
 
-    return(hla_data %>%
-        filter(!.data$SampleName %in% missing_samples))
+    # Add row names and column names to the distance matrix
+    nameMat <- c(unique(unlist(outMet[,1])),
+                unique(unlist(outMet[,2]))[length(unique(unlist(outMet[,2])))])
+
+    rownames(matDia) <- nameMat
+    colnames(matDia) <- nameMat
+
+    return(matDia)
 }
+
+

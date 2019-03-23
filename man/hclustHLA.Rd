@@ -4,10 +4,10 @@
 \alias{hclustHLA}
 \title{Hierarchical clustering using a HLA typing similarity metric}
 \usage{
-hclustHLA(dist, method = "complete", ...)
+hclustHLA(hlaMetric, method = "complete", ...)
 }
 \arguments{
-\item{dist}{an object of class \code{dist}. See \link[stats]{dist}.}
+\item{hlaMetric}{an object of class \code{HLAMetric}.}
 
 \item{method}{a string \code{character} string, the agglomeration method
 to be used for clustering.}
@@ -24,8 +24,14 @@ related to HLA typing.
 }
 \examples{
 
-## TODO
+## Load example dataset
+data(demoHLADataset)
 
+## Calculate Hamming distance metric
+hammingDistance <- calculateHamming(demoHLADataset)
+
+## Run clustering
+hclustHLA(hammingDistance)
 
 }
 \author{

@@ -2,34 +2,72 @@
 % Please edit documentation in R/HLAdbTools.R
 \name{getSeqCMP}
 \alias{getSeqCMP}
-\title{Get the sequence from the type}
+\title{Get the reference sequence and the sequences of two allele typing
+for a specific region.}
 \usage{
 getSeqCMP(HLAInfo, regionExt, typeS1, typeS2)
 }
 \arguments{
-\item{HLAInfo}{TODO}
+\item{HLAInfo}{an object of class \code{HLAdb} containing the global HLA
+aligment for all typing.}
 
-\item{regionExt}{TODO}
+\item{regionExt}{a \code{data.frame} containing a \code{start} and an
+\code{end} column. The \code{start} and \code{end} positions are both
+included in the extracted region.}
 
-\item{typeS1}{Sample 1 TODO}
+\item{typeS1}{a \code{character} string that represent the typing of the
+first sample. The \code{typeS1} and \code{typeS2} typing must be for the
+same HLA gene.}
 
-\item{typeS2}{Sample 2 TODO}
+\item{typeS2}{a \code{character} string that represent the typing of the
+second sample. The \code{typeS1} and \code{typeS2} typing must be for the
+same HLA gene.}
 }
 \value{
-An object of class TODO
+A \code{list} containing the following elements:
+\itemize{
+\item \code{data} a \code{tibble} object containing the HLA typing
+information for all samples. The columns are:
+\itemize{
+\item \code{refSeq} a \code{character} string that represent the
+reference sequence for the specified region of the HLA gene.
+\item \code{seqS1} a \code{character} string that represent the
+sequence of the first sample for the specified region of the allele typing.
+\item \code{seqS2} a \code{character} string that represent the
+sequence of the second sample for the specified region of the allele typing.
+}
+}
 }
 \description{
-Get from the object HLAdb two sequences and the reference
-for a region
-}
-\details{
-TODO
+From an \code{HLAdb} object that contains HLA aligment
+information for all typing, extract the reference sequence of a
+specific region of a HLA
+gene and the sequences associated to two allele typing for the same region.
+The two typing must be for the same HLA gene. This enable an aligment
+comparaison of the two allele typing.
 }
 \examples{
 
+## Get path where some HLA database files are stored
+directory <- system.file("extdata", package = "HLAClustRView")
 
+## Parse HLA database files of protein type
+HLAInfo <- parseHLADbAlignment(hlaDbPath=directory, seqType="prot")
+
+## Select two allele typing for the same HLA gene
+sample1 <- "DRA*01:01:01:03"
+sample2 <- "DRA*01:02:03"
+
+## Select a region to extract
+regions <- data.frame(start=c(160, 200), end=c(180, 220))
+
+## Extract the aligment information for the specified region included the
+## reference sequence and the sequences for both allele typing
+HLAClustRView:::getSeqCMP(HLAInfo = HLAInfo, regionExt = regions,
+    typeS1 = sample1, typeS2 = sample2)
 
 }
 \author{
 Pascal Belleau, Astrid Deschenes
 }
+\keyword{internal}

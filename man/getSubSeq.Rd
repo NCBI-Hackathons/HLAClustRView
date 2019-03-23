@@ -2,32 +2,46 @@
 % Please edit documentation in R/HLAdbTools.R
 \name{getSubSeq}
 \alias{getSubSeq}
-\title{Get the subsequence}
+\title{Get the subsequence from a selected sequence for a specific region.}
 \usage{
 getSubSeq(seq, posInit, regionExt)
 }
 \arguments{
-\item{seq}{TODO}
+\item{seq}{a \code{character} string that represent the sequence used to
+extract the subsequence.}
 
-\item{posInit}{TODO}
+\item{posInit}{a \code{integer} that represent the starting position of the
+gene.}
 
-\item{regionExt}{TODO}
+\item{regionExt}{a \code{data.frame} containing a \code{start}
+and an \code{end} column. The \code{start} and \code{end} positions are both
+included in the extracted region.}
 }
 \value{
-An object of class TODO
+a \code{character} string containing the extracted subsequence.
 }
 \description{
-Get from the object HLAdb two sequences and the reference
-for a region
-}
-\details{
-TODO
+From a selected sequence, extract a subsequence using the list
+of specified regions.
 }
 \examples{
 
+## Sequence used for extraction
+sequence <- "    MGSGWVPWVVALLVNLTRLDSSMTQGTDSPEDFVIQAKADCYFTNGTEKVQFVVRFIF"
+
+## The starting position of the gene
+position <- -10
+
+## The region to extact
+regions <- data.frame(start=c(15, 25), end=c(20, 30))
+
+## Extract subsequence
+HLAClustRView:::getSubSeq(seq = sequence, posInit = position,
+    regionExt = regions)
 
 
 }
 \author{
 Pascal Belleau, Astrid Deschenes
 }
+\keyword{internal}
