@@ -52,9 +52,9 @@ The human leukocyte antigen (HLA) complex plays an important biological role in
 the regulation of the immune system. HLA alleles encode major 
 histocompatibility complex (MHC) protein, which display peptide antigens for 
 recognition by T cells. MHCs are essential for antiviral, antibacterial, and 
-anti-tumor immunity [@Kumar2012].  
-Further, inheritance of specific HLA alleles are implicated in autoimmune 
-disorders, such as inflammatory bowel disease, type 1 diabetes, rheumatoid 
+anti-tumor immunity [@Kumar2012]. Further, inheritance of specific HLA alleles 
+are implicated in autoimmune disorders, such as inflammatory bowel 
+disease, type 1 diabetes, rheumatoid 
 arthritis, and systemic lupus erythematosus [@Gutierrez-Arcelus2016a]. 
 Furthermore, HLA gene products play a critical role in the outcomes of human 
 organ transplantation [@Choo2007]. 
@@ -74,7 +74,22 @@ information about polymorphism in the human genes of the immune system.
 The naming of HLA genes, allele sequences, and their quality control under the 
 responsibility of the [WHO Nomenclature Committee for Factors of the HLA System](http://hla.alleles.org/nomenclature/committee.html).
 
+Having metrics that would capture the degree of affiliation between 
+HLA alleles would facilitate association studies and clustering analysis. 
+However, establishing those similarity metrics is challenging for a number of
+reasons.  First, the number of HLA alleles is very large and second, the 
+HLA nomenclature is complex. Only few similarity metrics based on HLA 
+nomenclature are currently available. 
+As an example, van Dorp and Kesmir have developed a Bayesian method that takes 
+functional HLA similarities into account to find HLA
+associations with quantitative traits [@VanDorp2018].
 
+The *HLAClustRView* package implements novel metrics that use HLA typing to 
+calculate the degree of similarity between HLA molecules. Those metrics has 
+been developed to ease the integration of HLA typing nomenclature in complex
+analysis. In addition, functionalities enabling cluster analysis
+and visualisation of associated RNA expression have been added to the 
+*HLAClustRView* package.
 
 # Metrics which estimate similarity between two HLA typing 
 
@@ -192,7 +207,7 @@ library(HLAClustRView)
 ### 3. Loading HLA typing samples file
 
 The sample file "Samples_HLA_typing.txt" used in this analysis looks 
-like this (only the first seven columns are shown):
+like this (only the first seven columns and first five rows are shown):
 
 <br>
 
