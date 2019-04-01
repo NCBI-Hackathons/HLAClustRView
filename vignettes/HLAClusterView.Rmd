@@ -139,7 +139,7 @@ TODO
 
 # Workflow #
 
-The *`r packageDescription("HLAClustRView")[["Package"]]`* package is splitted
+The *`r packageDescription("HLAClustRView")[["Package"]]`* package is split 
 in 3 main sections: input, process and visualization. The Figure 1 shows the
 workflow within each section. 
 
