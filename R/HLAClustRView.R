@@ -30,19 +30,40 @@
 #' @keywords package
 NULL
 
-#' This dataset can be used TODO.
+#' This dataset contains the protein information from the HLA
+#' database version 3.35.0.
 #'
-#' @name hladb
+#' @name hladb_protein_3.35.0
 #'
-#' @aliases hladb
+#' @aliases hladb_protein_3.35.0
 #'
 #' @docType data
 #'
-#' @format TODO
+#' @format An object of class \code{HLAdb} with 3 entries. The entries are:
+#' \itemize{
+#' \item \code{refSeq} A \code{list} of \code{character} string that
+#' represent reference sequences; one sequence
+#' per HLA gene.
+#' \item \code{posInit} A \code{list} of \code{integer};
+#' one starting position per HLA gene.
+#' \item \code{HLAAlignment} A \code{data.table} containing the information
+#' for each allele of each HLA gene.
+#' }
 #'
-#' @return TODO
+#' @return An object of class \code{HLAdb} with 3 entries. The entries are:
+#' \itemize{
+#' \item \code{refSeq} A \code{list} of \code{character} string that
+#' represent reference sequences; one sequence
+#' per HLA gene.
+#' \item \code{posInit} A \code{list} of \code{integer};
+#' one starting position per HLA gene.
+#' \item \code{HLAAlignment} A \code{data.table} containing the information
+#' for each allele of each HLA gene.
+#' }
 #'
-#' @usage TODO
+#' @usage data(hladb_protein_3.35.0)
+#'
+#' @details See \url{http://hla.alleles.org/alleles/text_index.html}
 #'
 #' @keywords datasets
 #'
@@ -134,7 +155,7 @@ NULL
 #'
 NULL
 
-#' This dataset contains the allele and digit1 information for
+#' This dataset contains the allele information for
 #' HLA genes in one pair of samples.
 #'
 #' This dataset can be used to test the \code{sample_pair_distance} function.
