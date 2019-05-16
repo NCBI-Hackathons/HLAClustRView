@@ -4,7 +4,7 @@
 \alias{parseHLADbAlignment}
 \title{Parse HLA Database alignment files for a specific alignment type}
 \usage{
-parseHLADbAlignment(hlaDbPath, seqType = c("nuc", "gen", "prot"))
+parseHLADbAlignment(hlaDbPath, seqType = c("prot", "nuc", "gen"))
 }
 \arguments{
 \item{hlaDbPath}{A \code{character} string, the path to the directory of
@@ -14,7 +14,7 @@ exist and contain at least one HLA alignment file.}
 
 \item{seqType}{A \code{character} string, the sequence type of the file to
 parse. The choices are: "nuc" for CDS sequence, "gen" for genomic, and
-"prot" for protein. Default: "nuc".}
+"prot" for protein. Default: "prot".}
 }
 \value{
 An object of class \code{HLAdb} with 3 entries. The entries are:

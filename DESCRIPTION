@@ -27,7 +27,7 @@ NeedsCompilation: no
 VignetteBuilder: knitr
 biocViews: BiologicalQuestion, Software, ImmunoOncology, Clustering, 
     MultipleComparison
-Depends: R (>= 3.3)
+Depends: R (>= 3.5.0)
 Imports: purrr,
     dplyr,
     tidyr,
