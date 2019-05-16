@@ -8,15 +8,26 @@ Description: This package implements specialized similarity metrics that
     bind RNA-seq expression (when available) to the clusters.
 Version: 0.99.0
 Date: 2018-11-09
-Author:  Pascal Belleau, Adewunmi Adelaja, Astrid Deschênes,
-    Santiago Medina, Nissim Ranade, Allissa Dillman
+Authors@R: c(person("Pascal", "Belleau", email="pascal_belleau@hotmail.com",
+    role=c("cre", "aut"), comment = c(ORCID = "0000-0002-0802-1071")),
+    person("Adewunmi", "Adelaja", email="pascal_belleau@hotmail.com",
+    role=c("aut")),
+    person("Astrid", "Deschênes", email="adeschen@hotmail.com",
+    role=c("aut"), comment = c(ORCID = "0000-0001-7846-6749")),
+    person("Santiago", "Medina", email="smedina@stowers.org",
+    role=c("aut")),
+    person("Nissim", "Ranade", email="ranade@cshl.edu",
+    role=c("aut")),
+    person("Allissa", "Dillman", email="allissa.dillman@nih.gov",
+    role=c("aut")))
 Maintainer: Pascal Belleau <pascal_belleau@hotmail.com>
 License: MIT + file LICENSE
 Encoding: UTF-8
 NeedsCompilation: no
 VignetteBuilder: knitr
-biocViews: BiologicalQuestion, Software, ImmunoOncology, Clustering
-Depends: R (>= 3.3)
+biocViews: BiologicalQuestion, Software, ImmunoOncology, Clustering, 
+    MultipleComparison
+Depends: R (>= 3.5.0)
 Imports: purrr,
     dplyr,
     tidyr,

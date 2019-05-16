@@ -16,7 +16,7 @@
 #'
 #' @param seqType A \code{character} string, the sequence type of the file to
 #' parse. The choices are: "nuc" for CDS sequence, "gen" for genomic, and
-#' "prot" for protein. Default: "nuc".
+#' "prot" for protein. Default: "prot".
 #'
 #' @return An object of class \code{HLAdb} with 3 entries. The entries are:
 #' \itemize{
@@ -45,7 +45,7 @@
 #' @author Pascal Belleau, Astrid Deschenes
 #' @importFrom data.table data.table rbindlist
 #' @export
-parseHLADbAlignment <- function(hlaDbPath, seqType=c("nuc", "gen", "prot")) {
+parseHLADbAlignment <- function(hlaDbPath, seqType=c("prot", "nuc", "gen")) {
 
     ## Validate that the sequence type is known
     if(! seqType %in% c("nuc", "gen", "prot")) {
