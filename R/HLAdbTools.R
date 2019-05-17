@@ -1,74 +1,45 @@
-#' @title Get the reference sequence and the sequences of two allele typing
-#' for a specific region.
+#' @title Get the sequence from the type
 #'
-#' @description From an \code{HLAdb} object that contains HLA aligment
-#' information for all typing, extract the reference sequence of a
-#' specific region of a HLA
-#' gene and the sequences associated to two allele typing for the same region.
-#' The two typing must be for the same HLA gene. This enable an aligment
-#' comparaison of the two allele typing.
+#' @description Get from the object HLAdb two sequences and the reference
+#' for a region
 #'
-#' @param HLAInfo an object of class \code{HLAdb} containing the global HLA
-#' aligment for all typing.
+#' @param HLAInfo TODO
 #'
-#' @param regionExt a \code{data.frame} containing a \code{start} and an
-#' \code{end} column. The \code{start} and \code{end} positions are both
-#' included in the extracted region.
+#' @param regionExt TODO
 #'
-#' @param typeS1 a \code{character} string that represent the typing of the
-#' first sample. The \code{typeS1} and \code{typeS2} typing must be for the
-#' same HLA gene.
+#' @param typeS1 Sample 1 TODO
 #'
-#' @param typeS2 a \code{character} string that represent the typing of the
-#' second sample. The \code{typeS1} and \code{typeS2} typing must be for the
-#' same HLA gene.
+#' @param typeS2 Sample 2 TODO
 #'
-#' @return A \code{list} containing the following elements:
-#' \itemize{
-#' \item \code{data} a \code{tibble} object containing the HLA typing
-#' information for all samples. The columns are:
-#' \itemize{
-#' \item \code{refSeq} a \code{character} string that represent the
-#' reference sequence for the specified region of the HLA gene.
-#' \item \code{seqS1} a \code{character} string that represent the
-#' sequence of the first sample for the specified region of the allele typing.
-#' \item \code{seqS2} a \code{character} string that represent the
-#' sequence of the second sample for the specified region of the allele typing.
-#' }
-#' }
+#' @return An object of class TODO
+#'
+#' @details TODO
 #'
 #' @examples
 #'
-#' ## Get path where some HLA database files are stored
-#' directory <- system.file("extdata", package = "HLAClustRView")
 #'
-#' ## Parse HLA database files of protein type
-#' HLAInfo <- parseHLADbAlignment(hlaDbPath=directory, seqType="prot")
-#'
-#' ## Select two allele typing for the same HLA gene
-#' sample1 <- "DRA*01:01:01:03"
-#' sample2 <- "DRA*01:02:03"
-#'
-#' ## Select a region to extract
-#' regions <- data.frame(start=c(160, 200), end=c(180, 220))
-#'
-#' ## Extract the aligment information for the specified region included the
-#' ## reference sequence and the sequences for both allele typing
-#' HLAClustRView:::getSeqCMP(HLAInfo = HLAInfo, regionExt = regions,
-#'     typeS1 = sample1, typeS2 = sample2)
 #'
 #' @author Pascal Belleau, Astrid Deschenes
-#' @keywords internal
-getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
+#' @importFrom data.table data.table rbindlist
+#' @export
+
+
+getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2){
+
 
     splitS1 <- splitTyping(typeS1)
     splitS2 <- splitTyping(typeS2)
 
-    posS1 <- getTypingPos(HLAInfo$HLAAlignment, splitS1)
-    posS2 <- getTypingPos(HLAInfo$HLAAlignment, splitS2)
+    posS1 <- getIncompleteTypingPos(HLAInfo$HLAAlignment, splitS1)
+    posS1 <- reduceTypingPos(HLAInfo$HLAAlignment, posS1)
+    posS2 <- getIncompleteTypingPos(HLAInfo$HLAAlignment, splitS2)
+    posS2 <- reduceTypingPos(HLAInfo$HLAAlignment, posS2)
 
-    if (splitS1[1] != splitS2[1]) {
-        stop("The typing for the two alleles must be for the same HLA gene.")
+    if(splitS1[1] != splitS2[1]){
+        stop("Call get seq with type from 2 genes")
+    }
+    if(is.na(posS1) || is.na(posS2)){
+        stop(paste0("Typing without specific sequence ", typeS1, " ", typeS2))
     }
 
     refSeq <- HLAInfo$refSeq[[splitS1[1]]]
@@ -76,60 +47,68 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
 
     seqCMP <- list(refSeq="", seqS1="", seqS2="")
     seqCMP$refSeq <- getSubSeq(refSeq, posInit, regionExt)
-    seqCMP$seqS1 <- getSubSeq(HLAInfo$HLAAlignment[posS1]$SeqDiff,
-                                posInit, regionExt)
-    seqCMP$seqS2 <- getSubSeq(HLAInfo$HLAAlignment[posS2]$SeqDiff,
-                                posInit, regionExt)
+    seqCMP$seqS1 <- getSubSeq(HLAInfo$HLAAlignment[posS1]$SeqDiff, posInit, regionExt)
+    seqCMP$seqS2 <- getSubSeq(HLAInfo$HLAAlignment[posS2]$SeqDiff, posInit, regionExt)
 
     return(seqCMP)
 }
 
-#' @title Get the subsequence from a selected sequence for a specific region.
+#' @title Get the subsequence
 #'
-#' @description From a selected sequence, extract a subsequence using the list
-#' of specified regions.
+#' @description Get from the object HLAdb two sequences and the reference
+#' for a region
 #'
-#' @param seq a \code{character} string that represent the sequence used to
-#' extract the subsequence.
+#' @param seq TODO
 #'
-#' @param posInit a \code{integer} that represent the starting position of the
-#' gene.
+#' @param posInit TODO
 #'
-#' @param regionExt a \code{data.frame} containing a \code{start}
-#' and an \code{end} column. The \code{start} and \code{end} positions are both
-#' included in the extracted region.
+#' @param regionExt TODO
 #'
-#' @return a \code{character} string containing the extracted subsequence.
+#' @return An object of class TODO
 #'
+#' @details TODO
 #'
 #' @examples
 #'
-#' ## Sequence used for extraction
-#' sequence <- "    MGSGWVPWVVALLVNLTRLDSSMTQGTDSPEDFVIQAKADCYFTNGTEKVQFVVRFIF"
-#'
-#' ## The starting position of the gene
-#' position <- -10
-#'
-#' ## The region to extact
-#' regions <- data.frame(start=c(15, 25), end=c(20, 30))
-#'
-#' ## Extract subsequence
-#' HLAClustRView:::getSubSeq(seq = sequence, posInit = position,
-#'     regionExt = regions)
 #'
 #'
 #' @author Pascal Belleau, Astrid Deschenes
-#' @keywords internal
-getSubSeq <- function(seq, posInit, regionExt) {
+#' @importFrom data.table data.table rbindlist
+#' @export
+
+
+getSubSeq <- function(seq, posInit, regionExt){
 
     subSeq <- ""
 
-    for(i in seq_len(nrow(regionExt))) {
-        subSeq <- paste0(subSeq, substr(seq,
-                            regionExt$start[i] - posInit,
-                            regionExt$end[i] - posInit))
+    for(i in seq_len(nrow(regionExt))){
+        subSeq <- paste0(subSeq, substr(seq, regionExt$start[i] - posInit, regionExt$end[i] - posInit))
     }
 
     return(subSeq)
 }
 
+#' @title load matrix of substitution
+#'
+#' @description Load matrix BLOSOM or PAM
+#' from ftp://ftp.ncbi.nih.gov/blast/matrices/
+#'
+#' @param fileName TODO
+#'
+#' @return a matrix
+#'
+#' @details TODO
+#'
+#' @examples
+#'
+#'
+#'
+#' @author Pascal Belleau, Astrid Deschenes
+#' @importFrom data.table data.table rbindlist
+#' @export
+
+parseSubMatrix <- function(fileName){
+
+    subMatrix <- read.table(fileName, header = TRUE)
+
+}
