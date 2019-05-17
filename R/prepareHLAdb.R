@@ -90,6 +90,50 @@ parseHLADbAlignment <- function(hlaDbPath, seqType=c("prot", "nuc", "gen")) {
     return(HLAdb)
 }
 
+
+#' @title load HLA Database alignment files for a specific alignment type
+#'
+#' @description load HLA Database parse by parseHLADbAlignment
+#'
+#'
+#' @param hlaDbFile A \code{character} string, the path to the rds file from
+#' parseHLADbAlignment.
+#'#'
+#' @return An object of class \code{HLAdb} with 3 entries. The entries are:
+#' \itemize{
+#' \item \code{refSeq} A \code{list} of \code{character} string that
+#' represent reference sequences; one sequence
+#' per HLA gene.
+#' \item \code{posInit} A \code{list} of \code{integer};
+#' one starting position per HLA gene.
+#' \item \code{HLAAlignment} A \code{data.table} containing the information
+#' for each allele of each HLA gene.
+#' }
+#'
+#' @details See \url{http://hla.alleles.org/alleles/text_index.html}
+#'
+#' @examples
+#'
+#' ## Get path where some HLA database files are stored
+#' ##directory <- system.file("extdata", package = "HLAClustRView")
+#'
+#' ## Parse HLA database files of protein type
+#' ##HLAInfo <- loadHLADb(hlaDbFile="")
+#'
+#' ## Show reference sequences
+#' ##HLAInfo$refSeq
+#'
+#' @author Pascal Belleau, Astrid Deschenes
+#' @importFrom data.table data.table rbindlist
+#' @export
+loadHLADb <- function(hlaDbFile){
+
+    # Must add validation
+    return(readRDS(hlaDbFile))
+}
+
+
+
 #' @title Pre-process HLA Database alignment file
 #'
 #' @description Extract information from one HLA alignment file.
@@ -479,5 +523,109 @@ getTypingPos <- function(seqProcess, curTyping) {
     }
 
     return(curPos)
+}
+
+#' @title Get the position in the HLA table of the corresponding HLA
+#' typing same as getTypingPos except it get all typing that
+#' corresponding to the typing not NA
+#'
+#' @description Get the position in the HLA table of the corresponding HLA
+#' typing. The HLA typing can use up to 6 fields for the identification.
+#'
+#' @param seq A \code{character} string containing the sequence.
+#'
+#' @param curTyping A \code{vector} of \code{character} string defining
+#' the HLA type. The \code{vector} should have 6 fields.
+#'
+#' @return A \code{integer} or a \code{vector} of \code{integer} representing
+#' the position(s), in the data.table, of
+#' the HLA typing. If the HLA typing is not present, an empty \code{integer}
+#' is returned.
+#'
+#' @examples
+#'
+#' ## Information about HLA alignment file
+#' fileInfo <- paste0(system.file("extdata", package = "HLAClustRView"),
+#'     "/DRA_prot.txt")
+#'
+#' ## Parse HLA alignment file
+#' ## DRAInfo$HLAalignment contains the HLA table
+#' DRAInfo <- HLAClustRView:::parseAlignment(fileName=fileInfo)
+#'
+#' ## Create a vector with the information about one HLA typing
+#' typing <- matrix(data=c("DRA", "01", "01", "02", NA, NA), nrow=1)
+#'
+#' ## Get the position of the specific typing in the HLA table
+#' HLAClustRView:::getTypingPos(seqProcess=DRAInfo$HLAalignment,
+#'     curTyping=typing)
+#'
+#' @author Pascal Belleau, Astrid Deschenes
+#' @keywords internal
+getIncompleteTypingPos <- function(seqProcess, curTyping) {
+
+    curPos <- integer()
+
+    if (is.na(curTyping[4])) {
+        curPos <- which(seqProcess$GeneName == curTyping[1] &
+                            seqProcess$AlleleGroup == curTyping[2] &
+                            seqProcess$Protein == curTyping[3])
+    } else if (is.na(curTyping[5])) {
+        curPos <- which(seqProcess$GeneName == curTyping[1] &
+                            seqProcess$AlleleGroup == curTyping[2] &
+                            seqProcess$Protein == curTyping[3] &
+                            seqProcess$SynSubst == curTyping[4])
+    } else if (is.na(curTyping[6])) {
+        curPos <- which(seqProcess$GeneName == curTyping[1] &
+                            seqProcess$AlleleGroup == curTyping[2] &
+                            seqProcess$Protein == curTyping[3] &
+                            seqProcess$SynSubst == curTyping[4] &
+                            seqProcess$Noncoding == curTyping[5])
+    } else {
+        curPos <- which(seqProcess$GeneName == curTyping[1] &
+                            seqProcess$AlleleGroup == curTyping[2] &
+                            seqProcess$Protein == curTyping[3] &
+                            seqProcess$SynSubst == curTyping[4] &
+                            seqProcess$Noncoding == curTyping[5] &
+                            seqProcess$Suffix == curTyping[6])
+    }
+
+    return(curPos)
+}
+
+#' @title Verify if all the sequence are the same for the
+#' typing position
+#'
+#' @description TODO
+#'
+#'
+#'
+#' @details TODO
+#'
+#' @param TODO
+#'
+#' @return TODO
+#'
+#' @examples
+#'
+#'
+#'
+#' @author Pascal Belleau and Astrid Deschenes
+#'
+#' @keywords internal
+reduceTypingPos <- function(seqProcess, typingPos) {
+    flag <- TRUE
+    if(length(typingPos) >= 1){
+        for(i in seq_len(length(typingPos))){
+            if(seqProcess$SeqDiff[typingPos[1]] != seqProcess$SeqDiff[typingPos[i]]){
+                flag <- FALSE
+            }
+        }
+    }else{
+        flag <- FALSE
+    }
+    posReduce <- ifelse(flag,typingPos[1], NA)
+
+
+    return(posReduce)
 }
 
