@@ -47,8 +47,12 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2){
 
     seqCMP <- list(refSeq="", seqS1="", seqS2="")
     seqCMP$refSeq <- getSubSeq(refSeq, posInit, regionExt)
-    seqCMP$seqS1 <- getSubSeq(HLAInfo$HLAAlignment[posS1]$SeqDiff, posInit, regionExt)
-    seqCMP$seqS2 <- getSubSeq(HLAInfo$HLAAlignment[posS2]$SeqDiff, posInit, regionExt)
+    if(!(is.na(posS1))){
+        seqCMP$seqS1 <- getSubSeq(HLAInfo$HLAAlignment[posS1]$SeqDiff, posInit, regionExt)
+    }
+    if(!(is.na(posS2))){
+        seqCMP$seqS2 <- getSubSeq(HLAInfo$HLAAlignment[posS2]$SeqDiff, posInit, regionExt)
+    }
 
     return(seqCMP)
 }
