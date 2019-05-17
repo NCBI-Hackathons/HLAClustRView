@@ -41,5 +41,7 @@ Imports: purrr,
 Suggests: testthat,
     tibble,
     knitr,
-    rmarkdown
+    rmarkdown,
+    circlize,
+    BiocStyle
 RoxygenNote: 6.1.1

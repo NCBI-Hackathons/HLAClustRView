@@ -54,6 +54,8 @@ draw_cluster <- function(matrixDistance) {
 #' @export
 draw_heatmap <- function(hlaMetric, ...) {
 
+    myArgs <- match.call()
+
     if (!("HLAMetric" %in% class(hlaMetric))) {
         stop("hlaMetric must be of class \"HLAMetric\"")
     }
@@ -63,10 +65,19 @@ draw_heatmap <- function(hlaMetric, ...) {
     newMat <- t(distMat)
     newMat[lower.tri(newMat)] <- distMat[lower.tri(distMat)]
 
-    heatGraph <- Heatmap(newMat, name = hlaMetric$metric,
-                    heatmap_legend_param = list(direction="horizontal"), ...)
+    if ("name" %in% names(myArgs)) {
+        heatGraph <- Heatmap(newMat,
+                        heatmap_legend_param = list(direction="horizontal"),
+                        ...)
+    } else {
+
+        heatGraph <- Heatmap(newMat, name = hlaMetric$metric,
+                        heatmap_legend_param = list(direction="horizontal"),
+                        ...)
+    }
+
 
     draw(heatGraph, heatmap_legend_side = "bottom")
 
-    return(heatGraph)
+    return(invisible(heatGraph))
 }
