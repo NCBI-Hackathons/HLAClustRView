@@ -96,7 +96,7 @@ and visualisation of associated RNA expression have been added to the
 To enable quantification of the similarity between two HLA typing, a similarity
 metric must be used. The *HLAClustRView* package implements two metrics.
 
-## Hamming distance based on first HLA typing field ##
+## 1. Hamming distance based on first HLA typing field ##
 
 In information theory, this Hamming distance is broadly applied to quantify 
 similarity among data strings. The Hamming distance between two binary strings 
@@ -133,7 +133,7 @@ where:
 * <font size="+1">a~1~ and a~2~ are the two alleles of the first sample for a given gene</font>
 * <font size="+1">b~1~ and b~2~ are the two alleles of the second sample for a given gene</font>
 
-## Distance based on sequence similarity ##
+## 2. Distance based on sequence similarity ##
 
 TODO
 
@@ -185,6 +185,21 @@ kable(demoData)
 ```
 
 <br>
+
+# HLA database #
+
+Some metrics needs the information provided by the HLA database. The protein
+information of the most recent HLA database versions (3.35.0 and 3.36.0) are 
+available through 
+the *HLAClusteRView* package.
+
+
+```{r hladbEx, warning=FALSE, message=FALSE, eval=TRUE}
+data(hladb_protein_3.35.0)
+
+summary(hladb_protein_3.35.0)
+```
+
 
 # An analysis step by step #
 

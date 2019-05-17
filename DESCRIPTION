@@ -35,6 +35,7 @@ Imports: purrr,
     stringr,
     data.table,
     stats,
+    ComplexHeatmap,
     graphics,
     rlang
 Suggests: testthat,
