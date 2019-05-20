@@ -7,7 +7,7 @@
 hamming_distance_digit1(allele)
 }
 \arguments{
-\item{allele}{a \code{tibble} object with 3 mendatory columns:
+\item{allele}{a \code{tibble} object with 3 mandatory columns:
 "SampleName", "AlleleName" and "AlleleGroup".}
 }
 \value{
