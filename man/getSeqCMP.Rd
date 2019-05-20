@@ -2,25 +2,28 @@
 % Please edit documentation in R/HLAdbTools.R
 \name{getSeqCMP}
 \alias{getSeqCMP}
-\title{Get the sequence from the type}
+\title{Get the sequence from 2 allele types from the same HLA gene.}
 \usage{
 getSeqCMP(HLAInfo, regionExt, typeS1, typeS2)
 }
 \arguments{
-\item{HLAInfo}{TODO}
+\item{HLAInfo}{An object of class \code{HLAdb} contain information from
+HLA database.}
 
 \item{regionExt}{TODO}
 
-\item{typeS1}{Sample 1 TODO}
+\item{typeS1}{A \code{character} array containing one well-formed
+HLA allele.}
 
-\item{typeS2}{Sample 2 TODO}
+\item{typeS2}{A \code{character} array containing one well-formed
+HLA allele.}
 }
 \value{
 An object of class TODO
 }
 \description{
-Get from the object HLAdb two sequences and the reference
-for a region
+Extract from the \code{HLAdb} object, two sequences and
+the reference for a specific region related to 2 specific allele types.
 }
 \details{
 TODO
