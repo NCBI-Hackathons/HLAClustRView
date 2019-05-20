@@ -1,15 +1,18 @@
-#' @title Get the sequence from the type
+#' @title Get the sequence from 2 allele types from the same HLA gene.
 #'
-#' @description Get from the object HLAdb two sequences and the reference
-#' for a region
+#' @description Extract from the \code{HLAdb} object, two sequences and
+#' the reference for a specific region related to 2 specific allele types.
 #'
-#' @param HLAInfo TODO
+#' @param HLAInfo An object of class \code{HLAdb} contain information from
+#' HLA database.
 #'
 #' @param regionExt TODO
 #'
-#' @param typeS1 Sample 1 TODO
+#' @param typeS1 A \code{character} array containing one well-formed
+#' HLA allele.
 #'
-#' @param typeS2 Sample 2 TODO
+#' @param typeS2 A \code{character} array containing one well-formed
+#' HLA allele.
 #'
 #' @return An object of class TODO
 #'
@@ -24,6 +27,9 @@
 #' @export
 getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
 
+    if (!("HLAdb" %in% class(HLAInfo))) {
+        stop("HLAInfo must be of class \"HLAdb\"")
+    }
 
     splitS1 <- splitTyping(typeS1)
     splitS2 <- splitTyping(typeS2)
