@@ -1,25 +1,40 @@
 
 
-#' @title Draw cluster
+#' @title Draw dendrogram
 #'
-#' @description TODO
+#' @description Create and draw a dendrogram using the
+#' metric distances.
 #'
-#' @param matrixDistance distance matrix
+#' @param hlaMetric an object of class \code{hlaMetric} that contain the
+#' distance between samples.
 #'
 #' @return TODO
 #'
 #' @examples
 #'
-#' ##TODO
+#' ## Load example dataset
+#' data(demoHLADataset)
 #'
-#' @author Santiago Medina, Pascal Belleau
+#' ## Calculate Hamming distance metric
+#' hammingMetric <- calculateHamming(demoHLADataset)
+#'
+#' ## Create dendogram
+#' draw_dendogram(hammingMetric)
+#'
+#' @author Santiago Medina, Astrid Deschenes, Pascal Belleau
 #'
 #' @importFrom dplyr %>%
 #' @importFrom graphics plot
 #' @importFrom stats as.dist
 #' @export
-draw_cluster <- function(matrixDistance) {
-    hc <- as.dist(matrixDistance) %>%
+draw_dendogram <- function(hlaMetric) {
+
+    if (!("HLAMetric" %in% class(hlaMetric))) {
+        stop("hlaMetric must be of class \"HLAMetric\"")
+    }
+
+
+    hc <- as.dist(hlaMetric$dist) %>%
         hclust()
     plot(hc)
 }
@@ -66,14 +81,21 @@ draw_heatmap <- function(hlaMetric, ...) {
     newMat[lower.tri(newMat)] <- distMat[lower.tri(distMat)]
 
     if ("name" %in% names(myArgs)) {
-        heatGraph <- Heatmap(newMat,
+        if ("heatmap_legend_param" %in% names(myArgs)) {
+            heatGraph <- Heatmap(newMat, ...)
+        } else {
+            heatGraph <- Heatmap(newMat,
                         heatmap_legend_param = list(direction="horizontal"),
                         ...)
+        }
     } else {
-
-        heatGraph <- Heatmap(newMat, name = hlaMetric$metric,
+        if ("heatmap_legend_param" %in% names(myArgs)) {
+            heatGraph <- Heatmap(newMat, name = hlaMetric$metric, ...)
+        } else {
+            heatGraph <- Heatmap(newMat, name = hlaMetric$metric,
                         heatmap_legend_param = list(direction="horizontal"),
                         ...)
+        }
     }
 
 
