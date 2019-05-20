@@ -21,10 +21,10 @@ TODO
 }
 \examples{
 
-
+## TODO
 
 }
 \author{
-Pascal Belleau and Astrid Deschenes
+Pascal Belleau, Astrid Deschenes
 }
 \keyword{internal}
