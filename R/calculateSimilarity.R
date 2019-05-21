@@ -9,7 +9,7 @@
 #' \code{s1} and \code{s2} are two samples and \code{A1} and \code{A2} are
 #' there alleles.
 #'
-#' @param allele a \code{tibble} object with 3 mendatory columns:
+#' @param allele a \code{tibble} object with 3 mandatory columns:
 #' "SampleName", "AlleleName" and "AlleleGroup".
 #'
 #' @return a \code{tibble} object with one row containing the minimum
