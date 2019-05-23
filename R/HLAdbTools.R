@@ -1,15 +1,18 @@
-#' @title Get the sequence from the type
+#' @title Get the sequence from 2 allele types from the same HLA gene.
 #'
-#' @description Get from the object HLAdb two sequences and the reference
-#' for a region
+#' @description Extract from the \code{HLAdb} object, two sequences and
+#' the reference for a specific region related to 2 specific allele types.
 #'
-#' @param HLAInfo TODO
+#' @param HLAInfo An object of class \code{HLAdb} contain information from
+#' HLA database.
 #'
 #' @param regionExt TODO
 #'
-#' @param typeS1 Sample 1 TODO
+#' @param typeS1 A \code{character} array containing one well-formed
+#' HLA allele.
 #'
-#' @param typeS2 Sample 2 TODO
+#' @param typeS2 A \code{character} array containing one well-formed
+#' HLA allele.
 #'
 #' @return An object of class TODO
 #'
@@ -17,15 +20,16 @@
 #'
 #' @examples
 #'
-#'
+#' ## TODO
 #'
 #' @author Pascal Belleau, Astrid Deschenes
 #' @importFrom data.table data.table rbindlist
 #' @export
+getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
 
-
-getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2){
-
+    if (!("HLAdb" %in% class(HLAInfo))) {
+        stop("HLAInfo must be of class \"HLAdb\"")
+    }
 
     splitS1 <- splitTyping(typeS1)
     splitS2 <- splitTyping(typeS2)
@@ -35,10 +39,10 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2){
     posS2 <- getIncompleteTypingPos(HLAInfo$HLAAlignment, splitS2)
     posS2 <- reduceTypingPos(HLAInfo$HLAAlignment, posS2)
 
-    if(splitS1[1] != splitS2[1]){
+    if (splitS1[1] != splitS2[1]) {
         stop("Call get seq with type from 2 genes")
     }
-    if(is.na(posS1) || is.na(posS2)){
+    if (is.na(posS1) || is.na(posS2)) {
         stop(paste0("Typing without specific sequence ", typeS1, " ", typeS2))
     }
 
@@ -47,11 +51,13 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2){
 
     seqCMP <- list(refSeq="", seqS1="", seqS2="")
     seqCMP$refSeq <- getSubSeq(refSeq, posInit, regionExt)
-    if(!(is.na(posS1))){
-        seqCMP$seqS1 <- getSubSeq(HLAInfo$HLAAlignment[posS1]$SeqDiff, posInit, regionExt)
+    if (!(is.na(posS1))) {
+        seqCMP$seqS1 <- getSubSeq(HLAInfo$HLAAlignment[posS1]$SeqDiff,
+                                    posInit, regionExt)
     }
-    if(!(is.na(posS2))){
-        seqCMP$seqS2 <- getSubSeq(HLAInfo$HLAAlignment[posS2]$SeqDiff, posInit, regionExt)
+    if (!(is.na(posS2))) {
+        seqCMP$seqS2 <- getSubSeq(HLAInfo$HLAAlignment[posS2]$SeqDiff,
+                                    posInit, regionExt)
     }
 
     return(seqCMP)
@@ -74,19 +80,17 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2){
 #'
 #' @examples
 #'
-#'
+#' ## TODO
 #'
 #' @author Pascal Belleau, Astrid Deschenes
-#' @importFrom data.table data.table rbindlist
 #' @export
-
-
-getSubSeq <- function(seq, posInit, regionExt){
+getSubSeq <- function(seq, posInit, regionExt) {
 
     subSeq <- ""
 
-    for(i in seq_len(nrow(regionExt))){
-        subSeq <- paste0(subSeq, substr(seq, regionExt$start[i] - posInit, regionExt$end[i] - posInit))
+    for(i in seq_len(nrow(regionExt))) {
+        subSeq <- paste0(subSeq, substr(seq, regionExt$start[i] - posInit,
+                                            regionExt$end[i] - posInit))
     }
 
     return(subSeq)
@@ -105,13 +109,12 @@ getSubSeq <- function(seq, posInit, regionExt){
 #'
 #' @examples
 #'
-#'
+#' ## TODO
 #'
 #' @author Pascal Belleau, Astrid Deschenes
-#' @importFrom data.table data.table rbindlist
+#' @importFrom utils read.table
 #' @export
-
-parseSubMatrix <- function(fileName){
+parseSubMatrix <- function(fileName) {
 
     subMatrix <- read.table(fileName, header = TRUE)
 

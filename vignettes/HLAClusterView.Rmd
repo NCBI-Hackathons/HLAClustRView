@@ -2,7 +2,7 @@
 title: HLA typing clustering and visualization based on specific similarity metrics
 author: Pascal Belleau, Adewunmi Adelaja, Astrid Deschênes, Santiago Medina, Nissim Ranade, Allissa Dillman
 output:
-    html_document:
+    BiocStyle::html_document:
         toc: yes
         css: style.css
     pdf_document:
@@ -96,7 +96,7 @@ and visualisation of associated RNA expression have been added to the
 To enable quantification of the similarity between two HLA typing, a similarity
 metric must be used. The *HLAClustRView* package implements two metrics.
 
-## Hamming distance based on first HLA typing field ##
+## Hamming-like distance based on first HLA typing field ##
 
 In information theory, this Hamming distance is broadly applied to quantify 
 similarity among data strings. The Hamming distance between two binary strings 
@@ -116,7 +116,7 @@ for the calculation of the metric.
 
 <center>
 
-![](Hamming_Eqn_01.jpg ""){width=75%}
+![](Hamming_Eqn_01.jpg ""){width=110%}
 
 </center>
 
@@ -124,14 +124,14 @@ for the calculation of the metric.
 
 <center>
 
-![](Hamming_Eqn_02.jpg ""){width=22%}
+![](Hamming_Eqn_02.jpg ""){width=55%}
 
 </center>
 
 where:
 
-* <font size="+1">a~1~ and a~2~ are the two alleles of the first sample for a given gene</font>
-* <font size="+1">b~1~ and b~2~ are the two alleles of the second sample for a given gene</font>
+* <font>a~1~ and a~2~ are the two alleles of the first sample for a given gene</font>
+* <font>b~1~ and b~2~ are the two alleles of the second sample for a given gene</font>
 
 ## Distance based on sequence similarity ##
 
@@ -186,9 +186,24 @@ kable(demoData)
 
 <br>
 
+# HLA database #
+
+Some metrics needs the information provided by the HLA database. The protein
+information of the most recent HLA database versions (3.35.0 and 3.36.0) are 
+available through 
+the *HLAClusteRView* package.
+
+
+```{r hladbEx, warning=FALSE, message=FALSE, eval=TRUE}
+data(hladb_protein_3.35.0)
+
+summary(hladb_protein_3.35.0)
+```
+
+
 # An analysis step by step #
 
-### 1. Installing HLAClustRView package
+### Installing HLAClustRView package
 
 The *devtools* package provides *install_github()* that enables installing 
 packages from GitHub.
@@ -198,13 +213,13 @@ library(devtools)
 install_github("NCBI-Hackathons/HLAClustRView")
 ```
 
-### 2. Loading HLAClustRView package
+### Loading HLAClustRView package
 
 ```{r loadingPackage, warning=FALSE, message=FALSE} 
 library(HLAClustRView)
 ```
 
-### 3. Loading HLA typing samples file
+### Loading HLA typing samples file
 
 The sample file "Samples_HLA_typing.txt" used in this analysis looks 
 like this (only the first seven columns and first five rows are shown):
@@ -227,7 +242,7 @@ HLAdata <- readHLADataset(hlaFilePath = "./Samples_HLA_typing.txt")
 HLAdata
 ```
 
-### 4. Calculating Hamming-like metric
+### Calculating Hamming-like metric
 
 The Hamming-like distance, which is based on first HLA typing field, can be 
 calculated through the *calculateHamming()* function. The output is an object
@@ -239,10 +254,35 @@ hammingMetric <- calculateHamming(HLAdata)
 print(hammingMetric)
 ```
 
+### Sample-to-sample graph using Hamming-like metric
 
-### 5. Clustering using Hamming-like metric
+The *draw_heatmap()* function enable the creation of sample-to-sample heatmap.
 
-```{r clusteringHamming, warning=FALSE, message=FALSE, fig.align="center"}
+```{r graphHamming, warning=FALSE, message=FALSE, fig.height=4, fig.width=4}
+draw_heatmap(hammingMetric)
+```
+
+As the *draw_heatmap()* function enable personalization by acception parameters
+that are pass to the interanl *Heatmap()* function from 
+`r Biocpkg("ComplexHeatmap")` package.
+
+```{r graphHamming2, warning=FALSE, message=FALSE, fig.height=4, fig.width=4}
+library(circlize)
+
+## Create a 
+col_fun = colorRamp2(c(0, 10, 20), c("white", "orange", "violet"))
+
+draw_heatmap(hammingMetric, col = col_fun, border = TRUE,
+            clustering_method_rows = "median", 
+            clustering_method_columns = "median")
+
+```
+
+
+
+### Clustering using Hamming-like metric
+
+```{r clusteringHamming, warning=FALSE, message=FALSE}
 hammingClust <- hclustHLA(hammingMetric)
 
 plot(hammingClust, main="Dendogram based on HLA typing Hamming-like distance", 

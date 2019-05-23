@@ -20,7 +20,6 @@ Authors@R: c(person("Pascal", "Belleau", email="pascal_belleau@hotmail.com",
     role=c("aut")),
     person("Allissa", "Dillman", email="allissa.dillman@nih.gov",
     role=c("aut")))
-Maintainer: Pascal Belleau <pascal_belleau@hotmail.com>
 License: MIT + file LICENSE
 Encoding: UTF-8
 NeedsCompilation: no
@@ -35,10 +34,13 @@ Imports: purrr,
     stringr,
     data.table,
     stats,
+    ComplexHeatmap,
     graphics,
     rlang
 Suggests: testthat,
     tibble,
     knitr,
-    rmarkdown
+    rmarkdown,
+    circlize,
+    BiocStyle
 RoxygenNote: 6.1.1

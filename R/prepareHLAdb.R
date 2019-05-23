@@ -607,20 +607,21 @@ getIncompleteTypingPos <- function(seqProcess, curTyping) {
 #'
 #' @examples
 #'
+#' ## TODO
 #'
-#'
-#' @author Pascal Belleau and Astrid Deschenes
+#' @author Pascal Belleau, Astrid Deschenes
 #'
 #' @keywords internal
 reduceTypingPos <- function(seqProcess, typingPos) {
     flag <- TRUE
-    if(length(typingPos) >= 1){
-        for(i in seq_len(length(typingPos))){
-            if(seqProcess$SeqDiff[typingPos[1]] != seqProcess$SeqDiff[typingPos[i]]){
+    if (length(typingPos) >= 1) {
+        for(i in seq_len(length(typingPos))) {
+            if (seqProcess$SeqDiff[typingPos[1]] !=
+                    seqProcess$SeqDiff[typingPos[i]]) {
                 flag <- FALSE
             }
         }
-    }else{
+    } else {
         flag <- FALSE
     }
     posReduce <- ifelse(flag,typingPos[1], NA)
