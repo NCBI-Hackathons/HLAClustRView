@@ -42,7 +42,7 @@ redistribute this software.
 If you use the *`r packageDescription("HLAClustRView")[["Package"]]`* package 
 for a publication, we would ask you to cite the following:
 
-```{r citation, comment='', echo=T, include=T, message=FALSE, error=FALSE}
+```{r citation, comment='', echo=TRUE, include=TRUE, message=FALSE, error=FALSE}
 citation("HLAClustRView")
 ```
 
@@ -173,15 +173,14 @@ The specification for the columns are:
 This is an example of what the file should look like:
 
 ```{r demoDataset, echo=FALSE, message=FALSE, warning=FALSE}
-demoData <- data.frame(Sample=c("Sample_1", "Sample_2", "Sample_3", "..."), 
-                A_1=c("A*24:02:01:01", "A*01:01:01:20", "A*01:01:03", "..."),
-                A_2=c("A*01:01:03", "A*01:01:10", "A*01:01:21", "..."),
-                H_1=c("H*01:01:01:03", "H*01:02", "H*01:02", "..."),
-                H_2=c("H*02:01:01:01", "H*02:02", "H*01:02", "..."),
-                J_1=c("J*01:01:01:03", "J*01:01:01:03", "J*01:01:01:05", "..."),
-                J_2=c("J*01:01:01:03", "J*01:01:01:06", "J*02:01", "..."),
-                "..."=c(rep("...", 4)))
-kable(demoData)
+demoData <- data.frame(Sample=c("Sample_1", "Sample_2", "Sample_3", "Sample_4", "..."), 
+                A_1=c("A*24:02:01:01", "A*01:01:01:20", "A*01:01:03", "A*01:01:03", "..."),
+                A_2=c("A*01:01:03", "A*01:01:10", "A*01:01:21", "A*01:01:10", "..."),
+                DMA_1=c("DMA*01:01:01:01", "DMA*01:02", "DMA*01:03", "DMA*01:02", "..."),
+                DMA_2=c("DMA*01:02", "DMA*01:01:01:01", "DMA*01:01:01:01", "DMA*01:01:01:04", "..."),
+                "..."=c(rep("...", 5)))
+knitr::kable(demoData, 
+    caption = 'A example of an input file containing multiple typing.')
 ```
 
 <br>
@@ -227,8 +226,9 @@ like this (only the first seven columns and first five rows are shown):
 <br>
 
 ```{r demoData, echo=FALSE, message=FALSE, warning=FALSE}
-demoData <- read.table("./Samples_HLA_typing.txt", header=T, sep="\t")
-kable(demoData[1:5, 1:9])
+demoData <- read.table("./Samples_HLA_typing.txt", header=TRUE, sep="\t")
+kable(demoData[1:5, 1:5], 
+    caption = 'A table of the 5 first lines and columns of the Samples_HLA_typing.txt file.')
 ```
 
 <br>
@@ -279,8 +279,10 @@ draw_heatmap(hammingMetric, col = col_fun, border = TRUE,
 ```
 
 
+### Cluster dendogram using Hamming-like metric
 
-### Clustering using Hamming-like metric
+The *draw_dendogram()* function enable the creation of a cluster dendogram 
+graph.
 
 ```{r clusteringHamming, warning=FALSE, message=FALSE}
 hammingClust <- hclustHLA(hammingMetric)
