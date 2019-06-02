@@ -190,6 +190,7 @@ calculateHamming <- function(hla_data) {
         # get's the data for s1 and s2 and applys the distance function
         filter(hla_data, .data$SampleName %in% c(s1, s2)) %>%
             ssample_pair_distance()
+        #print(paste0("s1 ", s1, " s2 ", s2))
     }
 
     sample_pairs <-
@@ -227,6 +228,7 @@ calculateHamming <- function(hla_data) {
     ## Prepare HLADataset object
     res <- list()
     res[["dist"]] <- distanceMatrix
+    res[["alleleInfo"]] <- distances
     res[["metric"]] <- "Hamming Distance"
     class(res) <- "HLAMetric"
 
