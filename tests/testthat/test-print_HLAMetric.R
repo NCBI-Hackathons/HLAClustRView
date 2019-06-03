@@ -16,7 +16,7 @@ test_that("print() for HLAMetric object must return identical object", {
 
     result <- print(expeced)
 
-    expect_equal(result, expeced)
+    expect_equal(result$dist, expeced$dist)
 })
 
 test_that("print() for HLAMetric object without distance must return identical object", {
@@ -26,5 +26,5 @@ test_that("print() for HLAMetric object without distance must return identical o
 
     result <- print(demo)
 
-    expect_equal(result, demo)
+    expect_equal(result$dist, demo$dist)
 })

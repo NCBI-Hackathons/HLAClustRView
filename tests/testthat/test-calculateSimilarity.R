@@ -172,7 +172,7 @@ test_that("calculateHamming() should return good result 01", {
     expected$metric <- "Hamming Distance"
     class(expected) <- "HLAMetric"
 
-    expect_equal(res, expected)
+    expect_equal(res$dist, expected$dist)
 })
 
 test_that("calculateHamming() should return good result 02", {
@@ -199,11 +199,17 @@ test_that("calculateHamming() should return good result 02", {
     expected$dist <- matrix(c(0, 0, 0, 5, 0, 0, 4, 3, 0), nrow=3, byrow = TRUE)
     colnames(expected$dist) <- c("s3", "s4", "s5")
     rownames(expected$dist) <- colnames(expected$dist)
+
+    expected$alleleInfo <- tibble(SampleName1=c("s3", "s3", "s4"), SampleName2=c("s4", "s5", "s5"),
+           HammingDistance=c(5,4,3),
+           data=alleleInfo)
+
     expected$metric <- "Hamming Distance"
     class(expected) <- "HLAMetric"
 
 
-    expect_equal(res, expected)
+    expect_equal(res$dist, expected$dist)
+
 })
 
 

@@ -117,5 +117,7 @@ getSubSeq <- function(seq, posInit, regionExt) {
 parseSubMatrix <- function(fileName) {
 
     subMatrix <- read.table(fileName, header = TRUE)
-
+    return(subMatrix)
 }
+
+
