@@ -272,7 +272,7 @@ library(circlize)
 ## Create a 
 col_fun = colorRamp2(c(0, 10, 20), c("white", "orange", "violet"))
 
-draw_heatmap(hammingMetric, col = col_fun, border = TRUE,
+draw_heatmap(hammingMetric, col = col_fun,
             clustering_method_rows = "median", 
             clustering_method_columns = "median")
 
