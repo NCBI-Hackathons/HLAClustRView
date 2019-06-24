@@ -69,7 +69,7 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
     posS2 <- reduceTypingPos(HLAInfo$HLAAlignment, posS2)
 
     if (splitS1[1] != splitS2[1]) {
-        stop("Call get seq with type from 2 genes")
+        stop("Call getSeqCMP() with type from 2 genes")
     }
     if (is.na(posS1) || is.na(posS2)) {
         stop(paste0("Typing without specific sequence ", typeS1, " ", typeS2))
