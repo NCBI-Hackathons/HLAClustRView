@@ -1,7 +1,7 @@
 ### Unit tests for functions in HLAdbTools.R file
 
 library(HLAClustRView)
-
+library(dplyr)
 
 directory <- system.file("extdata", package = "HLAClustRView")
 HLA_INFO <- parseHLADbAlignment(hlaDbPath = directory, seqType = "prot")
@@ -12,8 +12,19 @@ context("Test for getSeqCMP() function")
 
 test_that("getSeqCMP() must return good result", {
 
-    sample1 <- "DRA*01:01:01:03"
-    sample2 <- "DRA*01:01:02"
+    #sample1 <- "DRA*01:01:01:03"
+    #sample2 <- "DRA*01:01:02"
+    inputTibble <- tibble(SampleName=c("ERR188021", "ERR188021"),
+                          AlleleName=c("1","2"),
+                          GeneName=c("DRA", "DRA"),
+                          AlleleGroup=c("01", "01"),
+                          Protein=c("01", "01"),
+                          SynSubst=c("01", "02"),
+                          NonCoding=c("03", NA),
+                          Suffix=c(NA, NA)
+                          )
+    sample1 <- inputTibble[1,]
+    sample2 <- inputTibble[2,]
 
     regions <- data.frame(start=c(160, 200, 240), end=c(180, 220, 260))
 

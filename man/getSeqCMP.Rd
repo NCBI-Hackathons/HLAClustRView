@@ -12,10 +12,9 @@ HLA database.}
 
 \item{regionExt}{TODO}
 
-\item{typeS1}{A \code{character} array containing one well-formed
-HLA allele.}
+\item{typeS1}{A line of the tibble data from the object data return readHLADataset}
 
-\item{typeS2}{A \code{character} array containing one well-formed
+\item{typeS2}{A line of the tibble data from the object data return readHLADataset
 HLA allele.}
 }
 \value{

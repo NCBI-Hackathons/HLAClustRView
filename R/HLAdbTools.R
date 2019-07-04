@@ -8,10 +8,9 @@
 #'
 #' @param regionExt TODO
 #'
-#' @param typeS1 A \code{character} array containing one well-formed
-#' HLA allele.
+#' @param typeS1 A line of the tibble data from the object data return readHLADataset
 #'
-#' @param typeS2 A \code{character} array containing one well-formed
+#' @param typeS2 A line of the tibble data from the object data return readHLADataset
 #' HLA allele.
 #'
 #' @return An object of class TODO
@@ -31,8 +30,12 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
         stop("HLAInfo must be of class \"HLAdb\"")
     }
 
-    splitS1 <- splitTyping(typeS1)
-    splitS2 <- splitTyping(typeS2)
+    splitS1 <- unlist(typeS1[,c("GeneName", "AlleleGroup",
+                                "Protein", "SynSubst",
+                                "NonCoding", "Suffix")])
+    splitS2 <- unlist(typeS2[,c("GeneName", "AlleleGroup",
+                                "Protein", "SynSubst",
+                                "NonCoding", "Suffix")]) #splitTyping(typeS2)
 
     posS1 <- getIncompleteTypingPos(HLAInfo$HLAAlignment, splitS1)
     posS1 <- reduceTypingPos(HLAInfo$HLAAlignment, posS1)
