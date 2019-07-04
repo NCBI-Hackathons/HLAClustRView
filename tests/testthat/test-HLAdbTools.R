@@ -39,6 +39,28 @@ test_that("getSeqCMP() must return good result", {
     expect_equal(result, expected)
 })
 
+test_that("getSeqCMP() must return error when HLAInfo not HLAdb", {
+
+    sample1 <- "DRA*01:01:01:03"
+    sample2 <- "DRA*01:01:02"
+
+    regions <- data.frame(start=c(160, 200, 240), end=c(180, 220, 260))
+
+    message <- "HLAInfo must be of class \"HLAdb\""
+    expect_error(getSeqCMP(HLAInfo = "Hello", regionExt = regions,
+                           typeS1 = sample1, typeS2 = sample2), message)
+})
+
+test_that("getSeqCMP() must return error when regionExt not data.frame", {
+
+    sample1 <- "DRA*01:01:01:03"
+    sample2 <- "DRA*01:01:02"
+
+    message <- "regionExt must a \"data.frame\""
+    expect_error(getSeqCMP(HLAInfo = HLA_INFO, regionExt = "Toronto",
+                           typeS1 = sample1, typeS2 = sample2), message)
+})
+
 
 ### Tests getSubSeq() function
 

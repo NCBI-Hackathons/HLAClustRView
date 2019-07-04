@@ -39,7 +39,8 @@ suffix of the HLA typing or \code{NA}.
 }
 \description{
 Parses a text file containing HLA allele typing for one or
-multiple samples and transforms it into an object.
+multiple samples and transforms it into an object. Beware that samples with
+at least one missing HLA type for the allele group are going to be removed.
 }
 \examples{
 

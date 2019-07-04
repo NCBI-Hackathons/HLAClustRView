@@ -1,25 +1,58 @@
-#' @title Get the sequence from 2 allele types from the same HLA gene.
+#' @title Get the subsequences from 2 allele types from the same HLA gene.
 #'
 #' @description Extract from the \code{HLAdb} object, two sequences and
-#' the reference for a specific region related to 2 specific allele types.
+#' the reference for a group of specific regions. The final sequences are
+#' the concatenation of the sequences of each region.
 #'
-#' @param HLAInfo An object of class \code{HLAdb} contain information from
+#' @param HLAInfo An object of class \code{HLAdb} containing information from
 #' HLA database.
 #'
-#' @param regionExt TODO
+#' @param regionExt A \code{data.frame} containing 2 columns called
+#' \code{Start} and \code{end}. Those columns must contain \code{integer}
+#' entries corresponding to the regions to retain to create the subsequence.
+#' When more than one entry is present, the final subsequence will be the
+#' concatenation of all retained regions.
 #'
 #' @param typeS1 A line of the tibble data from the object data return readHLADataset
 #'
 #' @param typeS2 A line of the tibble data from the object data return readHLADataset
 #' HLA allele.
 #'
-#' @return An object of class TODO
+#' @return A \code{list} containing:
+#' \itemize{
+#' \item \code{refSeq} a \code{character} string containing the reference.
+#' \item \code{seqS1} a \code{character} string containing the sequence of the
+#' first HLA allele.
+#' \item \code{seqS2} a \code{character} string containing the sequence of the
+#' second HLA allele.
+#' }
 #'
 #' @details TODO
 #'
 #' @examples
+#' library(dplyr)
+#' ## Get HLA protein database
+#' data(hladb_protein_3.35.0)
 #'
-#' ## TODO
+#' ## Two samples from same HLA gene
+#'inputTibble <- tibble(SampleName=c("ERR188021", "ERR188021"),
+#'                      AlleleName=c("1","2"),
+#'                      GeneName=c("DRA", "DRA"),
+#'                      AlleleGroup=c("01", "01"),
+#'                      Protein=c("01", "01"),
+#'                      SynSubst=c("01", "02"),
+#'                      NonCoding=c("03", NA),
+#'                      Suffix=c(NA, NA)
+#')
+#'sample1 <- inputTibble[1,]
+#'sample2 <- inputTibble[2,]#'
+#' ## Fix regions that will be extracted
+#' regions <- data.frame(start=c(160, 200, 240), end=c(180, 220, 260))
+#'
+#' ## Extract subsequences
+#' getSeqCMP(HLAInfo = hladb_protein_3.35.0, regionExt = regions,
+#'     typeS1 = sample1, typeS2 = sample2)
+#'
 #'
 #' @author Pascal Belleau, Astrid Deschenes
 #' @importFrom data.table data.table rbindlist
@@ -28,6 +61,9 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
 
     if (!("HLAdb" %in% class(HLAInfo))) {
         stop("HLAInfo must be of class \"HLAdb\"")
+    }
+    if (!is.data.frame(regionExt)) {
+        stop("regionExt must a \"data.frame\"")
     }
 
     splitS1 <- unlist(typeS1[,c("GeneName", "AlleleGroup",
@@ -43,7 +79,7 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
     posS2 <- reduceTypingPos(HLAInfo$HLAAlignment, posS2)
 
     if (splitS1[1] != splitS2[1]) {
-        stop("Call get seq with type from 2 genes")
+        stop("Call getSeqCMP() with type from 2 genes")
     }
     if (is.na(posS1) || is.na(posS2)) {
         stop(paste0("Typing without specific sequence ", typeS1, " ", typeS2))
@@ -68,8 +104,8 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
 
 #' @title Get the subsequence
 #'
-#' @description Get from the object HLAdb two sequences and the reference
-#' for a region
+#' @description Extract, from a HLAdb object, two sequences and the reference
+#' for a region specified by user
 #'
 #' @param seq TODO
 #'
@@ -86,7 +122,7 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
 #' ## TODO
 #'
 #' @author Pascal Belleau, Astrid Deschenes
-#' @export
+#' @keywords internal
 getSubSeq <- function(seq, posInit, regionExt) {
 
     subSeq <- ""

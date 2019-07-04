@@ -17,8 +17,8 @@ getSubSeq(seq, posInit, regionExt)
 An object of class TODO
 }
 \description{
-Get from the object HLAdb two sequences and the reference
-for a region
+Extract, from a HLAdb object, two sequences and the reference
+for a region specified by user
 }
 \details{
 TODO
@@ -31,3 +31,4 @@ TODO
 \author{
 Pascal Belleau, Astrid Deschenes
 }
+\keyword{internal}

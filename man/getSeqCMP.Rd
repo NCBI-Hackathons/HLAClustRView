@@ -2,15 +2,19 @@
 % Please edit documentation in R/HLAdbTools.R
 \name{getSeqCMP}
 \alias{getSeqCMP}
-\title{Get the sequence from 2 allele types from the same HLA gene.}
+\title{Get the subsequences from 2 allele types from the same HLA gene.}
 \usage{
 getSeqCMP(HLAInfo, regionExt, typeS1, typeS2)
 }
 \arguments{
-\item{HLAInfo}{An object of class \code{HLAdb} contain information from
+\item{HLAInfo}{An object of class \code{HLAdb} containing information from
 HLA database.}
 
-\item{regionExt}{TODO}
+\item{regionExt}{A \code{data.frame} containing 2 columns called
+\code{Start} and \code{end}. Those columns must contain \code{integer}
+entries corresponding to the regions to retain to create the subsequence.
+When more than one entry is present, the final subsequence will be the
+concatenation of all retained regions.}
 
 \item{typeS1}{A line of the tibble data from the object data return readHLADataset}
 
@@ -18,18 +22,47 @@ HLA database.}
 HLA allele.}
 }
 \value{
-An object of class TODO
+A \code{list} containing:
+\itemize{
+\item \code{refSeq} a \code{character} string containing the reference.
+\item \code{seqS1} a \code{character} string containing the sequence of the
+first HLA allele.
+\item \code{seqS2} a \code{character} string containing the sequence of the
+second HLA allele.
+}
 }
 \description{
 Extract from the \code{HLAdb} object, two sequences and
-the reference for a specific region related to 2 specific allele types.
+the reference for a group of specific regions. The final sequences are
+the concatenation of the sequences of each region.
 }
 \details{
 TODO
 }
 \examples{
+library(dplyr)
+## Get HLA protein database
+data(hladb_protein_3.35.0)
 
-## TODO
+## Two samples from same HLA gene
+inputTibble <- tibble(SampleName=c("ERR188021", "ERR188021"),
+                     AlleleName=c("1","2"),
+                     GeneName=c("DRA", "DRA"),
+                     AlleleGroup=c("01", "01"),
+                     Protein=c("01", "01"),
+                     SynSubst=c("01", "02"),
+                     NonCoding=c("03", NA),
+                     Suffix=c(NA, NA)
+)
+sample1 <- inputTibble[1,]
+sample2 <- inputTibble[2,]#'
+## Fix regions that will be extracted
+regions <- data.frame(start=c(160, 200, 240), end=c(180, 220, 260))
+
+## Extract subsequences
+getSeqCMP(HLAInfo = hladb_protein_3.35.0, regionExt = regions,
+    typeS1 = sample1, typeS2 = sample2)
+
 
 }
 \author{

@@ -36,8 +36,8 @@ most up-to-date information.
 
 * **Version:** 0.99.0
 * **Depends:** R (>= 3.3)
-* **Imports:** purrr, dplyr, tidyr, tibble, utils, methods, stringr, data.table
-* **Suggests:** testthat, knitr, rmarkdown
+* **Imports:** purrr, dplyr, tidyr, tibble, utils, methods, stringr, data.table, stats, ComplexHeatmap, graphics, rlang
+* **Suggests:** testthat, knitr, rmarkdown, circlize, BiocStyle
     
 ## Package Workflow ##
 
