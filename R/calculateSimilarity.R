@@ -40,17 +40,30 @@ hamming_distance_digit1 <- function(allele) {
 
     stopifnot(nrow(allele) == 4)
 
-    hdist <-
-        allele %>%
-        split(allele$SampleName) %>%
-        reduce(.f = crossing) %>% # biparty graph to compute simularities
+    alleleSplit <- allele %>% split(allele$SampleName)
+
+    colnames(alleleSplit[[2]]) <- paste0(colnames(alleleSplit[[2]]), "_2")
+
+    hdist <- crossing(alleleSplit[[1]], alleleSplit[[2]]) %>% # biparty graph to compute simularities
         mutate(
-            is_similar = .data$AlleleGroup != .data$AlleleGroup1,
-            same_allele = .data$AlleleName == .data$AlleleName1
+            is_similar = .data$AlleleGroup != .data$AlleleGroup_2,
+            same_allele = .data$AlleleName == .data$AlleleName_2
             ) %>%
         group_by(.data$same_allele) %>%
         summarise(distance = sum(.data$is_similar)) %>%
         filter(.data$distance == min(.data$distance))
+
+    # hdist <-
+    #     allele %>%
+    #     split(allele$SampleName) %>%
+    #     reduce(.f = crossing) %>% # biparty graph to compute simularities
+    #     mutate(
+    #         is_similar = .data$AlleleGroup != .data$AlleleGroup_2,
+    #         same_allele = .data$AlleleName == .data$AlleleName_2
+    #     ) %>%
+    #     group_by(.data$same_allele) %>%
+    #     summarise(distance = sum(.data$is_similar)) %>%
+    #     filter(.data$distance == min(.data$distance))
 
     result <- hdist
 
@@ -114,7 +127,7 @@ sample_pair_distance <- function(sample_pair_data) {
         select(-data) %>%
         unnest(.data$x)
 
-    distances_per_gene %>%
+    distances_per_gene %>% as_tibble() %>%
         mutate(HammingDistance = sum(.data$distance)) %>%
         select(-.data$distance) %>%
         group_by(.data$HammingDistance) %>%
@@ -193,6 +206,8 @@ calculateHamming <- function(hla_data) {
         #print(paste0("s1 ", s1, " s2 ", s2))
     }
 
+    ## Create a tibble with 2 columns containing all the possible combinaison
+    ## of samples
     sample_pairs <-
         unique(hla_data$SampleName) %>%
         combn(m = 2) %>%
