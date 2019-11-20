@@ -5,13 +5,13 @@ library(HLAClustRView)
 
 data("demoHLADataset")
 
-### Tests draw_dendogram() function
+### Tests draw_dendrogram() function
 
-context("Test for draw_dendogram() function")
+context("Test for draw_dendrogram() function")
 
-test_that("draw_dendogram() must return error hlaMetric argument is string", {
+test_that("draw_dendrogram() must return error hlaMetric argument is string", {
     message <- "hlaMetric must be of class \"HLAMetric\""
-    expect_error(draw_dendogram(hlaMetric = "BigFoot"), message)
+    expect_error(draw_dendrogram(hlaMetric = "BigFoot"), message)
 })
 
 

@@ -262,8 +262,8 @@ The *draw_heatmap()* function enable the creation of sample-to-sample heatmap.
 draw_heatmap(hammingMetric)
 ```
 
-As the *draw_heatmap()* function enable personalization by acception parameters
-that are pass to the interanl *Heatmap()* function from 
+The *draw_heatmap()* function enable personalization by acception parameters
+that are pass to the internal *Heatmap()* function from 
 `r Biocpkg("ComplexHeatmap")` package.
 
 ```{r graphHamming2, warning=FALSE, message=FALSE, fig.height=4, fig.width=4}
@@ -275,20 +275,45 @@ col_fun = colorRamp2(c(0, 10, 20), c("white", "orange", "violet"))
 draw_heatmap(hammingMetric, col = col_fun,
             clustering_method_rows = "median", 
             clustering_method_columns = "median")
-
 ```
 
 
-### Cluster dendogram using Hamming-like metric
+### Dendrogram using Hamming-like metric
 
-The *draw_dendogram()* function enable the creation of a cluster dendogram 
-graph.
+The *draw_dendrogram()* function enable the creation of a cluster dendrogram 
+graph from an \code{HLAMetric} object, as shown in 
+Figure \@ref(fig:clusteringHamming01).
 
-```{r clusteringHamming, warning=FALSE, message=FALSE}
-hammingClust <- hclustHLA(hammingMetric)
+```{r clusteringHamming01, warning=FALSE, message=FALSE, fig.cap="Dendrogram based on Hamming-like metric."}
+    
+## Draw a basic dendrogram using a HLAMetric object
+draw_dendrogram(hlaMetric = hammingMetric)
+    
+```
 
-plot(hammingClust, main="Dendogram based on HLA typing Hamming-like distance", 
-        xlab="Distance", sub= "")
+The *draw_dendrogram()* function enable personalization by acception parameters
+that are pass to the internal *plot()* function from 
+`r Rpackage("graphics")` package. An example is shown in 
+Figure \@ref(fig:clusteringHamming02).
+
+```{r clusteringHamming02, warning=FALSE, message=FALSE, fig.cap="Triangle dendrogram based on Hamming-like metric."}
+## Get a triangle dendrogram with type="t"
+draw_dendrogram(hlaMetric = hammingMetric, type="t",
+        main="Dendrogram based on HLA typing Hamming-like distance", 
+        xlab="", sub= "")
+```
+
+
+The *draw_dendrogram()* function also offers phylogenetic trees display through
+the use of the \code{as.phylo} parameter. The phylogenetic trees option is 
+provided by the R package `r Rpackage("ape")`. An example is shown in 
+Figure \@ref(fig:clusteringHamming03).
+ 
+ 
+```{r clusteringHamming03, warning=FALSE, message=FALSE, fig.cap="Circular phylogenetic trees based on Hamming-like metric."}
+## Get a circular display with type="fan" when as.phylo is set to TRUE
+draw_dendrogram(hlaMetric = hammingMetric, as.phylo=TRUE, type="fan", 
+        main="Phylogenetic trees display")
 ```
 
 

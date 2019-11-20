@@ -2,7 +2,7 @@
 % Please edit documentation in R/splitTyping.R
 \name{splitTyping}
 \alias{splitTyping}
-\title{splitTyping}
+\title{Split a HLA allele name into a matrix of fields}
 \usage{
 splitTyping(aChar)
 }
@@ -12,10 +12,12 @@ HLA alleles,
 see http://hla.alleles.org/nomenclature/naming.html}
 }
 \value{
-a n x 6 \code{matrix} of fields
+a \code{matrix} of fields with 6 columns and a number of rows
+corresponding to the length of the \code{aChar} array.
 }
 \description{
-Converts a well-formed HLA allele name to a matrix of fields
+This function converts a well-formed HLA allele name to a
+matrix of fields.
 }
 \examples{
 

@@ -1,12 +1,14 @@
-#' @title splitTyping
+#' @title Split a HLA allele name into a matrix of fields
 #'
-#' @description Converts a well-formed HLA allele name to a matrix of fields
+#' @description This function converts a well-formed HLA allele name to a
+#' matrix of fields.
 #'
 #' @param aChar a \code{character} array containing one or more well-formed
 #' HLA alleles,
 #' see http://hla.alleles.org/nomenclature/naming.html
 #'
-#' @return a n x 6 \code{matrix} of fields
+#' @return a \code{matrix} of fields with 6 columns and a number of rows
+#' corresponding to the length of the \code{aChar} array.
 #'
 #' @examples
 #'
