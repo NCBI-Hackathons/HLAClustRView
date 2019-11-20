@@ -13,10 +13,9 @@
 #' When more than one entry is present, the final subsequence will be the
 #' concatenation of all retained regions.
 #'
-#' @param typeS1 A \code{character} array containing one well-formed
-#' HLA allele.
+#' @param typeS1 A line of the tibble data from the object data return readHLADataset
 #'
-#' @param typeS2 A \code{character} array containing one well-formed
+#' @param typeS2 A line of the tibble data from the object data return readHLADataset
 #' HLA allele.
 #'
 #' @return A \code{list} containing:
@@ -31,14 +30,22 @@
 #' @details TODO
 #'
 #' @examples
-#'
+#' library(dplyr)
 #' ## Get HLA protein database
 #' data(hladb_protein_3.35.0)
 #'
 #' ## Two samples from same HLA gene
-#' sample1 <- "DRA*01:01:01:03"
-#' sample2 <- "DRA*01:01:02"
-#'
+#'inputTibble <- tibble(SampleName=c("ERR188021", "ERR188021"),
+#'                      AlleleName=c("1","2"),
+#'                      GeneName=c("DRA", "DRA"),
+#'                      AlleleGroup=c("01", "01"),
+#'                      Protein=c("01", "01"),
+#'                      SynSubst=c("01", "02"),
+#'                      NonCoding=c("03", NA),
+#'                      Suffix=c(NA, NA)
+#')
+#'sample1 <- inputTibble[1,]
+#'sample2 <- inputTibble[2,]#'
 #' ## Fix regions that will be extracted
 #' regions <- data.frame(start=c(160, 200, 240), end=c(180, 220, 260))
 #'
@@ -55,13 +62,16 @@ getSeqCMP <- function(HLAInfo, regionExt, typeS1, typeS2) {
     if (!("HLAdb" %in% class(HLAInfo))) {
         stop("HLAInfo must be of class \"HLAdb\"")
     }
-
     if (!is.data.frame(regionExt)) {
         stop("regionExt must a \"data.frame\"")
     }
 
-    splitS1 <- splitTyping(typeS1)
-    splitS2 <- splitTyping(typeS2)
+    splitS1 <- unlist(typeS1[,c("GeneName", "AlleleGroup",
+                                "Protein", "SynSubst",
+                                "NonCoding", "Suffix")])
+    splitS2 <- unlist(typeS2[,c("GeneName", "AlleleGroup",
+                                "Protein", "SynSubst",
+                                "NonCoding", "Suffix")]) #splitTyping(typeS2)
 
     posS1 <- getIncompleteTypingPos(HLAInfo$HLAAlignment, splitS1)
     posS1 <- reduceTypingPos(HLAInfo$HLAAlignment, posS1)
