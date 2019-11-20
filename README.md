@@ -17,11 +17,11 @@ clusters.
 
 ## Goal ##
 
-The HLA genes plays a primary biological role in 
+The HLA genes play a primary biological role in 
 the regulation of the immune system and in the outcomes of human organ 
 transplantation. However, the official HLA typing format is tedious to process.
 So far, not much analysis has been done from the clustering perspective for
-this type of data.
+this specific type of data.
 The goal of the **HLAClustRView** package is to implement appropriate 
 similarity metrics on HLA typing to enable sample clustering and more complex
 analysis.
