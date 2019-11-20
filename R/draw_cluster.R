@@ -30,7 +30,7 @@
 #' @importFrom dplyr %>%
 #' @importFrom graphics plot
 #' @importFrom ape  as.phylo
-#' @importFrom stats as.dist
+#' @importFrom stats as.dendrogram
 #' @export
 draw_dendrogram <- function(hlaMetric, as.phylo=FALSE, ...) {
 
@@ -40,13 +40,18 @@ draw_dendrogram <- function(hlaMetric, as.phylo=FALSE, ...) {
         stop("hlaMetric must be of class \"HLAMetric\"")
     }
 
-    hc <- as.dist(hlaMetric$dist) %>%
-        hclust()
+    if (as.phylo) {
+        pp <- as.dist(hlaMetric$dist) %>%
+                hclust() %>% as.phylo()
+    } else {
+        dd <- as.dist(hlaMetric$dist) %>%
+                hclust() %>% as.dendrogram()
+    }
 
     if (as.phylo) {
-        plot(as.phylo(hc), ...)
+        plot(x=pp, ...)
     } else {
-        plot(hc, ...)
+        plot(x=dd, ...)
     }
 }
 
