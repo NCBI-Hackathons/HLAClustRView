@@ -1,14 +1,18 @@
 
-
 #' @title Draw dendrogram
 #'
-#' @description Create and draw a dendrogram using the
-#' metric distances.
+#' @description This function creates and draws a dendrogram using the
+#' metric distances from an \code{hlaMetric} object.
 #'
 #' @param hlaMetric an object of class \code{hlaMetric} that contain the
 #' distance between samples.
 #'
-#' @return TODO
+#' @param as.phylo a \code{logical} indicating if the dendrogram has to
+#' be drawn using a phylogenetic tree display. Default: \code{FALSE}.
+#'
+#' @param \ldots arguments passed to the \code{plot} method.
+#'
+#' @return \code{NULL}
 #'
 #' @examples
 #'
@@ -18,25 +22,32 @@
 #' ## Calculate Hamming distance metric
 #' hammingMetric <- calculateHamming(demoHLADataset)
 #'
-#' ## Create dendogram
-#' draw_dendogram(hammingMetric)
+#' ## Create dendrogram
+#' draw_dendrogram(hammingMetric)
 #'
-#' @author Santiago Medina, Astrid Deschenes, Pascal Belleau
+#' @author Santiago Medina, Astrid Deschênes, Pascal Belleau
 #'
 #' @importFrom dplyr %>%
 #' @importFrom graphics plot
+#' @importFrom ape  as.phylo
 #' @importFrom stats as.dist
 #' @export
-draw_dendogram <- function(hlaMetric) {
+draw_dendrogram <- function(hlaMetric, as.phylo=FALSE, ...) {
+
+    myArgs <- match.call()
 
     if (!("HLAMetric" %in% class(hlaMetric))) {
         stop("hlaMetric must be of class \"HLAMetric\"")
     }
 
-
     hc <- as.dist(hlaMetric$dist) %>%
         hclust()
-    plot(hc)
+
+    if (as.phylo) {
+        plot(as.phylo(hc), ...)
+    } else {
+        plot(hc, ...)
+    }
 }
 
 
@@ -63,7 +74,7 @@ draw_dendogram <- function(hlaMetric) {
 #' ## Create sample-to-sample heatmap
 #' draw_heatmap(hammingMetric)
 #'
-#' @author Astrid Deschenes, Pascal Belleau
+#' @author Astrid Deschênes, Pascal Belleau
 #'
 #' @importFrom ComplexHeatmap Heatmap draw
 #' @export

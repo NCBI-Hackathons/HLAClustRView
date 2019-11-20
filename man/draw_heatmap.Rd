@@ -32,5 +32,5 @@ draw_heatmap(hammingMetric)
 
 }
 \author{
-Astrid Deschenes, Pascal Belleau
+Astrid Deschênes, Pascal Belleau
 }

@@ -37,6 +37,7 @@ Imports: purrr,
     ComplexHeatmap,
     graphics,
     tibble,
+    ape,
     rlang
 Suggests: testthat,
     knitr,
