@@ -14,6 +14,15 @@ test_that("draw_dendrogram() must return error hlaMetric argument is string", {
     expect_error(draw_dendrogram(hlaMetric = "BigFoot"), message)
 })
 
+test_that("draw_dendrogram() must return error when as.phylo is not an logical", {
+
+    hammingMetric <- calculateHamming(demoHLADataset)
+
+    message <- "as.phylo must be of logical"
+    expect_error(draw_dendrogram(hlaMetric=hammingMetric, as.phylo="allo"),
+                    message)
+})
+
 
 ### Tests draw_heatmap() function
 

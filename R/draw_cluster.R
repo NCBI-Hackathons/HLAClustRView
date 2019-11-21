@@ -30,7 +30,7 @@
 #' @importFrom dplyr %>%
 #' @importFrom graphics plot
 #' @importFrom ape  as.phylo
-#' @importFrom stats as.dendrogram
+#' @importFrom stats as.dendrogram as.dist
 #' @export
 draw_dendrogram <- function(hlaMetric, as.phylo=FALSE, ...) {
 
@@ -38,6 +38,10 @@ draw_dendrogram <- function(hlaMetric, as.phylo=FALSE, ...) {
 
     if (!("HLAMetric" %in% class(hlaMetric))) {
         stop("hlaMetric must be of class \"HLAMetric\"")
+    }
+
+    if (!is.logical(as.phylo)) {
+        stop("as.phylo must be of logical")
     }
 
     if (as.phylo) {
